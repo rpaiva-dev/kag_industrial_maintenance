@@ -1,0 +1,1379 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="fonte" attr.type="string" />
+  <key id="d1" for="edge" attr.name="tipo_relacao" attr.type="string" />
+  <key id="d0" for="node" attr.name="tipo" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="peneira vibratória inclinada pvi-1000">
+      <data key="d0">equipamento</data>
+    </node>
+    <node id="motor de acionamento da peneira">
+      <data key="d0">componente</data>
+    </node>
+    <node id="excêntrico da peneira">
+      <data key="d0">componente</data>
+    </node>
+    <node id="mancais do excêntrico">
+      <data key="d0">componente</data>
+    </node>
+    <node id="molas de suporte">
+      <data key="d0">componente</data>
+    </node>
+    <node id="tela de peneiramento">
+      <data key="d0">componente</data>
+    </node>
+    <node id="estrutura vibratória">
+      <data key="d0">componente</data>
+    </node>
+    <node id="amortecedores de borracha">
+      <data key="d0">componente</data>
+    </node>
+    <node id="vibração excessiva no motor de acionamento da peneira">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desalinhamento entre o motor e o excêntrico da peneira">
+      <data key="d0">causa</data>
+    </node>
+    <node id="realinhamento do conjunto motor-excêntrico">
+      <data key="d0">acao</data>
+    </node>
+    <node id="aquecimento do motor de acionamento da peneira">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="sobrecarga por excesso de material na alimentação">
+      <data key="d0">causa</data>
+    </node>
+    <node id="ajuste da taxa de alimentação da peneira">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ruído metálico no excêntrico da peneira">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste dos mancais do excêntrico">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição dos mancais do excêntrico e relubrificação">
+      <data key="d0">acao</data>
+    </node>
+    <node id="folga excessiva no eixo excêntrico da peneira">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste das buchas do excêntrico">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do conjunto excêntrico da peneira">
+      <data key="d0">acao</data>
+    </node>
+    <node id="quebra de mola de suporte">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="fadiga do material por fixação incorreta da peneira na estrutura de apoio">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do jogo de molas de suporte e verificação do nivelamento do equipamento">
+      <data key="d0">acao</data>
+    </node>
+    <node id="corrosão nas molas de suporte">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="exposição prolongada à umidade e a material abrasivo">
+      <data key="d0">causa</data>
+    </node>
+    <node id="aplicação de revestimento anticorrosivo e inspeção periódica das molas">
+      <data key="d0">acao</data>
+    </node>
+    <node id="rasgo na tela de peneiramento">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="impacto de blocos de rocha sobredimensionados na alimentação">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição da tela de peneiramento e o ajuste da granulometria máxima de alimentação">
+      <data key="d0">acao</data>
+    </node>
+    <node id="entupimento da tela de peneiramento">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="excesso de umidade e finos no material">
+      <data key="d0">causa</data>
+    </node>
+    <node id="limpeza da tela e a instalação de sistema de aspersão de água">
+      <data key="d0">acao</data>
+    </node>
+    <node id="trinca na estrutura vibratória">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="fadiga estrutural por operação fora da frequência de vibração de projeto">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reforço estrutural da estrutura vibratória e o ajuste da frequência de vibração">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ressecamento dos amortecedores de borracha">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="exposição prolongada ao sol e a óleo lubrificante">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição dos amortecedores de borracha">
+      <data key="d0">acao</data>
+    </node>
+    <node id="transportador de correia de longa distância tc-2000">
+      <data key="d0">equipamento</data>
+    </node>
+    <node id="motor de acionamento do transportador">
+      <data key="d0">componente</data>
+    </node>
+    <node id="redutor de velocidade">
+      <data key="d0">componente</data>
+    </node>
+    <node id="tambor de acionamento">
+      <data key="d0">componente</data>
+    </node>
+    <node id="tambor de retorno">
+      <data key="d0">componente</data>
+    </node>
+    <node id="roletes de carga">
+      <data key="d0">componente</data>
+    </node>
+    <node id="roletes de retorno">
+      <data key="d0">componente</data>
+    </node>
+    <node id="correia transportadora">
+      <data key="d0">componente</data>
+    </node>
+    <node id="esticador">
+      <data key="d0">componente</data>
+    </node>
+    <node id="raspadores de limpeza">
+      <data key="d0">componente</data>
+    </node>
+    <node id="sobrecorrente no motor de acionamento do transportador">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="atolamento de material no chute de transferência">
+      <data key="d0">causa</data>
+    </node>
+    <node id="desobstrução do chute">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ajuste do fluxo de material">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ruído anormal no motor de acionamento do transportador">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desalinhamento do acoplamento entre o motor e o redutor">
+      <data key="d0">causa</data>
+    </node>
+    <node id="realinhamento do acoplamento motor-redutor">
+      <data key="d0">acao</data>
+    </node>
+    <node id="vazamento de óleo no redutor de velocidade">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste dos retentores do redutor">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição dos retentores do redutor">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ruído de engrenamento no redutor de velocidade">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste das engrenagens internas do redutor">
+      <data key="d0">causa</data>
+    </node>
+    <node id="troca do conjunto de engrenagens do redutor">
+      <data key="d0">acao</data>
+    </node>
+    <node id="patinação da correia no tambor de acionamento">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="baixa tensão da correia transportadora">
+      <data key="d0">causa</data>
+    </node>
+    <node id="ajuste do esticador">
+      <data key="d0">acao</data>
+    </node>
+    <node id="aumento da tensão da correia">
+      <data key="d0">acao</data>
+    </node>
+    <node id="desgaste do revestimento do tambor de acionamento">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="atrito excessivo por baixa aderência da correia">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do revestimento do tambor de acionamento">
+      <data key="d0">acao</data>
+    </node>
+    <node id="vibração no tambor de retorno">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desbalanceamento por acúmulo de material aderido ao tambor de retorno">
+      <data key="d0">causa</data>
+    </node>
+    <node id="limpeza e o balanceamento do tambor de retorno">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ruído nos roletes de carga">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="rolamento travado por falta de lubrificação">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do rolete de carga travado">
+      <data key="d0">acao</data>
+    </node>
+    <node id="desgaste acelerado dos roletes de carga">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desalinhamento da correia causando atrito lateral constante">
+      <data key="d0">causa</data>
+    </node>
+    <node id="alinhamento da correia transportadora">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição dos roletes de carga desgastados">
+      <data key="d0">acao</data>
+    </node>
+    <node id="rasgo longitudinal na correia transportadora">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="perfuração por material metálico contaminante na alimentação">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reparo por vulcanização">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição do trecho danificado da correia">
+      <data key="d0">acao</data>
+    </node>
+    <node id="desalinhamento lateral da correia transportadora">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="carregamento descentralizado no chute de alimentação">
+      <data key="d0">causa</data>
+    </node>
+    <node id="ajuste dos guias de alinhamento da correia">
+      <data key="d0">acao</data>
+    </node>
+    <node id="tensão insuficiente da correia transportadora">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="curso do esticador esgotado">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reposição de um trecho de correia">
+      <data key="d0">acao</data>
+    </node>
+    <node id="reajuste do esticador">
+      <data key="d0">acao</data>
+    </node>
+    <node id="acúmulo de material na correia de retorno">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste das lâminas do raspador">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição das lâminas do raspador de limpeza">
+      <data key="d0">acao</data>
+    </node>
+    <node id="caminhão fora de estrada cfe-400t">
+      <data key="d0">equipamento</data>
+    </node>
+    <node id="motor diesel">
+      <data key="d0">componente</data>
+    </node>
+    <node id="sistema de transmissão">
+      <data key="d0">componente</data>
+    </node>
+    <node id="sistema de freios">
+      <data key="d0">componente</data>
+    </node>
+    <node id="pneus fora de estrada">
+      <data key="d0">componente</data>
+    </node>
+    <node id="caçamba basculante">
+      <data key="d0">componente</data>
+    </node>
+    <node id="sistema hidráulico de basculamento">
+      <data key="d0">componente</data>
+    </node>
+    <node id="suspensão hidropneumática">
+      <data key="d0">componente</data>
+    </node>
+    <node id="perda de potência do motor diesel">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="entupimento do filtro de combustível">
+      <data key="d0">causa</data>
+    </node>
+    <node id="entupimento do filtro de ar">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição dos filtros de combustível e de ar">
+      <data key="d0">acao</data>
+    </node>
+    <node id="superaquecimento do motor diesel">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="baixo nível de líquido de arrefecimento">
+      <data key="d0">causa</data>
+    </node>
+    <node id="radiador obstruído">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reposição do líquido de arrefecimento">
+      <data key="d0">acao</data>
+    </node>
+    <node id="limpeza do radiador">
+      <data key="d0">acao</data>
+    </node>
+    <node id="fumaça preta no escapamento do motor diesel">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desregulagem do sistema de injeção de combustível">
+      <data key="d0">causa</data>
+    </node>
+    <node id="calibração do sistema de injeção">
+      <data key="d0">acao</data>
+    </node>
+    <node id="dificuldade de troca de marchas">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="baixo nível de óleo da transmissão">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reposição do óleo e verificação de vazamentos na transmissão">
+      <data key="d0">acao</data>
+    </node>
+    <node id="patinação da transmissão">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste dos discos de embreagem">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do pacote de discos de embreagem">
+      <data key="d0">acao</data>
+    </node>
+    <node id="pedal de freio esponjoso">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="presença de ar no sistema hidráulico de freios">
+      <data key="d0">causa</data>
+    </node>
+    <node id="sangria do sistema de freios">
+      <data key="d0">acao</data>
+    </node>
+    <node id="superaquecimento dos freios">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="uso excessivo do freio de serviço em rampas longas">
+      <data key="d0">causa</data>
+    </node>
+    <node id="treinamento do operador para uso do freio motor e do retardador">
+      <data key="d0">acao</data>
+    </node>
+    <node id="desgaste irregular dos pneus">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="pressão de calibragem incorreta">
+      <data key="d0">causa</data>
+    </node>
+    <node id="calibragem dos pneus conforme especificação do fabricante">
+      <data key="d0">acao</data>
+    </node>
+    <node id="corte lateral no pneu">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="operação em via de tráfego com pedras cortantes">
+      <data key="d0">causa</data>
+    </node>
+    <node id="manutenção das vias de tráfego e substituição do pneu danificado">
+      <data key="d0">acao</data>
+    </node>
+    <node id="trinca na caçamba basculante">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="impacto de blocos de rocha durante o carregamento">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reforço estrutural da caçamba e ajuste da altura de descarga da escavadeira de carregamento">
+      <data key="d0">acao</data>
+    </node>
+    <node id="caçamba que não retorna à posição">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="válvula de controle hidráulico travada">
+      <data key="d0">causa</data>
+    </node>
+    <node id="limpeza ou substituição da válvula de controle hidráulico">
+      <data key="d0">acao</data>
+    </node>
+    <node id="vazamento no cilindro de basculamento">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste das vedações do cilindro de basculamento">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do kit de vedações do cilindro">
+      <data key="d0">acao</data>
+    </node>
+    <node id="basculamento lento da caçamba">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="baixo nível de óleo hidráulico">
+      <data key="d0">causa</data>
+    </node>
+    <node id="bomba hidráulica desgastada">
+      <data key="d0">causa</data>
+    </node>
+    <node id="reposição do óleo hidráulico">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição da bomba hidráulica">
+      <data key="d0">acao</data>
+    </node>
+    <node id="vazamento nos cilindros de suspensão">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste das vedações hidropneumáticas dos cilindros de suspensão">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição das vedações e recarga de nitrogênio dos cilindros de suspensão">
+      <data key="d0">acao</data>
+    </node>
+    <node id="britador de mandíbulas bm-1200">
+      <data key="d0">equipamento</data>
+    </node>
+    <node id="mandíbula fixa">
+      <data key="d0">componente</data>
+    </node>
+    <node id="mandíbula móvel">
+      <data key="d0">componente</data>
+    </node>
+    <node id="eixo excêntrico do britador">
+      <data key="d0">componente</data>
+    </node>
+    <node id="volante">
+      <data key="d0">componente</data>
+    </node>
+    <node id="biela">
+      <data key="d0">componente</data>
+    </node>
+    <node id="mancais principais">
+      <data key="d0">componente</data>
+    </node>
+    <node id="bucha da biela">
+      <data key="d0">componente</data>
+    </node>
+    <node id="molas de tração">
+      <data key="d0">componente</data>
+    </node>
+    <node id="placa de articulação">
+      <data key="d0">componente</data>
+    </node>
+    <node id="correias de transmissão">
+      <data key="d0">componente</data>
+    </node>
+    <node id="motor de acionamento do britador">
+      <data key="d0">componente</data>
+    </node>
+    <node id="sistema de lubrificação">
+      <data key="d0">componente</data>
+    </node>
+    <node id="desgaste acelerado do revestimento das mandíbulas">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="material de alimentação com abrasividade acima do especificado para o revestimento instalado">
+      <data key="d0">causa</data>
+    </node>
+    <node id="troca por revestimento de liga mais resistente">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ajuste da granulometria de alimentação">
+      <data key="d0">acao</data>
+    </node>
+    <node id="vibração excessiva no eixo excêntrico do britador">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste dos mancais principais">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição dos mancais principais">
+      <data key="d0">acao</data>
+    </node>
+    <node id="realinhamento do eixo excêntrico">
+      <data key="d0">acao</data>
+    </node>
+    <node id="desbalanceamento do volante">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="trinca ou perda de massa no volante">
+      <data key="d0">causa</data>
+    </node>
+    <node id="balanceamento dinâmico">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição do volante">
+      <data key="d0">acao</data>
+    </node>
+    <node id="folga excessiva na biela">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="desgaste da bucha da biela">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição da bucha da biela">
+      <data key="d0">acao</data>
+    </node>
+    <node id="ajuste da folga">
+      <data key="d0">acao</data>
+    </node>
+    <node id="quebra da mola de tração">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="fadiga por sobrecarga do britador causada por material não britável na câmara de britagem">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição da mola de tração">
+      <data key="d0">acao</data>
+    </node>
+    <node id="instalação de detector de metal na alimentação">
+      <data key="d0">acao</data>
+    </node>
+    <node id="desgaste da placa de articulação">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="lubrificação insuficiente na articulação">
+      <data key="d0">causa</data>
+    </node>
+    <node id="relubrificação programada">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição da placa de articulação quando necessário">
+      <data key="d0">acao</data>
+    </node>
+    <node id="patinação das correias de transmissão">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="tensionamento insuficiente das correias">
+      <data key="d0">causa</data>
+    </node>
+    <node id="ajuste da tensão">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição do jogo de correias de transmissão">
+      <data key="d0">acao</data>
+    </node>
+    <node id="sobrecorrente no motor de acionamento do britador">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="britador operando afogado por alimentação excessiva">
+      <data key="d0">causa</data>
+    </node>
+    <node id="ajuste da taxa de alimentação">
+      <data key="d0">acao</data>
+    </node>
+    <node id="instalação de controle de nível na câmara de britagem">
+      <data key="d0">acao</data>
+    </node>
+    <node id="pressão baixa no sistema de lubrificação">
+      <data key="d0">sintoma</data>
+    </node>
+    <node id="filtro de óleo obstruído">
+      <data key="d0">causa</data>
+    </node>
+    <node id="bomba de lubrificação desgastada">
+      <data key="d0">causa</data>
+    </node>
+    <node id="substituição do filtro de óleo">
+      <data key="d0">acao</data>
+    </node>
+    <node id="substituição da bomba de lubrificação do britador">
+      <data key="d0">acao</data>
+    </node>
+    <edge source="peneira vibratória inclinada pvi-1000" target="motor de acionamento da peneira">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="peneira vibratória inclinada pvi-1000" target="excêntrico da peneira">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="peneira vibratória inclinada pvi-1000" target="mancais do excêntrico">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="peneira vibratória inclinada pvi-1000" target="molas de suporte">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="peneira vibratória inclinada pvi-1000" target="tela de peneiramento">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="peneira vibratória inclinada pvi-1000" target="estrutura vibratória">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="peneira vibratória inclinada pvi-1000" target="amortecedores de borracha">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="motor de acionamento da peneira" target="vibração excessiva no motor de acionamento da peneira">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="motor de acionamento da peneira" target="aquecimento do motor de acionamento da peneira">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="excêntrico da peneira" target="ruído metálico no excêntrico da peneira">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="excêntrico da peneira" target="folga excessiva no eixo excêntrico da peneira">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="molas de suporte" target="quebra de mola de suporte">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="molas de suporte" target="corrosão nas molas de suporte">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="tela de peneiramento" target="rasgo na tela de peneiramento">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="tela de peneiramento" target="entupimento da tela de peneiramento">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="estrutura vibratória" target="trinca na estrutura vibratória">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="amortecedores de borracha" target="ressecamento dos amortecedores de borracha">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="vibração excessiva no motor de acionamento da peneira" target="desalinhamento entre o motor e o excêntrico da peneira">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="desalinhamento entre o motor e o excêntrico da peneira" target="realinhamento do conjunto motor-excêntrico">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="aquecimento do motor de acionamento da peneira" target="sobrecarga por excesso de material na alimentação">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="sobrecarga por excesso de material na alimentação" target="ajuste da taxa de alimentação da peneira">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="ruído metálico no excêntrico da peneira" target="desgaste dos mancais do excêntrico">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="desgaste dos mancais do excêntrico" target="substituição dos mancais do excêntrico e relubrificação">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="folga excessiva no eixo excêntrico da peneira" target="desgaste das buchas do excêntrico">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="desgaste das buchas do excêntrico" target="substituição do conjunto excêntrico da peneira">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="quebra de mola de suporte" target="fadiga do material por fixação incorreta da peneira na estrutura de apoio">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="fadiga do material por fixação incorreta da peneira na estrutura de apoio" target="substituição do jogo de molas de suporte e verificação do nivelamento do equipamento">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="corrosão nas molas de suporte" target="exposição prolongada à umidade e a material abrasivo">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="exposição prolongada à umidade e a material abrasivo" target="aplicação de revestimento anticorrosivo e inspeção periódica das molas">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="rasgo na tela de peneiramento" target="impacto de blocos de rocha sobredimensionados na alimentação">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="impacto de blocos de rocha sobredimensionados na alimentação" target="substituição da tela de peneiramento e o ajuste da granulometria máxima de alimentação">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="entupimento da tela de peneiramento" target="excesso de umidade e finos no material">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="excesso de umidade e finos no material" target="limpeza da tela e a instalação de sistema de aspersão de água">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="trinca na estrutura vibratória" target="fadiga estrutural por operação fora da frequência de vibração de projeto">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="fadiga estrutural por operação fora da frequência de vibração de projeto" target="reforço estrutural da estrutura vibratória e o ajuste da frequência de vibração">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="ressecamento dos amortecedores de borracha" target="exposição prolongada ao sol e a óleo lubrificante">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="exposição prolongada ao sol e a óleo lubrificante" target="substituição dos amortecedores de borracha">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Peneira Vibratória Inclinada PVI-1000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="motor de acionamento do transportador">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="redutor de velocidade">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="tambor de acionamento">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="tambor de retorno">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="roletes de carga">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="roletes de retorno">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="correia transportadora">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="esticador">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="transportador de correia de longa distância tc-2000" target="raspadores de limpeza">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="motor de acionamento do transportador" target="sobrecorrente no motor de acionamento do transportador">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="motor de acionamento do transportador" target="ruído anormal no motor de acionamento do transportador">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="redutor de velocidade" target="vazamento de óleo no redutor de velocidade">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="redutor de velocidade" target="ruído de engrenamento no redutor de velocidade">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="tambor de acionamento" target="patinação da correia no tambor de acionamento">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="tambor de acionamento" target="desgaste do revestimento do tambor de acionamento">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="tambor de retorno" target="vibração no tambor de retorno">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="roletes de carga" target="ruído nos roletes de carga">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="roletes de carga" target="desgaste acelerado dos roletes de carga">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="correia transportadora" target="rasgo longitudinal na correia transportadora">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="correia transportadora" target="desalinhamento lateral da correia transportadora">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="esticador" target="tensão insuficiente da correia transportadora">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="raspadores de limpeza" target="acúmulo de material na correia de retorno">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="sobrecorrente no motor de acionamento do transportador" target="atolamento de material no chute de transferência">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="atolamento de material no chute de transferência" target="desobstrução do chute">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="atolamento de material no chute de transferência" target="ajuste do fluxo de material">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="ruído anormal no motor de acionamento do transportador" target="desalinhamento do acoplamento entre o motor e o redutor">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desalinhamento do acoplamento entre o motor e o redutor" target="realinhamento do acoplamento motor-redutor">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="vazamento de óleo no redutor de velocidade" target="desgaste dos retentores do redutor">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desgaste dos retentores do redutor" target="substituição dos retentores do redutor">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="ruído de engrenamento no redutor de velocidade" target="desgaste das engrenagens internas do redutor">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desgaste das engrenagens internas do redutor" target="troca do conjunto de engrenagens do redutor">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="patinação da correia no tambor de acionamento" target="baixa tensão da correia transportadora">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="baixa tensão da correia transportadora" target="ajuste do esticador">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="baixa tensão da correia transportadora" target="aumento da tensão da correia">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desgaste do revestimento do tambor de acionamento" target="atrito excessivo por baixa aderência da correia">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="atrito excessivo por baixa aderência da correia" target="substituição do revestimento do tambor de acionamento">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="vibração no tambor de retorno" target="desbalanceamento por acúmulo de material aderido ao tambor de retorno">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desbalanceamento por acúmulo de material aderido ao tambor de retorno" target="limpeza e o balanceamento do tambor de retorno">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="ruído nos roletes de carga" target="rolamento travado por falta de lubrificação">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="rolamento travado por falta de lubrificação" target="substituição do rolete de carga travado">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desgaste acelerado dos roletes de carga" target="desalinhamento da correia causando atrito lateral constante">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desalinhamento da correia causando atrito lateral constante" target="alinhamento da correia transportadora">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desalinhamento da correia causando atrito lateral constante" target="substituição dos roletes de carga desgastados">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="rasgo longitudinal na correia transportadora" target="perfuração por material metálico contaminante na alimentação">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="perfuração por material metálico contaminante na alimentação" target="reparo por vulcanização">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="perfuração por material metálico contaminante na alimentação" target="substituição do trecho danificado da correia">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desalinhamento lateral da correia transportadora" target="carregamento descentralizado no chute de alimentação">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="carregamento descentralizado no chute de alimentação" target="ajuste dos guias de alinhamento da correia">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="tensão insuficiente da correia transportadora" target="curso do esticador esgotado">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="curso do esticador esgotado" target="reposição de um trecho de correia">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="curso do esticador esgotado" target="reajuste do esticador">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="acúmulo de material na correia de retorno" target="desgaste das lâminas do raspador">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="desgaste das lâminas do raspador" target="substituição das lâminas do raspador de limpeza">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Transportador de Correia de Longa Distância TC-2000</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="motor diesel">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="sistema de transmissão">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="sistema de freios">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="pneus fora de estrada">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="caçamba basculante">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="sistema hidráulico de basculamento">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caminhão fora de estrada cfe-400t" target="suspensão hidropneumática">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="motor diesel" target="perda de potência do motor diesel">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="motor diesel" target="superaquecimento do motor diesel">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="motor diesel" target="fumaça preta no escapamento do motor diesel">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="sistema de transmissão" target="dificuldade de troca de marchas">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="sistema de transmissão" target="patinação da transmissão">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="sistema de freios" target="pedal de freio esponjoso">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="sistema de freios" target="superaquecimento dos freios">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="pneus fora de estrada" target="desgaste irregular dos pneus">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="pneus fora de estrada" target="corte lateral no pneu">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caçamba basculante" target="trinca na caçamba basculante">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caçamba basculante" target="caçamba que não retorna à posição">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="sistema hidráulico de basculamento" target="vazamento no cilindro de basculamento">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="sistema hidráulico de basculamento" target="basculamento lento da caçamba">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="suspensão hidropneumática" target="vazamento nos cilindros de suspensão">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="perda de potência do motor diesel" target="entupimento do filtro de combustível">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="perda de potência do motor diesel" target="entupimento do filtro de ar">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="entupimento do filtro de combustível" target="substituição dos filtros de combustível e de ar">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="entupimento do filtro de ar" target="substituição dos filtros de combustível e de ar">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="superaquecimento do motor diesel" target="baixo nível de líquido de arrefecimento">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="superaquecimento do motor diesel" target="radiador obstruído">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="baixo nível de líquido de arrefecimento" target="reposição do líquido de arrefecimento">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="radiador obstruído" target="limpeza do radiador">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="fumaça preta no escapamento do motor diesel" target="desregulagem do sistema de injeção de combustível">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="desregulagem do sistema de injeção de combustível" target="calibração do sistema de injeção">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="dificuldade de troca de marchas" target="baixo nível de óleo da transmissão">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="baixo nível de óleo da transmissão" target="reposição do óleo e verificação de vazamentos na transmissão">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="patinação da transmissão" target="desgaste dos discos de embreagem">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="desgaste dos discos de embreagem" target="substituição do pacote de discos de embreagem">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="pedal de freio esponjoso" target="presença de ar no sistema hidráulico de freios">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="presença de ar no sistema hidráulico de freios" target="sangria do sistema de freios">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="superaquecimento dos freios" target="uso excessivo do freio de serviço em rampas longas">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="uso excessivo do freio de serviço em rampas longas" target="treinamento do operador para uso do freio motor e do retardador">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="desgaste irregular dos pneus" target="pressão de calibragem incorreta">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="pressão de calibragem incorreta" target="calibragem dos pneus conforme especificação do fabricante">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="corte lateral no pneu" target="operação em via de tráfego com pedras cortantes">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="operação em via de tráfego com pedras cortantes" target="manutenção das vias de tráfego e substituição do pneu danificado">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="trinca na caçamba basculante" target="impacto de blocos de rocha durante o carregamento">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="impacto de blocos de rocha durante o carregamento" target="reforço estrutural da caçamba e ajuste da altura de descarga da escavadeira de carregamento">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="caçamba que não retorna à posição" target="válvula de controle hidráulico travada">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="válvula de controle hidráulico travada" target="limpeza ou substituição da válvula de controle hidráulico">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="vazamento no cilindro de basculamento" target="desgaste das vedações do cilindro de basculamento">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="desgaste das vedações do cilindro de basculamento" target="substituição do kit de vedações do cilindro">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="basculamento lento da caçamba" target="baixo nível de óleo hidráulico">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="basculamento lento da caçamba" target="bomba hidráulica desgastada">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="baixo nível de óleo hidráulico" target="reposição do óleo hidráulico">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="bomba hidráulica desgastada" target="substituição da bomba hidráulica">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="vazamento nos cilindros de suspensão" target="desgaste das vedações hidropneumáticas dos cilindros de suspensão">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="desgaste das vedações hidropneumáticas dos cilindros de suspensão" target="substituição das vedações e recarga de nitrogênio dos cilindros de suspensão">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Caminhão Fora de Estrada CFE-400T</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="mandíbula fixa">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="mandíbula móvel">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="eixo excêntrico do britador">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="volante">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="biela">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="mancais principais">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="bucha da biela">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="molas de tração">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="placa de articulação">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="correias de transmissão">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="motor de acionamento do britador">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador de mandíbulas bm-1200" target="sistema de lubrificação">
+      <data key="d1">tem_componente</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="mandíbula fixa" target="desgaste acelerado do revestimento das mandíbulas">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="mandíbula móvel" target="desgaste acelerado do revestimento das mandíbulas">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="eixo excêntrico do britador" target="vibração excessiva no eixo excêntrico do britador">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="volante" target="desbalanceamento do volante">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="biela" target="folga excessiva na biela">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="molas de tração" target="quebra da mola de tração">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="placa de articulação" target="desgaste da placa de articulação">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="correias de transmissão" target="patinação das correias de transmissão">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="motor de acionamento do britador" target="sobrecorrente no motor de acionamento do britador">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="sistema de lubrificação" target="pressão baixa no sistema de lubrificação">
+      <data key="d1">apresenta_sintoma</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desgaste acelerado do revestimento das mandíbulas" target="material de alimentação com abrasividade acima do especificado para o revestimento instalado">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="material de alimentação com abrasividade acima do especificado para o revestimento instalado" target="troca por revestimento de liga mais resistente">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="material de alimentação com abrasividade acima do especificado para o revestimento instalado" target="ajuste da granulometria de alimentação">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="vibração excessiva no eixo excêntrico do britador" target="desgaste dos mancais principais">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desgaste dos mancais principais" target="substituição dos mancais principais">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desgaste dos mancais principais" target="realinhamento do eixo excêntrico">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desbalanceamento do volante" target="trinca ou perda de massa no volante">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="trinca ou perda de massa no volante" target="balanceamento dinâmico">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="trinca ou perda de massa no volante" target="substituição do volante">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="folga excessiva na biela" target="desgaste da bucha da biela">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desgaste da bucha da biela" target="substituição da bucha da biela">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desgaste da bucha da biela" target="ajuste da folga">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="quebra da mola de tração" target="fadiga por sobrecarga do britador causada por material não britável na câmara de britagem">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="fadiga por sobrecarga do britador causada por material não britável na câmara de britagem" target="substituição da mola de tração">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="fadiga por sobrecarga do britador causada por material não britável na câmara de britagem" target="instalação de detector de metal na alimentação">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="desgaste da placa de articulação" target="lubrificação insuficiente na articulação">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="lubrificação insuficiente na articulação" target="relubrificação programada">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="lubrificação insuficiente na articulação" target="substituição da placa de articulação quando necessário">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="patinação das correias de transmissão" target="tensionamento insuficiente das correias">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="tensionamento insuficiente das correias" target="ajuste da tensão">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="tensionamento insuficiente das correias" target="substituição do jogo de correias de transmissão">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="sobrecorrente no motor de acionamento do britador" target="britador operando afogado por alimentação excessiva">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador operando afogado por alimentação excessiva" target="ajuste da taxa de alimentação">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="britador operando afogado por alimentação excessiva" target="instalação de controle de nível na câmara de britagem">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="pressão baixa no sistema de lubrificação" target="filtro de óleo obstruído">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="pressão baixa no sistema de lubrificação" target="bomba de lubrificação desgastada">
+      <data key="d1">indica_causa</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="filtro de óleo obstruído" target="substituição do filtro de óleo">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+    <edge source="bomba de lubrificação desgastada" target="substituição da bomba de lubrificação do britador">
+      <data key="d1">resolve_com</data>
+      <data key="d2">Britador de Mandíbulas BM-1200</data>
+    </edge>
+  </graph>
+</graphml>

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAG Agent AH — Knowledge Augmented Generation for Mining Asset Maintenance</title>
+<meta name="description" content="A Knowledge Augmented Generation system built from scratch: a knowledge graph grounds every answer about mining asset maintenance in real, traceable relationships — never a guess.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f5f5f7;
+    --text: #1d1d1f;
+    --text-soft: #6e6e73;
+    --line: #d2d2d7;
+    --accent: #0071e3;
+    --accent-hover: #005bb5;
+    --dark: #1d1d1f;
+    --radius: 14px;
+    --max-width: 1000px;
+    --transition: 0.2s ease;
+
+    /* Node-type colors — mirror the app's graph legend so the diagram here
+       reads consistently with the live product (see src/graph_viz.py). */
+    --c-equip: #4e79a7;
+    --c-comp: #59a14f;
+    --c-symptom: #f28e2b;
+    --c-cause: #e15759;
+    --c-action: #b07aa1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  img, svg { max-width: 100%; display: block; }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1, h2, h3 { letter-spacing: -0.02em; font-weight: 800; }
+
+  .section { padding: 96px 0; }
+  .section-alt { background: var(--bg-soft); }
+  .section-dark { background: var(--dark); color: #f5f5f7; }
+  .section-dark .text-soft { color: #a1a1a6; }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-head { max-width: 640px; margin: 0 auto 56px auto; text-align: center; }
+  .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; }
+  .section-head p { color: var(--text-soft); font-size: 1.05rem; }
+  .section-dark .section-head p { color: #a1a1a6; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: 24px;
+    height: 64px;
+  }
+
+  .nav-left { min-width: 0; } /* intentionally empty — no logo/text top-left */
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lang-toggle {
+    border: 1px solid var(--line);
+    background: transparent;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .lang-toggle:hover { border-color: var(--text); }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .nav-toggle span { width: 20px; height: 2px; background: var(--text); border-radius: 2px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-outline { border-color: var(--line); color: var(--text); }
+  .btn-outline:hover { border-color: var(--text); }
+  .section-dark .btn-outline { border-color: #48484a; color: #f5f5f7; }
+  .section-dark .btn-outline:hover { border-color: #f5f5f7; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 120px 0 90px 0;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    max-width: 780px;
+    margin: 0 auto 20px auto;
+  }
+  .hero .accent-word { color: var(--accent); }
+  .hero .subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--text-soft);
+    max-width: 620px;
+    margin: 0 auto 36px auto;
+  }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Flow diagram ---------- */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .flow-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; width: 100%; }
+  .flow-arrow {
+    font-size: 26px;
+    color: var(--accent);
+    line-height: 1;
+    margin: 6px 0;
+  }
+
+  .flow-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 150px;
+    transition: transform var(--transition), border-color var(--transition);
+  }
+  .flow-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .flow-card .icon { font-size: 26px; display: block; margin-bottom: 8px; }
+  .flow-card span.sub {
+    display: block;
+    font-weight: 500;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    margin-top: 4px;
+  }
+
+  .flow-databases { max-width: 900px; }
+
+  .flow-wide {
+    max-width: 620px;
+    width: 100%;
+  }
+  .flow-wide p {
+    font-weight: 500;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    margin-top: 8px;
+  }
+
+  .chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .chain .sep { color: var(--text-soft); font-size: 13px; }
+  .chip {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .chip-equip { background: var(--c-equip); }
+  .chip-comp { background: var(--c-comp); }
+  .chip-symptom { background: var(--c-symptom); }
+  .chip-cause { background: var(--c-cause); }
+  .chip-action { background: var(--c-action); }
+
+  .flow-pipeline { max-width: 900px; align-items: center; }
+  .flow-chevron { font-size: 22px; color: var(--text-soft); align-self: center; }
+
+  /* ---------- How it works (RAG vs KAG) ---------- */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .compare-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .compare-card.is-kag { border-color: var(--accent); background: rgba(0, 113, 227, 0.04); }
+  .compare-card h3 { font-size: 1.1rem; margin-bottom: 12px; }
+  .compare-card p { font-size: 14.5px; color: var(--text-soft); margin-bottom: 10px; }
+  .compare-card .tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    color: var(--text-soft);
+    margin-bottom: 14px;
+  }
+  .compare-card.is-kag .tag { background: var(--accent); color: #fff; }
+
+  /* ---------- Databases (asset) cards ---------- */
+  .db-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .db-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: transform var(--transition), border-color var(--transition);
+  }
+  .db-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .db-card .icon { font-size: 30px; margin-bottom: 12px; }
+  .db-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .db-card p { font-size: 14px; color: var(--text-soft); margin-bottom: 14px; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-list span {
+    background: var(--bg-soft);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Tech stack ---------- */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+  }
+  .tech-item {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 16px;
+    text-align: center;
+    transition: transform var(--transition), border-color var(--transition);
+  }
+  .tech-item:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .tech-item .icon { font-size: 26px; margin-bottom: 10px; }
+  .tech-item strong { display: block; font-size: 14px; margin-bottom: 4px; white-space: nowrap; }
+  .tech-item span { font-size: 12px; color: var(--text-soft); white-space: nowrap; }
+
+  /* ---------- Contact ---------- */
+  .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    padding: 32px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav { grid-template-columns: 1fr auto; }
+    .nav-actions { gap: 10px; }
+
+    .compare-grid { grid-template-columns: 1fr; }
+    .db-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .flow-pipeline { flex-direction: column; }
+    .flow-chevron { transform: rotate(90deg); }
+
+    .section { padding: 64px 0; }
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 24px 16px 24px;
+    border-top: 1px solid var(--line);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav container">
+    <div class="nav-left"></div>
+    <div class="nav-links">
+      <a href="#diagram" data-i18n="nav.diagram">Diagram</a>
+      <a href="#how-it-works" data-i18n="nav.how">How it works</a>
+      <a href="#databases" data-i18n="nav.databases">Databases</a>
+      <a href="#stack" data-i18n="nav.stack">Stack</a>
+    </div>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="langToggle" type="button">PT</button>
+      <a class="btn btn-primary" href="#diagram" data-i18n="nav.cta">View diagram</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#diagram" data-i18n="nav.diagram">Diagram</a>
+    <a href="#how-it-works" data-i18n="nav.how">How it works</a>
+    <a href="#databases" data-i18n="nav.databases">Databases</a>
+    <a href="#stack" data-i18n="nav.stack">Stack</a>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="container">
+    <span class="eyebrow" data-i18n="hero.eyebrow">🛠️ KAG Agent AH — Asset Health</span>
+    <h1 data-i18n="hero.title">A knowledge graph, built from <span class="accent-word">scratch</span>, that never guesses.</h1>
+    <p class="subtitle" data-i18n="hero.subtitle">
+      A Knowledge Augmented Generation system for mining asset maintenance. Every answer is
+      traced through real relationships in a graph — not similar-sounding text.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#diagram" data-i18n="hero.btnPrimary">See how it works</a>
+      <a class="btn btn-outline" href="#databases" data-i18n="hero.btnSecondary">Explore the data</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="diagram">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="diagram.eyebrow">The pipeline</span>
+      <h2 data-i18n="diagram.heading">From maintenance manuals to a grounded answer</h2>
+      <p data-i18n="diagram.subheading">
+        Four synthetic manuals become one knowledge graph. Every question is answered by walking
+        real edges in that graph — never by guessing from similar-looking text.
+      </p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-row flow-databases">
+        <div class="flow-card reveal">
+          <span class="icon">🔧</span>
+          <strong data-i18n="diagram.db1">Vibrating Screen</strong>
+          <span class="sub">PVI-1000</span>
+        </div>
+        <div class="flow-card reveal">
+          <span class="icon">📦</span>
+          <strong data-i18n="diagram.db2">Belt Conveyor</strong>
+          <span class="sub">TC-2000</span>
+        </div>
+        <div class="flow-card reveal">
+          <span class="icon">🚛</span>
+          <strong data-i18n="diagram.db3">Haul Truck</strong>
+          <span class="sub">CFE-400T</span>
+        </div>
+        <div class="flow-card reveal">
+          <span class="icon">⚙️</span>
+          <strong data-i18n="diagram.db4">Jaw Crusher</strong>
+          <span class="sub">BM-1200</span>
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-row flow-single">
+        <div class="flow-card flow-wide reveal">
+          <span class="icon">🤖</span>
+          <strong data-i18n="diagram.extractionTitle">LLM extraction</strong>
+          <p data-i18n="diagram.extractionBody">
+            An LLM reads each manual and extracts structured triples — origin, relation,
+            destination — using only four allowed relations. Anything that doesn't fit the
+            schema is discarded, not guessed into shape.
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-row flow-single">
+        <div class="flow-card flow-wide reveal">
+          <span class="icon">🕸️</span>
+          <strong data-i18n="diagram.graphTitle">One unified knowledge graph</strong>
+          <div class="chain">
+            <span class="chip chip-equip" data-i18n="diagram.chainEquip">Equipment</span>
+            <span class="sep">→</span>
+            <span class="chip chip-comp" data-i18n="diagram.chainComp">Component</span>
+            <span class="sep">→</span>
+            <span class="chip chip-symptom" data-i18n="diagram.chainSymptom">Symptom</span>
+            <span class="sep">→</span>
+            <span class="chip chip-cause" data-i18n="diagram.chainCause">Cause</span>
+            <span class="sep">→</span>
+            <span class="chip chip-action" data-i18n="diagram.chainAction">Action</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <div class="flow-row flow-pipeline">
+        <div class="flow-card reveal">
+          <span class="icon">❓</span>
+          <strong data-i18n="diagram.step1">User question</strong>
+        </div>
+        <div class="flow-chevron">→</div>
+        <div class="flow-card reveal">
+          <span class="icon">🔗</span>
+          <strong data-i18n="diagram.step2">Entity linking</strong>
+        </div>
+        <div class="flow-chevron">→</div>
+        <div class="flow-card reveal">
+          <span class="icon">🧭</span>
+          <strong data-i18n="diagram.step3">Deterministic traversal</strong>
+        </div>
+        <div class="flow-chevron">→</div>
+        <div class="flow-card reveal">
+          <span class="icon">✅</span>
+          <strong data-i18n="diagram.step4">Grounded answer</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="how-it-works">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="how.eyebrow">In simple terms</span>
+      <h2 data-i18n="how.heading">How is this different from a regular RAG?</h2>
+      <p data-i18n="how.subheading">
+        Both look at your existing content before answering. The difference is what "evidence"
+        means to each one.
+      </p>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card reveal">
+        <span class="tag" data-i18n="how.ragTag">Traditional RAG</span>
+        <h3 data-i18n="how.ragTitle">Searches for similar text</h3>
+        <p data-i18n="how.ragBody1">Splits documents into chunks and retrieves the ones that sound closest to your question.</p>
+        <p data-i18n="how.ragBody2">If the answer needs to connect two facts that live in different chunks, the model has to
+          fill the gap itself — which is exactly where it can hallucinate.</p>
+      </div>
+      <div class="compare-card is-kag reveal">
+        <span class="tag" data-i18n="how.kagTag">This system (KAG)</span>
+        <h3 data-i18n="how.kagTitle">Walks a real graph</h3>
+        <p data-i18n="how.kagBody1">Your question is matched to one real node. A deterministic algorithm — not the LLM —
+          walks the actual edges from there: symptom → cause → action.</p>
+        <p data-i18n="how.kagBody2">If a step in that chain doesn't exist, or the question is ambiguous, the agent says so —
+          or asks for the missing detail — instead of inventing a relationship.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="databases">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="db.eyebrow">The data foundation</span>
+      <h2 data-i18n="db.heading">Four synthetic manuals, one mining domain</h2>
+      <p data-i18n="db.subheading">
+        Each of these is an independent source document — its own file, its own set of
+        components and failure modes — before extraction unifies them into a single graph.
+      </p>
+    </div>
+    <div class="db-grid">
+      <div class="db-card reveal">
+        <div class="icon">🔧</div>
+        <h3 data-i18n="db.card1Title">Vibrating Screen — PVI-1000</h3>
+        <p data-i18n="db.card1Body">Classifies crushed ore by particle size before secondary crushing or grinding.</p>
+        <div class="tag-list">
+          <span data-i18n="db.card1Tag1">Drive motor</span>
+          <span data-i18n="db.card1Tag2">Eccentric</span>
+          <span data-i18n="db.card1Tag3">Support springs</span>
+          <span data-i18n="db.card1Tag4">Screen mesh</span>
+        </div>
+      </div>
+      <div class="db-card reveal">
+        <div class="icon">📦</div>
+        <h3 data-i18n="db.card2Title">Belt Conveyor — TC-2000</h3>
+        <p data-i18n="db.card2Body">Long-distance continuous transport of crushed ore between processing stages.</p>
+        <div class="tag-list">
+          <span data-i18n="db.card2Tag1">Gearbox</span>
+          <span data-i18n="db.card2Tag2">Drive pulley</span>
+          <span data-i18n="db.card2Tag3">Idlers</span>
+          <span data-i18n="db.card2Tag4">Belt & take-up</span>
+        </div>
+      </div>
+      <div class="db-card reveal">
+        <div class="icon">🚛</div>
+        <h3 data-i18n="db.card3Title">Haul Truck — CFE-400T</h3>
+        <p data-i18n="db.card3Body">Hauls ore and waste rock between the pit and the crushing plant or dump sites.</p>
+        <div class="tag-list">
+          <span data-i18n="db.card3Tag1">Diesel engine</span>
+          <span data-i18n="db.card3Tag2">Brakes</span>
+          <span data-i18n="db.card3Tag3">Dump body</span>
+          <span data-i18n="db.card3Tag4">Suspension</span>
+        </div>
+      </div>
+      <div class="db-card reveal">
+        <div class="icon">⚙️</div>
+        <h3 data-i18n="db.card4Title">Jaw Crusher — BM-1200</h3>
+        <p data-i18n="db.card4Body">Primary crushing stage — the first size reduction of run-of-mine ore.</p>
+        <div class="tag-list">
+          <span data-i18n="db.card4Tag1">Jaw plates</span>
+          <span data-i18n="db.card4Tag2">Eccentric shaft</span>
+          <span data-i18n="db.card4Tag3">Tension springs</span>
+          <span data-i18n="db.card4Tag4">Toggle plate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="stack">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="stack.eyebrow">Built without shortcuts</span>
+      <h2 data-i18n="stack.heading">No graph-RAG framework — every piece hand-built</h2>
+      <p data-i18n="stack.subheading">No LangChain GraphRAG, no LlamaIndex KG. The extraction, the graph, and the traversal are all plain code.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-item reveal">
+        <div class="icon">🐍</div>
+        <strong>Python</strong>
+        <span data-i18n="stack.python">Core language</span>
+      </div>
+      <div class="tech-item reveal">
+        <div class="icon">🧠</div>
+        <strong>OpenAI GPT-4o</strong>
+        <span data-i18n="stack.llm">Extraction & linking</span>
+      </div>
+      <div class="tech-item reveal">
+        <div class="icon">🕸️</div>
+        <strong>NetworkX</strong>
+        <span data-i18n="stack.graph">Directed graph</span>
+      </div>
+      <div class="tech-item reveal">
+        <div class="icon">🎨</div>
+        <strong>PyVis</strong>
+        <span data-i18n="stack.viz">Graph visualization</span>
+      </div>
+      <div class="tech-item reveal">
+        <div class="icon">💬</div>
+        <strong>Streamlit</strong>
+        <span data-i18n="stack.ui">Chat interface</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="contact.eyebrow">Portfolio project</span>
+      <h2 data-i18n="contact.heading">A learning project on graph-grounded reasoning</h2>
+      <p class="text-soft" data-i18n="contact.body">
+        Built to understand entity/relation extraction, knowledge graph construction, and
+        multi-hop reasoning from first principles — not to ship a product.
+      </p>
+    </div>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:rodrigojs.paiva@gmail.com" data-i18n="contact.emailBtn">Contact</a>
+      <a class="btn btn-outline" href="#diagram" data-i18n="contact.backBtn">Back to diagram</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span data-i18n="footer.text">© 2026 KAG Agent AH — a Knowledge Augmented Generation portfolio project.</span>
+  </div>
+</footer>
+
+<script>
+  // ---------- i18n ----------
+  const translations = {
+    en: {
+      "nav.diagram": "Diagram",
+      "nav.how": "How it works",
+      "nav.databases": "Databases",
+      "nav.stack": "Stack",
+      "nav.cta": "View diagram",
+      "hero.eyebrow": "🛠️ KAG Agent AH — Asset Health",
+      "hero.title": "A knowledge graph, built from <span class=\"accent-word\">scratch</span>, that never guesses.",
+      "hero.subtitle": "A Knowledge Augmented Generation system for mining asset maintenance. Every answer is traced through real relationships in a graph — not similar-sounding text.",
+      "hero.btnPrimary": "See how it works",
+      "hero.btnSecondary": "Explore the data",
+      "diagram.eyebrow": "The pipeline",
+      "diagram.heading": "From maintenance manuals to a grounded answer",
+      "diagram.subheading": "Four synthetic manuals become one knowledge graph. Every question is answered by walking real edges in that graph — never by guessing from similar-looking text.",
+      "diagram.db1": "Vibrating Screen",
+      "diagram.db2": "Belt Conveyor",
+      "diagram.db3": "Haul Truck",
+      "diagram.db4": "Jaw Crusher",
+      "diagram.extractionTitle": "LLM extraction",
+      "diagram.extractionBody": "An LLM reads each manual and extracts structured triples — origin, relation, destination — using only four allowed relations. Anything that doesn't fit the schema is discarded, not guessed into shape.",
+      "diagram.graphTitle": "One unified knowledge graph",
+      "diagram.chainEquip": "Equipment",
+      "diagram.chainComp": "Component",
+      "diagram.chainSymptom": "Symptom",
+      "diagram.chainCause": "Cause",
+      "diagram.chainAction": "Action",
+      "diagram.step1": "User question",
+      "diagram.step2": "Entity linking",
+      "diagram.step3": "Deterministic traversal",
+      "diagram.step4": "Grounded answer",
+      "how.eyebrow": "In simple terms",
+      "how.heading": "How is this different from a regular RAG?",
+      "how.subheading": "Both look at your existing content before answering. The difference is what \"evidence\" means to each one.",
+      "how.ragTag": "Traditional RAG",
+      "how.ragTitle": "Searches for similar text",
+      "how.ragBody1": "Splits documents into chunks and retrieves the ones that sound closest to your question.",
+      "how.ragBody2": "If the answer needs to connect two facts that live in different chunks, the model has to fill the gap itself — which is exactly where it can hallucinate.",
+      "how.kagTag": "This system (KAG)",
+      "how.kagTitle": "Walks a real graph",
+      "how.kagBody1": "Your question is matched to one real node. A deterministic algorithm — not the LLM — walks the actual edges from there: symptom → cause → action.",
+      "how.kagBody2": "If a step in that chain doesn't exist, or the question is ambiguous, the agent says so — or asks for the missing detail — instead of inventing a relationship.",
+      "db.eyebrow": "The data foundation",
+      "db.heading": "Four synthetic manuals, one mining domain",
+      "db.subheading": "Each of these is an independent source document — its own file, its own set of components and failure modes — before extraction unifies them into a single graph.",
+      "db.card1Title": "Vibrating Screen — PVI-1000",
+      "db.card1Body": "Classifies crushed ore by particle size before secondary crushing or grinding.",
+      "db.card1Tag1": "Drive motor", "db.card1Tag2": "Eccentric", "db.card1Tag3": "Support springs", "db.card1Tag4": "Screen mesh",
+      "db.card2Title": "Belt Conveyor — TC-2000",
+      "db.card2Body": "Long-distance continuous transport of crushed ore between processing stages.",
+      "db.card2Tag1": "Gearbox", "db.card2Tag2": "Drive pulley", "db.card2Tag3": "Idlers", "db.card2Tag4": "Belt & take-up",
+      "db.card3Title": "Haul Truck — CFE-400T",
+      "db.card3Body": "Hauls ore and waste rock between the pit and the crushing plant or dump sites.",
+      "db.card3Tag1": "Diesel engine", "db.card3Tag2": "Brakes", "db.card3Tag3": "Dump body", "db.card3Tag4": "Suspension",
+      "db.card4Title": "Jaw Crusher — BM-1200",
+      "db.card4Body": "Primary crushing stage — the first size reduction of run-of-mine ore.",
+      "db.card4Tag1": "Jaw plates", "db.card4Tag2": "Eccentric shaft", "db.card4Tag3": "Tension springs", "db.card4Tag4": "Toggle plate",
+      "stack.eyebrow": "Built without shortcuts",
+      "stack.heading": "No graph-RAG framework — every piece hand-built",
+      "stack.subheading": "No LangChain GraphRAG, no LlamaIndex KG. The extraction, the graph, and the traversal are all plain code.",
+      "stack.python": "Core language",
+      "stack.llm": "Extraction & linking",
+      "stack.graph": "Directed graph",
+      "stack.viz": "Graph visualization",
+      "stack.ui": "Chat interface",
+      "contact.eyebrow": "Portfolio project",
+      "contact.heading": "A learning project on graph-grounded reasoning",
+      "contact.body": "Built to understand entity/relation extraction, knowledge graph construction, and multi-hop reasoning from first principles — not to ship a product.",
+      "contact.emailBtn": "Contact",
+      "contact.backBtn": "Back to diagram",
+      "footer.text": "© 2026 KAG Agent AH — a Knowledge Augmented Generation portfolio project."
+    },
+    pt: {
+      "nav.diagram": "Diagrama",
+      "nav.how": "Como funciona",
+      "nav.databases": "Bases de dados",
+      "nav.stack": "Stack",
+      "nav.cta": "Ver diagrama",
+      "hero.eyebrow": "🛠️ KAG Agent AH — Asset Health",
+      "hero.title": "Um grafo de conhecimento, construído do <span class=\"accent-word\">zero</span>, que nunca chuta.",
+      "hero.subtitle": "Um sistema de Knowledge Augmented Generation para manutenção de ativos de mineração. Toda resposta é rastreada por relações reais em um grafo — nunca por texto parecido.",
+      "hero.btnPrimary": "Ver como funciona",
+      "hero.btnSecondary": "Explorar os dados",
+      "diagram.eyebrow": "O pipeline",
+      "diagram.heading": "De manuais de manutenção a uma resposta ancorada",
+      "diagram.subheading": "Quatro manuais sintéticos viram um único grafo de conhecimento. Toda pergunta é respondida percorrendo arestas reais desse grafo — nunca chutando a partir de texto parecido.",
+      "diagram.db1": "Peneira Vibratória",
+      "diagram.db2": "Transportador de Correia",
+      "diagram.db3": "Caminhão Fora de Estrada",
+      "diagram.db4": "Britador de Mandíbulas",
+      "diagram.extractionTitle": "Extração por LLM",
+      "diagram.extractionBody": "Um LLM lê cada manual e extrai triplas estruturadas — origem, relação, destino — usando somente quatro relações permitidas. O que não se encaixa no esquema é descartado, nunca forçado.",
+      "diagram.graphTitle": "Um único grafo de conhecimento unificado",
+      "diagram.chainEquip": "Equipamento",
+      "diagram.chainComp": "Componente",
+      "diagram.chainSymptom": "Sintoma",
+      "diagram.chainCause": "Causa",
+      "diagram.chainAction": "Ação",
+      "diagram.step1": "Pergunta do usuário",
+      "diagram.step2": "Identificação da entidade",
+      "diagram.step3": "Travessia determinística",
+      "diagram.step4": "Resposta ancorada",
+      "how.eyebrow": "Em termos simples",
+      "how.heading": "Qual a diferença para um RAG comum?",
+      "how.subheading": "Os dois olham para o seu conteúdo antes de responder. A diferença é o que conta como \"evidência\" para cada um.",
+      "how.ragTag": "RAG tradicional",
+      "how.ragTitle": "Busca texto parecido",
+      "how.ragBody1": "Divide os documentos em pedaços (chunks) e recupera os que soam mais parecidos com a pergunta.",
+      "how.ragBody2": "Se a resposta exige conectar dois fatos que estão em pedaços diferentes, o modelo precisa preencher essa lacuna sozinho — e é exatamente aí que ele pode alucinar.",
+      "how.kagTag": "Este sistema (KAG)",
+      "how.kagTitle": "Percorre um grafo real",
+      "how.kagBody1": "Sua pergunta é mapeada para um nó real. Um algoritmo determinístico — não o LLM — percorre as arestas de verdade a partir dali: sintoma → causa → ação.",
+      "how.kagBody2": "Se uma etapa dessa cadeia não existe, ou a pergunta é ambígua, o agente diz isso — ou pede o detalhe que falta — em vez de inventar uma relação.",
+      "db.eyebrow": "A base de dados",
+      "db.heading": "Quatro manuais sintéticos, um domínio de mineração",
+      "db.subheading": "Cada um destes é um documento de origem independente — seu próprio arquivo, seus próprios componentes e modos de falha — antes de a extração unificá-los em um único grafo.",
+      "db.card1Title": "Peneira Vibratória — PVI-1000",
+      "db.card1Body": "Classifica o minério britado por faixa de tamanho antes da britagem secundária ou moagem.",
+      "db.card1Tag1": "Motor de acionamento", "db.card1Tag2": "Excêntrico", "db.card1Tag3": "Molas de suporte", "db.card1Tag4": "Tela de peneiramento",
+      "db.card2Title": "Transportador de Correia — TC-2000",
+      "db.card2Body": "Transporte contínuo de longa distância de minério britado entre etapas do processo.",
+      "db.card2Tag1": "Redutor", "db.card2Tag2": "Tambor de acionamento", "db.card2Tag3": "Roletes", "db.card2Tag4": "Correia e esticador",
+      "db.card3Title": "Caminhão Fora de Estrada — CFE-400T",
+      "db.card3Body": "Transporta minério e estéril entre a lavra e a britagem ou pilhas de disposição.",
+      "db.card3Tag1": "Motor diesel", "db.card3Tag2": "Freios", "db.card3Tag3": "Caçamba basculante", "db.card3Tag4": "Suspensão",
+      "db.card4Title": "Britador de Mandíbulas — BM-1200",
+      "db.card4Body": "Etapa de britagem primária — a primeira redução granulométrica do minério lavrado.",
+      "db.card4Tag1": "Mandíbulas", "db.card4Tag2": "Eixo excêntrico", "db.card4Tag3": "Molas de tração", "db.card4Tag4": "Placa de articulação",
+      "stack.eyebrow": "Construído sem atalhos",
+      "stack.heading": "Nenhum framework de graph-RAG — cada peça construída à mão",
+      "stack.subheading": "Sem LangChain GraphRAG, sem LlamaIndex KG. Extração, grafo e travessia são código puro.",
+      "stack.python": "Linguagem principal",
+      "stack.llm": "Extração e identificação",
+      "stack.graph": "Grafo direcionado",
+      "stack.viz": "Visualização do grafo",
+      "stack.ui": "Interface de chat",
+      "contact.eyebrow": "Projeto de portfólio",
+      "contact.heading": "Um projeto de aprendizado sobre raciocínio ancorado em grafo",
+      "contact.body": "Construído para entender extração de entidades/relações, construção de grafo de conhecimento e raciocínio multi-hop do zero — não para virar produto.",
+      "contact.emailBtn": "Contato",
+      "contact.backBtn": "Voltar ao diagrama",
+      "footer.text": "© 2026 KAG Agent AH — um projeto de portfólio de Knowledge Augmented Generation."
+    }
+  };
+
+  function applyLanguage(lang) {
+    const dict = translations[lang] || translations.en;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    const btn = document.getElementById('langToggle');
+    if (btn) btn.textContent = lang === 'pt' ? 'EN' : 'PT';
+    localStorage.setItem('kag-lang', lang);
+  }
+
+  const savedLang = localStorage.getItem('kag-lang') || 'en';
+  applyLanguage(savedLang);
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    const current = localStorage.getItem('kag-lang') || 'en';
+    applyLanguage(current === 'en' ? 'pt' : 'en');
+  });
+
+  // ---------- Mobile menu ----------
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // ---------- Reveal on scroll ----------
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
