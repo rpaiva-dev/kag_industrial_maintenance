@@ -1,45 +1,47 @@
-# KAG — Manutenção Industrial
+# KAG Agent Mining
 
-Sistema de **Knowledge Augmented Generation** construído do zero (sem LangChain GraphRAG, LlamaIndex KG ou similares) sobre uma base de conhecimento de manutenção industrial: equipamentos, componentes, sintomas, causas e ações corretivas.
+A **Knowledge Augmented Generation** system built from scratch (no LangChain GraphRAG, LlamaIndex KG or similar) over a mining-maintenance knowledge base: equipment, components, symptoms, causes and corrective actions.
 
-Diferente de um RAG comum (que busca trechos de texto parecidos), o KAG responde perguntas que exigem atravessar uma **cadeia de relações causa-efeito** que não está inteira em um único trecho:
+> **All data used in this project is synthetic.** The four equipment manuals, and every component, symptom, cause and corrective action inside them, were written to simulate realistic industrial-maintenance documentation — none of it was extracted from a real manufacturer's manual or a real mining operation.
 
-> "O motor da correia transportadora está com vibração alta — qual a causa mais provável e qual a ação corretiva?"
+Unlike a plain RAG (which searches for similar-sounding text passages), KAG answers questions that require walking a **chain of cause-effect relations** that doesn't live entirely in one passage:
+
+> "The crusher's eccentric shaft is vibrating — what's the most likely cause and the corrective action?"
 >
-> Exige percorrer: Equipamento → Componente → Sintoma → Causa → Ação corretiva.
+> Requires walking: Equipment → Component → Symptom → Cause → Corrective Action.
 
-## Arquitetura
+## Architecture
 
 ```
-data/raw/  ──►  src/extraction.py  ──►  data/processed/triplas.json
-                (LLM extrai triplas)          │
+data/raw/  ──►  src/extraction.py  ──►  data/processed/triples.json
+                (LLM extracts triples)        │
                                               ▼
-                                    src/graph_builder.py  ──►  grafo.graphml (nx.DiGraph)
+                                    src/graph_builder.py  ──►  graph.graphml (nx.DiGraph)
                                               │
-Pergunta ──► src/graph_query.py ──► caminhos (BFS ≤ 3 saltos)
-             (LLM só identifica               │
-              a entidade de partida)          ▼
-                                    src/answer_builder.py ──► resposta ancorada no grafo
-                                              │
-                                    src/graph_viz.py ──► grafo pyvis com caminho destacado
-                                              │
-                                          app.py (Streamlit)
+Question ──► src/graph_query.py ──► paths (traversal ≤ 3 hops)
+             (LLM only identifies             │
+              the starting entity;            ▼
+              deterministic specificity  src/answer_builder.py ──► graph-grounded answer
+              check asks for detail            │
+              when the question is    src/graph_viz.py ──► pyvis graph with the path highlighted
+              ambiguous)                        │
+                                             app.py (Streamlit)
 ```
 
-Relações do grafo: `tem_componente`, `apresenta_sintoma`, `indica_causa`, `resolve_com`.
+Graph relations: `has_component`, `has_symptom`, `indicates_cause`, `resolved_by`.
 
-Se a pergunta não mapear para nenhuma entidade do grafo, o sistema **admite que não tem a informação** — nunca inventa uma relação.
+If the question doesn't map to any entity in the graph, the system **admits it doesn't have the information** — it never invents a relation. If the question is ambiguous (e.g. it names a component but not the symptom), the agent **asks for the missing detail** instead of guessing.
 
-## Como rodar
+## How to run
 
 ```powershell
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt -q
 
-# configure a chave
-copy .env.example .env   # e edite com sua ANTHROPIC_API_KEY
+# set up the API key
+copy .env.example .env   # then edit it with your OPENAI_API_KEY
 
-# pipeline offline (usa o LLM para extrair as triplas)
+# offline pipeline (uses the LLM to extract the triples)
 .venv/Scripts/python -m src.extraction
 .venv/Scripts/python -m src.graph_builder
 
@@ -47,8 +49,8 @@ copy .env.example .env   # e edite com sua ANTHROPIC_API_KEY
 .venv/Scripts/python -m streamlit run app.py
 ```
 
-## Perguntas de exemplo
+## Example questions
 
-- Multi-hop: *"O motor da correia transportadora está com vibração alta — qual a causa provável e a ação corretiva?"*
-- 1 salto: *"Quais componentes tem a bomba centrífuga?"*
-- Fora do escopo: *"Como trocar o pneu de uma empilhadeira?"* → o sistema responde que não tem essa informação.
+- Multi-hop: *"The crusher's eccentric shaft is vibrating — what's the probable cause and the corrective action?"*
+- Ambiguous (triggers a clarifying question): *"The crusher's drive motor has a problem."*
+- Out of scope: *"How do I change a car tire?"* → the system answers that it doesn't have that information.

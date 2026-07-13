@@ -1,11 +1,12 @@
-"""Construção do grafo de conhecimento a partir das triplas extraídas.
+"""Knowledge graph construction from the extracted triples.
 
-Usamos networkx.DiGraph (grafo DIRECIONADO) porque as relações têm direção
-semântica: "sintoma indica_causa causa" não é o mesmo que o inverso. A direção
-é o que permite percorrer a cadeia causal na ordem certa durante a consulta.
+We use networkx.DiGraph (a DIRECTED graph) because the relations have
+semantic direction: "symptom indicates_cause cause" is not the same as the
+reverse. Direction is what lets us walk the causal chain in the right order
+during a query.
 
-Sem banco de grafo externo nesta versão: o grafo cabe em memória e o objetivo
-é aprender a mecânica, não operar em escala.
+No external graph database in this version: the graph fits in memory and
+the goal is to learn the mechanics, not to operate at scale.
 """
 
 import json
@@ -13,50 +14,51 @@ from pathlib import Path
 
 import networkx as nx
 
-RAIZ = Path(__file__).resolve().parent.parent
-ARQUIVO_TRIPLAS = RAIZ / "data" / "processed" / "triplas.json"
-ARQUIVO_GRAFO = RAIZ / "data" / "processed" / "grafo.graphml"
+ROOT = Path(__file__).resolve().parent.parent
+TRIPLES_FILE = ROOT / "data" / "processed" / "triples.json"
+GRAPH_FILE = ROOT / "data" / "processed" / "graph.graphml"
 
 
-def construir_grafo(triplas: list[dict]) -> nx.DiGraph:
-    """Monta o DiGraph: nó = entidade (com tipo), aresta = relação (com fonte)."""
-    grafo = nx.DiGraph()
-    for t in triplas:
-        # add_node é idempotente: a mesma entidade citada em vários documentos
-        # vira UM único nó — é assim que o conhecimento de fontes diferentes
-        # se conecta, coisa que chunks isolados de um RAG nunca fazem.
-        grafo.add_node(t["origem"], tipo=t["tipo_origem"])
-        grafo.add_node(t["destino"], tipo=t["tipo_destino"])
-        grafo.add_edge(
-            t["origem"],
-            t["destino"],
-            tipo_relacao=t["relacao"],
-            fonte=t["fonte"],
+def build_graph(triples: list[dict]) -> nx.DiGraph:
+    """Build the DiGraph: node = entity (with type), edge = relation (with source)."""
+    graph = nx.DiGraph()
+    for t in triples:
+        # add_node is idempotent: the same entity mentioned across several
+        # documents becomes ONE single node — this is how knowledge from
+        # different sources connects, something isolated chunks in a plain
+        # RAG never do.
+        graph.add_node(t["origin"], type=t["origin_type"])
+        graph.add_node(t["destination"], type=t["destination_type"])
+        graph.add_edge(
+            t["origin"],
+            t["destination"],
+            relation_type=t["relation"],
+            source=t["source"],
         )
-    return grafo
+    return graph
 
 
-def salvar_grafo(grafo: nx.DiGraph, caminho: Path = ARQUIVO_GRAFO) -> None:
-    """Persiste em GraphML — formato texto, legível e aberto por outras
-    ferramentas (Gephi, yEd), o que ajuda a inspecionar/depurar o grafo."""
-    caminho.parent.mkdir(parents=True, exist_ok=True)
-    nx.write_graphml(grafo, caminho, encoding="utf-8")
+def save_graph(graph: nx.DiGraph, path: Path = GRAPH_FILE) -> None:
+    """Persist as GraphML — a text-based, readable format, openable by other
+    tools (Gephi, yEd), which helps inspect/debug the graph."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    nx.write_graphml(graph, path, encoding="utf-8")
 
 
-def carregar_grafo(caminho: Path = ARQUIVO_GRAFO) -> nx.DiGraph:
-    return nx.read_graphml(caminho)
+def load_graph(path: Path = GRAPH_FILE) -> nx.DiGraph:
+    return nx.read_graphml(path)
 
 
-def executar_construcao() -> nx.DiGraph:
-    dados = json.loads(ARQUIVO_TRIPLAS.read_text(encoding="utf-8"))
-    grafo = construir_grafo(dados["triplas"])
-    salvar_grafo(grafo)
+def run_graph_construction() -> nx.DiGraph:
+    data = json.loads(TRIPLES_FILE.read_text(encoding="utf-8"))
+    graph = build_graph(data["triples"])
+    save_graph(graph)
     print(
-        f"Grafo construído: {grafo.number_of_nodes()} nós, "
-        f"{grafo.number_of_edges()} arestas. Salvo em {ARQUIVO_GRAFO}"
+        f"Graph built: {graph.number_of_nodes()} nodes, "
+        f"{graph.number_of_edges()} edges. Saved to {GRAPH_FILE}"
     )
-    return grafo
+    return graph
 
 
 if __name__ == "__main__":
-    executar_construcao()
+    run_graph_construction()

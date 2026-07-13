@@ -1,0 +1,1379 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="source" attr.type="string" />
+  <key id="d1" for="edge" attr.name="relation_type" attr.type="string" />
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="inclined vibrating screen pvi-1000">
+      <data key="d0">equipment</data>
+    </node>
+    <node id="screen drive motor">
+      <data key="d0">component</data>
+    </node>
+    <node id="screen eccentric">
+      <data key="d0">component</data>
+    </node>
+    <node id="eccentric bearings">
+      <data key="d0">component</data>
+    </node>
+    <node id="support springs">
+      <data key="d0">component</data>
+    </node>
+    <node id="screen mesh">
+      <data key="d0">component</data>
+    </node>
+    <node id="vibrating structure">
+      <data key="d0">component</data>
+    </node>
+    <node id="rubber dampers">
+      <data key="d0">component</data>
+    </node>
+    <node id="excessive vibration in the screen drive motor">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="misalignment between the motor and the screen eccentric">
+      <data key="d0">cause</data>
+    </node>
+    <node id="realigning the motor-eccentric assembly">
+      <data key="d0">action</data>
+    </node>
+    <node id="overheating of the screen drive motor">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="overload from excess material in the feed">
+      <data key="d0">cause</data>
+    </node>
+    <node id="adjusting the screen's feed rate">
+      <data key="d0">action</data>
+    </node>
+    <node id="metallic noise in the screen eccentric">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="wear of the eccentric bearings">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the eccentric bearings and relubricating">
+      <data key="d0">action</data>
+    </node>
+    <node id="excessive play in the screen eccentric shaft">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="wear of the eccentric bushings">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the screen eccentric assembly">
+      <data key="d0">action</data>
+    </node>
+    <node id="broken support spring">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="material fatigue from incorrect screen mounting on the support structure">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the set of support springs and checking the equipment's leveling">
+      <data key="d0">action</data>
+    </node>
+    <node id="corrosion on the support springs">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="prolonged exposure to moisture and abrasive material">
+      <data key="d0">cause</data>
+    </node>
+    <node id="applying anti-corrosion coating and periodic inspection of the springs">
+      <data key="d0">action</data>
+    </node>
+    <node id="tear in the screen mesh">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="impact from oversized rock blocks in the feed">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the screen mesh and adjusting the maximum feed particle size">
+      <data key="d0">action</data>
+    </node>
+    <node id="clogging of the screen mesh">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="excess moisture and fines in the material">
+      <data key="d0">cause</data>
+    </node>
+    <node id="cleaning the mesh and installing a water spray system">
+      <data key="d0">action</data>
+    </node>
+    <node id="crack in the vibrating structure">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="structural fatigue from operating outside the design vibration frequency">
+      <data key="d0">cause</data>
+    </node>
+    <node id="structurally reinforcing the vibrating structure and adjusting the vibration frequency">
+      <data key="d0">action</data>
+    </node>
+    <node id="drying and cracking of the rubber dampers">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="prolonged exposure to sunlight and lubricating oil">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the rubber dampers">
+      <data key="d0">action</data>
+    </node>
+    <node id="belt conveyor tc-2000">
+      <data key="d0">equipment</data>
+    </node>
+    <node id="conveyor drive motor">
+      <data key="d0">component</data>
+    </node>
+    <node id="gearbox">
+      <data key="d0">component</data>
+    </node>
+    <node id="drive pulley">
+      <data key="d0">component</data>
+    </node>
+    <node id="return pulley">
+      <data key="d0">component</data>
+    </node>
+    <node id="carrying idlers">
+      <data key="d0">component</data>
+    </node>
+    <node id="return idlers">
+      <data key="d0">component</data>
+    </node>
+    <node id="conveyor belt">
+      <data key="d0">component</data>
+    </node>
+    <node id="take-up">
+      <data key="d0">component</data>
+    </node>
+    <node id="cleaning scrapers">
+      <data key="d0">component</data>
+    </node>
+    <node id="overcurrent in the conveyor drive motor">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="material buildup jamming the transfer chute">
+      <data key="d0">cause</data>
+    </node>
+    <node id="clearing the chute">
+      <data key="d0">action</data>
+    </node>
+    <node id="adjusting the material flow">
+      <data key="d0">action</data>
+    </node>
+    <node id="abnormal noise in the conveyor drive motor">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="misalignment of the coupling between the motor and the gearbox">
+      <data key="d0">cause</data>
+    </node>
+    <node id="realigning the motor-gearbox coupling">
+      <data key="d0">action</data>
+    </node>
+    <node id="oil leak in the gearbox">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="worn gearbox seals">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the gearbox seals">
+      <data key="d0">action</data>
+    </node>
+    <node id="gear meshing noise in the gearbox">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="wear of the internal gearbox gears">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the gearbox's gear set">
+      <data key="d0">action</data>
+    </node>
+    <node id="belt slippage on the drive pulley">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="low conveyor belt tension">
+      <data key="d0">cause</data>
+    </node>
+    <node id="adjusting the take-up">
+      <data key="d0">action</data>
+    </node>
+    <node id="increasing belt tension">
+      <data key="d0">action</data>
+    </node>
+    <node id="wear of the drive pulley lagging">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="excessive friction from low belt grip">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the drive pulley lagging">
+      <data key="d0">action</data>
+    </node>
+    <node id="vibration in the return pulley">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="imbalance from material buildup stuck to the return pulley">
+      <data key="d0">cause</data>
+    </node>
+    <node id="cleaning and balancing the return pulley">
+      <data key="d0">action</data>
+    </node>
+    <node id="noise in the carrying idlers">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="a seized bearing from lack of lubrication">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the seized carrying idler">
+      <data key="d0">action</data>
+    </node>
+    <node id="accelerated wear of the carrying idlers">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="belt misalignment causing constant lateral friction">
+      <data key="d0">cause</data>
+    </node>
+    <node id="aligning the conveyor belt">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacing the worn carrying idlers">
+      <data key="d0">action</data>
+    </node>
+    <node id="longitudinal tear in the conveyor belt">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="puncture by a metallic contaminant in the feed">
+      <data key="d0">cause</data>
+    </node>
+    <node id="vulcanization repair">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacement of the damaged belt section">
+      <data key="d0">action</data>
+    </node>
+    <node id="lateral misalignment of the conveyor belt">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="off-center loading at the feed chute">
+      <data key="d0">cause</data>
+    </node>
+    <node id="adjusting the belt's alignment guides">
+      <data key="d0">action</data>
+    </node>
+    <node id="insufficient conveyor belt tension">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="the take-up has reached the end of its travel">
+      <data key="d0">cause</data>
+    </node>
+    <node id="splicing in a section of belt">
+      <data key="d0">action</data>
+    </node>
+    <node id="readjusting the take-up">
+      <data key="d0">action</data>
+    </node>
+    <node id="material buildup on the return side of the belt">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="worn scraper blades">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the cleaning scraper blades">
+      <data key="d0">action</data>
+    </node>
+    <node id="off-road haul truck cfe-400t">
+      <data key="d0">equipment</data>
+    </node>
+    <node id="diesel engine">
+      <data key="d0">component</data>
+    </node>
+    <node id="transmission">
+      <data key="d0">component</data>
+    </node>
+    <node id="brakes">
+      <data key="d0">component</data>
+    </node>
+    <node id="off-road tires">
+      <data key="d0">component</data>
+    </node>
+    <node id="dump body">
+      <data key="d0">component</data>
+    </node>
+    <node id="hoist hydraulic system">
+      <data key="d0">component</data>
+    </node>
+    <node id="hydro-pneumatic suspension">
+      <data key="d0">component</data>
+    </node>
+    <node id="loss of diesel engine power">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="diesel engine overheating">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="black smoke from the exhaust">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="clogged fuel filter">
+      <data key="d0">cause</data>
+    </node>
+    <node id="clogged air filter">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the fuel and air filters">
+      <data key="d0">action</data>
+    </node>
+    <node id="low coolant level">
+      <data key="d0">cause</data>
+    </node>
+    <node id="blocked radiator">
+      <data key="d0">cause</data>
+    </node>
+    <node id="topping up the coolant">
+      <data key="d0">action</data>
+    </node>
+    <node id="cleaning the radiator">
+      <data key="d0">action</data>
+    </node>
+    <node id="maladjusted fuel injection system">
+      <data key="d0">cause</data>
+    </node>
+    <node id="calibrating the injection system">
+      <data key="d0">action</data>
+    </node>
+    <node id="difficulty shifting gears">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="transmission slippage">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="low transmission fluid level">
+      <data key="d0">cause</data>
+    </node>
+    <node id="topping up the fluid and checking for transmission leaks">
+      <data key="d0">action</data>
+    </node>
+    <node id="worn clutch discs">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the clutch disc pack">
+      <data key="d0">action</data>
+    </node>
+    <node id="spongy brake pedal">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="brake overheating">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="air in the hydraulic brake system">
+      <data key="d0">cause</data>
+    </node>
+    <node id="bleeding the brake system">
+      <data key="d0">action</data>
+    </node>
+    <node id="excessive use of the service brake on long grades">
+      <data key="d0">cause</data>
+    </node>
+    <node id="training the operator to use the engine brake and the retarder">
+      <data key="d0">action</data>
+    </node>
+    <node id="irregular tire wear">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="sidewall cut on the tire">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="incorrect tire pressure">
+      <data key="d0">cause</data>
+    </node>
+    <node id="inflating the tires to the manufacturer's specification">
+      <data key="d0">action</data>
+    </node>
+    <node id="operation on haul roads with sharp rocks">
+      <data key="d0">cause</data>
+    </node>
+    <node id="maintaining the haul roads and replacing the damaged tire">
+      <data key="d0">action</data>
+    </node>
+    <node id="crack in the dump body">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="dump body that fails to return to position">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="impact from rock blocks during loading">
+      <data key="d0">cause</data>
+    </node>
+    <node id="structurally reinforcing the dump body and adjusting the loading excavator's dump height">
+      <data key="d0">action</data>
+    </node>
+    <node id="stuck hydraulic control valve">
+      <data key="d0">cause</data>
+    </node>
+    <node id="cleaning or replacing the control valve">
+      <data key="d0">action</data>
+    </node>
+    <node id="leak in the hoist cylinder">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="slow dump body hoisting">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="worn hoist cylinder seals">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the cylinder seal kit">
+      <data key="d0">action</data>
+    </node>
+    <node id="low hydraulic fluid level">
+      <data key="d0">cause</data>
+    </node>
+    <node id="worn hydraulic pump">
+      <data key="d0">cause</data>
+    </node>
+    <node id="topping up the hydraulic fluid">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacing the hydraulic pump">
+      <data key="d0">action</data>
+    </node>
+    <node id="leak in the suspension cylinders">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="worn hydro-pneumatic seals in the suspension cylinders">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the seals and recharging the suspension cylinders with nitrogen">
+      <data key="d0">action</data>
+    </node>
+    <node id="jaw crusher bm-1200">
+      <data key="d0">equipment</data>
+    </node>
+    <node id="fixed jaw plate">
+      <data key="d0">component</data>
+    </node>
+    <node id="moving jaw plate">
+      <data key="d0">component</data>
+    </node>
+    <node id="crusher eccentric shaft">
+      <data key="d0">component</data>
+    </node>
+    <node id="flywheel">
+      <data key="d0">component</data>
+    </node>
+    <node id="pitman">
+      <data key="d0">component</data>
+    </node>
+    <node id="main bearings">
+      <data key="d0">component</data>
+    </node>
+    <node id="pitman bushing">
+      <data key="d0">component</data>
+    </node>
+    <node id="tension springs">
+      <data key="d0">component</data>
+    </node>
+    <node id="toggle plate">
+      <data key="d0">component</data>
+    </node>
+    <node id="drive belts">
+      <data key="d0">component</data>
+    </node>
+    <node id="crusher drive motor">
+      <data key="d0">component</data>
+    </node>
+    <node id="lubrication system">
+      <data key="d0">component</data>
+    </node>
+    <node id="accelerated wear of the jaw plate liners">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="feed material with abrasiveness above the specification for the installed liner">
+      <data key="d0">cause</data>
+    </node>
+    <node id="switching to a more wear-resistant alloy liner">
+      <data key="d0">action</data>
+    </node>
+    <node id="adjusting the feed particle size">
+      <data key="d0">action</data>
+    </node>
+    <node id="excessive vibration in the crusher eccentric shaft">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="wear of the main bearings">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the main bearings">
+      <data key="d0">action</data>
+    </node>
+    <node id="realigning the eccentric shaft">
+      <data key="d0">action</data>
+    </node>
+    <node id="imbalance of the flywheel">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="crack or loss of mass in the flywheel">
+      <data key="d0">cause</data>
+    </node>
+    <node id="dynamic balancing">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacement of the flywheel">
+      <data key="d0">action</data>
+    </node>
+    <node id="excessive play in the pitman">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="wear of the pitman bushing">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the pitman bushing">
+      <data key="d0">action</data>
+    </node>
+    <node id="adjusting the play">
+      <data key="d0">action</data>
+    </node>
+    <node id="broken tension spring">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="fatigue from crusher overload caused by non-crushable material in the crushing chamber">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the tension spring">
+      <data key="d0">action</data>
+    </node>
+    <node id="installing a metal detector on the feed">
+      <data key="d0">action</data>
+    </node>
+    <node id="wear of the toggle plate">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="insufficient lubrication at the toggle joint">
+      <data key="d0">cause</data>
+    </node>
+    <node id="scheduled relubrication">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacement of the toggle plate when necessary">
+      <data key="d0">action</data>
+    </node>
+    <node id="slippage of the drive belts">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="insufficient belt tensioning">
+      <data key="d0">cause</data>
+    </node>
+    <node id="adjusting the tension">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacing the set of drive belts">
+      <data key="d0">action</data>
+    </node>
+    <node id="overcurrent in the crusher drive motor">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="crusher operating flooded due to excessive feed">
+      <data key="d0">cause</data>
+    </node>
+    <node id="adjusting the feed rate">
+      <data key="d0">action</data>
+    </node>
+    <node id="installing level control in the crushing chamber">
+      <data key="d0">action</data>
+    </node>
+    <node id="low pressure in the lubrication system">
+      <data key="d0">symptom</data>
+    </node>
+    <node id="clogged oil filter">
+      <data key="d0">cause</data>
+    </node>
+    <node id="worn lubrication pump">
+      <data key="d0">cause</data>
+    </node>
+    <node id="replacing the oil filter">
+      <data key="d0">action</data>
+    </node>
+    <node id="replacing the lubrication pump">
+      <data key="d0">action</data>
+    </node>
+    <edge source="inclined vibrating screen pvi-1000" target="screen drive motor">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="inclined vibrating screen pvi-1000" target="screen eccentric">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="inclined vibrating screen pvi-1000" target="eccentric bearings">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="inclined vibrating screen pvi-1000" target="support springs">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="inclined vibrating screen pvi-1000" target="screen mesh">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="inclined vibrating screen pvi-1000" target="vibrating structure">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="inclined vibrating screen pvi-1000" target="rubber dampers">
+      <data key="d1">has_component</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="screen drive motor" target="excessive vibration in the screen drive motor">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="screen drive motor" target="overheating of the screen drive motor">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="screen eccentric" target="metallic noise in the screen eccentric">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="screen eccentric" target="excessive play in the screen eccentric shaft">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="support springs" target="broken support spring">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="support springs" target="corrosion on the support springs">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="screen mesh" target="tear in the screen mesh">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="screen mesh" target="clogging of the screen mesh">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="vibrating structure" target="crack in the vibrating structure">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="rubber dampers" target="drying and cracking of the rubber dampers">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excessive vibration in the screen drive motor" target="misalignment between the motor and the screen eccentric">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="misalignment between the motor and the screen eccentric" target="realigning the motor-eccentric assembly">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="overheating of the screen drive motor" target="overload from excess material in the feed">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="overload from excess material in the feed" target="adjusting the screen's feed rate">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="metallic noise in the screen eccentric" target="wear of the eccentric bearings">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the eccentric bearings" target="replacing the eccentric bearings and relubricating">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excessive play in the screen eccentric shaft" target="wear of the eccentric bushings">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the eccentric bushings" target="replacing the screen eccentric assembly">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="broken support spring" target="material fatigue from incorrect screen mounting on the support structure">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="material fatigue from incorrect screen mounting on the support structure" target="replacing the set of support springs and checking the equipment's leveling">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="corrosion on the support springs" target="prolonged exposure to moisture and abrasive material">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="prolonged exposure to moisture and abrasive material" target="applying anti-corrosion coating and periodic inspection of the springs">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="tear in the screen mesh" target="impact from oversized rock blocks in the feed">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="impact from oversized rock blocks in the feed" target="replacing the screen mesh and adjusting the maximum feed particle size">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="clogging of the screen mesh" target="excess moisture and fines in the material">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excess moisture and fines in the material" target="cleaning the mesh and installing a water spray system">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crack in the vibrating structure" target="structural fatigue from operating outside the design vibration frequency">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="structural fatigue from operating outside the design vibration frequency" target="structurally reinforcing the vibrating structure and adjusting the vibration frequency">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="drying and cracking of the rubber dampers" target="prolonged exposure to sunlight and lubricating oil">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="prolonged exposure to sunlight and lubricating oil" target="replacing the rubber dampers">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="conveyor drive motor">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="gearbox">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="drive pulley">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="return pulley">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="carrying idlers">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="return idlers">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="conveyor belt">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="take-up">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt conveyor tc-2000" target="cleaning scrapers">
+      <data key="d1">has_component</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="conveyor drive motor" target="overcurrent in the conveyor drive motor">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="conveyor drive motor" target="abnormal noise in the conveyor drive motor">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="gearbox" target="oil leak in the gearbox">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="gearbox" target="gear meshing noise in the gearbox">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="drive pulley" target="belt slippage on the drive pulley">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="drive pulley" target="wear of the drive pulley lagging">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="return pulley" target="vibration in the return pulley">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="carrying idlers" target="noise in the carrying idlers">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="carrying idlers" target="accelerated wear of the carrying idlers">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="conveyor belt" target="longitudinal tear in the conveyor belt">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="conveyor belt" target="lateral misalignment of the conveyor belt">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="take-up" target="insufficient conveyor belt tension">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="cleaning scrapers" target="material buildup on the return side of the belt">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="overcurrent in the conveyor drive motor" target="material buildup jamming the transfer chute">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="material buildup jamming the transfer chute" target="clearing the chute">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="material buildup jamming the transfer chute" target="adjusting the material flow">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="abnormal noise in the conveyor drive motor" target="misalignment of the coupling between the motor and the gearbox">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="misalignment of the coupling between the motor and the gearbox" target="realigning the motor-gearbox coupling">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="oil leak in the gearbox" target="worn gearbox seals">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn gearbox seals" target="replacing the gearbox seals">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="gear meshing noise in the gearbox" target="wear of the internal gearbox gears">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the internal gearbox gears" target="replacing the gearbox's gear set">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt slippage on the drive pulley" target="low conveyor belt tension">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low conveyor belt tension" target="adjusting the take-up">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low conveyor belt tension" target="increasing belt tension">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the drive pulley lagging" target="excessive friction from low belt grip">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excessive friction from low belt grip" target="replacing the drive pulley lagging">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="vibration in the return pulley" target="imbalance from material buildup stuck to the return pulley">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="imbalance from material buildup stuck to the return pulley" target="cleaning and balancing the return pulley">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="noise in the carrying idlers" target="a seized bearing from lack of lubrication">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="a seized bearing from lack of lubrication" target="replacing the seized carrying idler">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="accelerated wear of the carrying idlers" target="belt misalignment causing constant lateral friction">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt misalignment causing constant lateral friction" target="aligning the conveyor belt">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="belt misalignment causing constant lateral friction" target="replacing the worn carrying idlers">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="longitudinal tear in the conveyor belt" target="puncture by a metallic contaminant in the feed">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="puncture by a metallic contaminant in the feed" target="vulcanization repair">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="puncture by a metallic contaminant in the feed" target="replacement of the damaged belt section">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="lateral misalignment of the conveyor belt" target="off-center loading at the feed chute">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-center loading at the feed chute" target="adjusting the belt's alignment guides">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="insufficient conveyor belt tension" target="the take-up has reached the end of its travel">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="the take-up has reached the end of its travel" target="splicing in a section of belt">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="the take-up has reached the end of its travel" target="readjusting the take-up">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="material buildup on the return side of the belt" target="worn scraper blades">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn scraper blades" target="replacing the cleaning scraper blades">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Belt Conveyor TC-2000 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="diesel engine">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="transmission">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="brakes">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="off-road tires">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="dump body">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="hoist hydraulic system">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road haul truck cfe-400t" target="hydro-pneumatic suspension">
+      <data key="d1">has_component</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="diesel engine" target="loss of diesel engine power">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="diesel engine" target="diesel engine overheating">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="diesel engine" target="black smoke from the exhaust">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="transmission" target="difficulty shifting gears">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="transmission" target="transmission slippage">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="brakes" target="spongy brake pedal">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="brakes" target="brake overheating">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road tires" target="irregular tire wear">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="off-road tires" target="sidewall cut on the tire">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="dump body" target="crack in the dump body">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="dump body" target="dump body that fails to return to position">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="hoist hydraulic system" target="leak in the hoist cylinder">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="hoist hydraulic system" target="slow dump body hoisting">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="hydro-pneumatic suspension" target="leak in the suspension cylinders">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="loss of diesel engine power" target="clogged fuel filter">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="loss of diesel engine power" target="clogged air filter">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="diesel engine overheating" target="low coolant level">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="diesel engine overheating" target="blocked radiator">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="black smoke from the exhaust" target="maladjusted fuel injection system">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="clogged fuel filter" target="replacing the fuel and air filters">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="clogged air filter" target="replacing the fuel and air filters">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low coolant level" target="topping up the coolant">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="blocked radiator" target="cleaning the radiator">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="maladjusted fuel injection system" target="calibrating the injection system">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="difficulty shifting gears" target="low transmission fluid level">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="transmission slippage" target="worn clutch discs">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low transmission fluid level" target="topping up the fluid and checking for transmission leaks">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn clutch discs" target="replacing the clutch disc pack">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="spongy brake pedal" target="air in the hydraulic brake system">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="brake overheating" target="excessive use of the service brake on long grades">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="air in the hydraulic brake system" target="bleeding the brake system">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excessive use of the service brake on long grades" target="training the operator to use the engine brake and the retarder">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="irregular tire wear" target="incorrect tire pressure">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="sidewall cut on the tire" target="operation on haul roads with sharp rocks">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="incorrect tire pressure" target="inflating the tires to the manufacturer's specification">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="operation on haul roads with sharp rocks" target="maintaining the haul roads and replacing the damaged tire">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crack in the dump body" target="impact from rock blocks during loading">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="dump body that fails to return to position" target="stuck hydraulic control valve">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="impact from rock blocks during loading" target="structurally reinforcing the dump body and adjusting the loading excavator's dump height">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="stuck hydraulic control valve" target="cleaning or replacing the control valve">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="leak in the hoist cylinder" target="worn hoist cylinder seals">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="slow dump body hoisting" target="low hydraulic fluid level">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="slow dump body hoisting" target="worn hydraulic pump">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn hoist cylinder seals" target="replacing the cylinder seal kit">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low hydraulic fluid level" target="topping up the hydraulic fluid">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn hydraulic pump" target="replacing the hydraulic pump">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="leak in the suspension cylinders" target="worn hydro-pneumatic seals in the suspension cylinders">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn hydro-pneumatic seals in the suspension cylinders" target="replacing the seals and recharging the suspension cylinders with nitrogen">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Haul Truck CFE-400T — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="fixed jaw plate">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="moving jaw plate">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="crusher eccentric shaft">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="flywheel">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="pitman">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="main bearings">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="pitman bushing">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="tension springs">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="toggle plate">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="drive belts">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="crusher drive motor">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="jaw crusher bm-1200" target="lubrication system">
+      <data key="d1">has_component</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="fixed jaw plate" target="accelerated wear of the jaw plate liners">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="moving jaw plate" target="accelerated wear of the jaw plate liners">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crusher eccentric shaft" target="excessive vibration in the crusher eccentric shaft">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="flywheel" target="imbalance of the flywheel">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="pitman" target="excessive play in the pitman">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="tension springs" target="broken tension spring">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="toggle plate" target="wear of the toggle plate">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="drive belts" target="slippage of the drive belts">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crusher drive motor" target="overcurrent in the crusher drive motor">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="lubrication system" target="low pressure in the lubrication system">
+      <data key="d1">has_symptom</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="accelerated wear of the jaw plate liners" target="feed material with abrasiveness above the specification for the installed liner">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="feed material with abrasiveness above the specification for the installed liner" target="switching to a more wear-resistant alloy liner">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="feed material with abrasiveness above the specification for the installed liner" target="adjusting the feed particle size">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excessive vibration in the crusher eccentric shaft" target="wear of the main bearings">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the main bearings" target="replacing the main bearings">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the main bearings" target="realigning the eccentric shaft">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="imbalance of the flywheel" target="crack or loss of mass in the flywheel">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crack or loss of mass in the flywheel" target="dynamic balancing">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crack or loss of mass in the flywheel" target="replacement of the flywheel">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="excessive play in the pitman" target="wear of the pitman bushing">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the pitman bushing" target="replacing the pitman bushing">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the pitman bushing" target="adjusting the play">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="broken tension spring" target="fatigue from crusher overload caused by non-crushable material in the crushing chamber">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="fatigue from crusher overload caused by non-crushable material in the crushing chamber" target="replacing the tension spring">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="fatigue from crusher overload caused by non-crushable material in the crushing chamber" target="installing a metal detector on the feed">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="wear of the toggle plate" target="insufficient lubrication at the toggle joint">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="insufficient lubrication at the toggle joint" target="scheduled relubrication">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="insufficient lubrication at the toggle joint" target="replacement of the toggle plate when necessary">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="slippage of the drive belts" target="insufficient belt tensioning">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="insufficient belt tensioning" target="adjusting the tension">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="insufficient belt tensioning" target="replacing the set of drive belts">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="overcurrent in the crusher drive motor" target="crusher operating flooded due to excessive feed">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crusher operating flooded due to excessive feed" target="adjusting the feed rate">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="crusher operating flooded due to excessive feed" target="installing level control in the crushing chamber">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low pressure in the lubrication system" target="clogged oil filter">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="low pressure in the lubrication system" target="worn lubrication pump">
+      <data key="d1">indicates_cause</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="clogged oil filter" target="replacing the oil filter">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+    <edge source="worn lubrication pump" target="replacing the lubrication pump">
+      <data key="d1">resolved_by</data>
+      <data key="d2">Jaw Crusher BM-1200 — Maintenance Manual (synthetic)</data>
+    </edge>
+  </graph>
+</graphml>

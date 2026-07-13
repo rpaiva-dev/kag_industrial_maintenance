@@ -1,0 +1,1564 @@
+{
+  "triples": [
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "screen drive motor",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "screen eccentric",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "eccentric bearings",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "support springs",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "screen mesh",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "vibrating structure",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "inclined vibrating screen pvi-1000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "rubber dampers",
+      "destination_type": "component",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "screen drive motor",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "excessive vibration in the screen drive motor",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excessive vibration in the screen drive motor",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "misalignment between the motor and the screen eccentric",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "misalignment between the motor and the screen eccentric",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "realigning the motor-eccentric assembly",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "screen drive motor",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "overheating of the screen drive motor",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "overheating of the screen drive motor",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "overload from excess material in the feed",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "overload from excess material in the feed",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the screen's feed rate",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "screen eccentric",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "metallic noise in the screen eccentric",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "metallic noise in the screen eccentric",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "wear of the eccentric bearings",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the eccentric bearings",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the eccentric bearings and relubricating",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "screen eccentric",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "excessive play in the screen eccentric shaft",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excessive play in the screen eccentric shaft",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "wear of the eccentric bushings",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the eccentric bushings",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the screen eccentric assembly",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "support springs",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "broken support spring",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "broken support spring",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "material fatigue from incorrect screen mounting on the support structure",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "material fatigue from incorrect screen mounting on the support structure",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the set of support springs and checking the equipment's leveling",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "support springs",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "corrosion on the support springs",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "corrosion on the support springs",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "prolonged exposure to moisture and abrasive material",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "prolonged exposure to moisture and abrasive material",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "applying anti-corrosion coating and periodic inspection of the springs",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "screen mesh",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "tear in the screen mesh",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "tear in the screen mesh",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "impact from oversized rock blocks in the feed",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "impact from oversized rock blocks in the feed",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the screen mesh and adjusting the maximum feed particle size",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "screen mesh",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "clogging of the screen mesh",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "clogging of the screen mesh",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "excess moisture and fines in the material",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excess moisture and fines in the material",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "cleaning the mesh and installing a water spray system",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "vibrating structure",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "crack in the vibrating structure",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crack in the vibrating structure",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "structural fatigue from operating outside the design vibration frequency",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "structural fatigue from operating outside the design vibration frequency",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "structurally reinforcing the vibrating structure and adjusting the vibration frequency",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "rubber dampers",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "drying and cracking of the rubber dampers",
+      "destination_type": "symptom",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "drying and cracking of the rubber dampers",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "prolonged exposure to sunlight and lubricating oil",
+      "destination_type": "cause",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "prolonged exposure to sunlight and lubricating oil",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the rubber dampers",
+      "destination_type": "action",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "conveyor drive motor",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "gearbox",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "drive pulley",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "return pulley",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "carrying idlers",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "return idlers",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "conveyor belt",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "take-up",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt conveyor tc-2000",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "cleaning scrapers",
+      "destination_type": "component",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "conveyor drive motor",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "overcurrent in the conveyor drive motor",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "overcurrent in the conveyor drive motor",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "material buildup jamming the transfer chute",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "material buildup jamming the transfer chute",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "clearing the chute",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "material buildup jamming the transfer chute",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the material flow",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "conveyor drive motor",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "abnormal noise in the conveyor drive motor",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "abnormal noise in the conveyor drive motor",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "misalignment of the coupling between the motor and the gearbox",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "misalignment of the coupling between the motor and the gearbox",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "realigning the motor-gearbox coupling",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "gearbox",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "oil leak in the gearbox",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "oil leak in the gearbox",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn gearbox seals",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn gearbox seals",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the gearbox seals",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "gearbox",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "gear meshing noise in the gearbox",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "gear meshing noise in the gearbox",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "wear of the internal gearbox gears",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the internal gearbox gears",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the gearbox's gear set",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "drive pulley",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "belt slippage on the drive pulley",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt slippage on the drive pulley",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "low conveyor belt tension",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low conveyor belt tension",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the take-up",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low conveyor belt tension",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "increasing belt tension",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "drive pulley",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "wear of the drive pulley lagging",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the drive pulley lagging",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "excessive friction from low belt grip",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excessive friction from low belt grip",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the drive pulley lagging",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "return pulley",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "vibration in the return pulley",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "vibration in the return pulley",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "imbalance from material buildup stuck to the return pulley",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "imbalance from material buildup stuck to the return pulley",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "cleaning and balancing the return pulley",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "carrying idlers",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "noise in the carrying idlers",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "noise in the carrying idlers",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "a seized bearing from lack of lubrication",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "a seized bearing from lack of lubrication",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the seized carrying idler",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "carrying idlers",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "accelerated wear of the carrying idlers",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "accelerated wear of the carrying idlers",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "belt misalignment causing constant lateral friction",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt misalignment causing constant lateral friction",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "aligning the conveyor belt",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "belt misalignment causing constant lateral friction",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the worn carrying idlers",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "conveyor belt",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "longitudinal tear in the conveyor belt",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "longitudinal tear in the conveyor belt",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "puncture by a metallic contaminant in the feed",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "puncture by a metallic contaminant in the feed",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "vulcanization repair",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "puncture by a metallic contaminant in the feed",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacement of the damaged belt section",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "conveyor belt",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "lateral misalignment of the conveyor belt",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "lateral misalignment of the conveyor belt",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "off-center loading at the feed chute",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-center loading at the feed chute",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the belt's alignment guides",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "take-up",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "insufficient conveyor belt tension",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "insufficient conveyor belt tension",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "the take-up has reached the end of its travel",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "the take-up has reached the end of its travel",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "splicing in a section of belt",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "the take-up has reached the end of its travel",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "readjusting the take-up",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "cleaning scrapers",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "material buildup on the return side of the belt",
+      "destination_type": "symptom",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "material buildup on the return side of the belt",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn scraper blades",
+      "destination_type": "cause",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn scraper blades",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the cleaning scraper blades",
+      "destination_type": "action",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "diesel engine",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "transmission",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "brakes",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "off-road tires",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "dump body",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "hoist hydraulic system",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road haul truck cfe-400t",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "hydro-pneumatic suspension",
+      "destination_type": "component",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "diesel engine",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "loss of diesel engine power",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "diesel engine",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "diesel engine overheating",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "diesel engine",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "black smoke from the exhaust",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "loss of diesel engine power",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "clogged fuel filter",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "loss of diesel engine power",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "clogged air filter",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "clogged fuel filter",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the fuel and air filters",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "clogged air filter",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the fuel and air filters",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "diesel engine overheating",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "low coolant level",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "diesel engine overheating",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "blocked radiator",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low coolant level",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "topping up the coolant",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "blocked radiator",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "cleaning the radiator",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "black smoke from the exhaust",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "maladjusted fuel injection system",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "maladjusted fuel injection system",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "calibrating the injection system",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "transmission",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "difficulty shifting gears",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "transmission",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "transmission slippage",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "difficulty shifting gears",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "low transmission fluid level",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low transmission fluid level",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "topping up the fluid and checking for transmission leaks",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "transmission slippage",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn clutch discs",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn clutch discs",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the clutch disc pack",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "brakes",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "spongy brake pedal",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "brakes",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "brake overheating",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "spongy brake pedal",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "air in the hydraulic brake system",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "air in the hydraulic brake system",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "bleeding the brake system",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "brake overheating",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "excessive use of the service brake on long grades",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excessive use of the service brake on long grades",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "training the operator to use the engine brake and the retarder",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road tires",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "irregular tire wear",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "off-road tires",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "sidewall cut on the tire",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "irregular tire wear",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "incorrect tire pressure",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "incorrect tire pressure",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "inflating the tires to the manufacturer's specification",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "sidewall cut on the tire",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "operation on haul roads with sharp rocks",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "operation on haul roads with sharp rocks",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "maintaining the haul roads and replacing the damaged tire",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "dump body",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "crack in the dump body",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "dump body",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "dump body that fails to return to position",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crack in the dump body",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "impact from rock blocks during loading",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "impact from rock blocks during loading",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "structurally reinforcing the dump body and adjusting the loading excavator's dump height",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "dump body that fails to return to position",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "stuck hydraulic control valve",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "stuck hydraulic control valve",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "cleaning or replacing the control valve",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "hoist hydraulic system",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "leak in the hoist cylinder",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "hoist hydraulic system",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "slow dump body hoisting",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "leak in the hoist cylinder",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn hoist cylinder seals",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn hoist cylinder seals",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the cylinder seal kit",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "slow dump body hoisting",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "low hydraulic fluid level",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "slow dump body hoisting",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn hydraulic pump",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low hydraulic fluid level",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "topping up the hydraulic fluid",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn hydraulic pump",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the hydraulic pump",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "hydro-pneumatic suspension",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "leak in the suspension cylinders",
+      "destination_type": "symptom",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "leak in the suspension cylinders",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn hydro-pneumatic seals in the suspension cylinders",
+      "destination_type": "cause",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn hydro-pneumatic seals in the suspension cylinders",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the seals and recharging the suspension cylinders with nitrogen",
+      "destination_type": "action",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "fixed jaw plate",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "moving jaw plate",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "crusher eccentric shaft",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "flywheel",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "pitman",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "main bearings",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "pitman bushing",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "tension springs",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "toggle plate",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "drive belts",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "crusher drive motor",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "jaw crusher bm-1200",
+      "origin_type": "equipment",
+      "relation": "has_component",
+      "destination": "lubrication system",
+      "destination_type": "component",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "fixed jaw plate",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "accelerated wear of the jaw plate liners",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "moving jaw plate",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "accelerated wear of the jaw plate liners",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "accelerated wear of the jaw plate liners",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "feed material with abrasiveness above the specification for the installed liner",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "feed material with abrasiveness above the specification for the installed liner",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "switching to a more wear-resistant alloy liner",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "feed material with abrasiveness above the specification for the installed liner",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the feed particle size",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crusher eccentric shaft",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "excessive vibration in the crusher eccentric shaft",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excessive vibration in the crusher eccentric shaft",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "wear of the main bearings",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the main bearings",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the main bearings",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the main bearings",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "realigning the eccentric shaft",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "flywheel",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "imbalance of the flywheel",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "imbalance of the flywheel",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "crack or loss of mass in the flywheel",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crack or loss of mass in the flywheel",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "dynamic balancing",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crack or loss of mass in the flywheel",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacement of the flywheel",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "pitman",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "excessive play in the pitman",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "excessive play in the pitman",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "wear of the pitman bushing",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the pitman bushing",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the pitman bushing",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the pitman bushing",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the play",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "tension springs",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "broken tension spring",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "broken tension spring",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "fatigue from crusher overload caused by non-crushable material in the crushing chamber",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "fatigue from crusher overload caused by non-crushable material in the crushing chamber",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the tension spring",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "fatigue from crusher overload caused by non-crushable material in the crushing chamber",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "installing a metal detector on the feed",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "toggle plate",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "wear of the toggle plate",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "wear of the toggle plate",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "insufficient lubrication at the toggle joint",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "insufficient lubrication at the toggle joint",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "scheduled relubrication",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "insufficient lubrication at the toggle joint",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacement of the toggle plate when necessary",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "drive belts",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "slippage of the drive belts",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "slippage of the drive belts",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "insufficient belt tensioning",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "insufficient belt tensioning",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the tension",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "insufficient belt tensioning",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the set of drive belts",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crusher drive motor",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "overcurrent in the crusher drive motor",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "overcurrent in the crusher drive motor",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "crusher operating flooded due to excessive feed",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crusher operating flooded due to excessive feed",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "adjusting the feed rate",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "crusher operating flooded due to excessive feed",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "installing level control in the crushing chamber",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "lubrication system",
+      "origin_type": "component",
+      "relation": "has_symptom",
+      "destination": "low pressure in the lubrication system",
+      "destination_type": "symptom",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low pressure in the lubrication system",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "clogged oil filter",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "low pressure in the lubrication system",
+      "origin_type": "symptom",
+      "relation": "indicates_cause",
+      "destination": "worn lubrication pump",
+      "destination_type": "cause",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "clogged oil filter",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the oil filter",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    },
+    {
+      "origin": "worn lubrication pump",
+      "origin_type": "cause",
+      "relation": "resolved_by",
+      "destination": "replacing the lubrication pump",
+      "destination_type": "action",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)"
+    }
+  ]
+}

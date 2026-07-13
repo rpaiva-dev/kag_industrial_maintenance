@@ -1,0 +1,73 @@
+{
+  "description": "Synthetic maintenance manual data for 4 mining asset types, used to prototype the KAG pipeline. Every equipment, component, symptom, cause and corrective action below is FICTIONAL — none of it was extracted from a real manufacturer manual. It only simulates the structure and vocabulary of real maintenance documentation, for learning and demonstration purposes. Each document describes an asset, its components, failure symptoms, probable causes and corrective actions. The 'machine_description' and 'main_components' fields are display metadata — they are not sent to the LLM during extraction, they only feed the app's 'About' page.",
+  "documents": [
+    {
+      "id": "doc-screen",
+      "source": "Vibrating Screen PVI-1000 — Maintenance Manual (synthetic)",
+      "category": "vibrating screen",
+      "machine_description": "Used to classify crushed ore by particle size before secondary crushing or grinding.",
+      "main_components": [
+        "Screen drive motor",
+        "Screen eccentric",
+        "Eccentric bearings",
+        "Support springs",
+        "Screen mesh",
+        "Vibrating structure",
+        "Rubber dampers"
+      ],
+      "text": "The inclined vibrating screen PVI-1000 is used to classify crushed ore by particle size before secondary crushing or grinding stages. Its main components are the screen drive motor, the screen eccentric, the eccentric bearings, the support springs, the screen mesh, the vibrating structure and the rubber dampers.\n\nThe screen drive motor may present excessive vibration in the screen drive motor, a symptom that indicates misalignment between the motor and the screen eccentric, resolved by realigning the motor-eccentric assembly. The screen drive motor may also present overheating of the screen drive motor, which indicates overload from excess material in the feed, resolved by adjusting the screen's feed rate.\n\nThe screen eccentric may present metallic noise in the screen eccentric, a symptom that indicates wear of the eccentric bearings, resolved by replacing the eccentric bearings and relubricating. The screen eccentric may also present excessive play in the screen eccentric shaft, which indicates wear of the eccentric bushings, resolved by replacing the screen eccentric assembly.\n\nThe support springs may present a broken support spring, a symptom that indicates material fatigue from incorrect screen mounting on the support structure, resolved by replacing the set of support springs and checking the equipment's leveling. The support springs may also present corrosion on the support springs, which indicates prolonged exposure to moisture and abrasive material, resolved by applying anti-corrosion coating and periodic inspection of the springs.\n\nThe screen mesh may present a tear in the screen mesh, a symptom that indicates impact from oversized rock blocks in the feed, resolved by replacing the screen mesh and adjusting the maximum feed particle size. The screen mesh may also present clogging of the screen mesh, which indicates excess moisture and fines in the material, resolved by cleaning the mesh and installing a water spray system.\n\nThe vibrating structure may present a crack in the vibrating structure, a symptom that indicates structural fatigue from operating outside the design vibration frequency, resolved by structurally reinforcing the vibrating structure and adjusting the vibration frequency.\n\nThe rubber dampers may present drying and cracking of the rubber dampers, a symptom that indicates prolonged exposure to sunlight and lubricating oil, resolved by replacing the rubber dampers."
+    },
+    {
+      "id": "doc-conveyor",
+      "source": "Belt Conveyor TC-2000 — Maintenance Manual (synthetic)",
+      "category": "belt conveyor",
+      "machine_description": "Continuous, long-distance transport of crushed ore between processing stages.",
+      "main_components": [
+        "Conveyor drive motor",
+        "Gearbox",
+        "Drive pulley",
+        "Return pulley",
+        "Carrying idlers",
+        "Conveyor belt",
+        "Take-up",
+        "Cleaning scrapers"
+      ],
+      "text": "The long-distance belt conveyor TC-2000 is used for the continuous transport of crushed ore between processing stages in a mining plant. Its main components are the conveyor drive motor, the gearbox, the drive pulley, the return pulley, the carrying idlers, the return idlers, the conveyor belt, the take-up and the cleaning scrapers.\n\nThe conveyor drive motor may present overcurrent in the conveyor drive motor, a symptom that indicates material buildup jamming the transfer chute, resolved by clearing the chute and adjusting the material flow. The conveyor drive motor may also present abnormal noise in the conveyor drive motor, which indicates misalignment of the coupling between the motor and the gearbox, resolved by realigning the motor-gearbox coupling.\n\nThe gearbox may present an oil leak in the gearbox, a symptom that indicates worn gearbox seals, resolved by replacing the gearbox seals. The gearbox may also present gear meshing noise in the gearbox, which indicates wear of the internal gearbox gears, resolved by replacing the gearbox's gear set.\n\nThe drive pulley may present belt slippage on the drive pulley, a symptom that indicates low conveyor belt tension, resolved by adjusting the take-up and increasing belt tension. The drive pulley may also present wear of the drive pulley lagging, which indicates excessive friction from low belt grip, resolved by replacing the drive pulley lagging.\n\nThe return pulley may present vibration in the return pulley, a symptom that indicates imbalance from material buildup stuck to the return pulley, resolved by cleaning and balancing the return pulley.\n\nThe carrying idlers may present noise in the carrying idlers, a symptom that indicates a seized bearing from lack of lubrication, resolved by replacing the seized carrying idler. The carrying idlers may also present accelerated wear of the carrying idlers, which indicates belt misalignment causing constant lateral friction, resolved by aligning the conveyor belt and replacing the worn carrying idlers.\n\nThe conveyor belt may present a longitudinal tear in the conveyor belt, a symptom that indicates puncture by a metallic contaminant in the feed, resolved by vulcanization repair or replacement of the damaged belt section. The conveyor belt may also present lateral misalignment of the conveyor belt, which indicates off-center loading at the feed chute, resolved by adjusting the belt's alignment guides.\n\nThe take-up may present insufficient conveyor belt tension, a symptom that indicates the take-up has reached the end of its travel, resolved by splicing in a section of belt and readjusting the take-up.\n\nThe cleaning scrapers may present material buildup on the return side of the belt, a symptom that indicates worn scraper blades, resolved by replacing the cleaning scraper blades."
+    },
+    {
+      "id": "doc-truck",
+      "source": "Haul Truck CFE-400T — Maintenance Manual (synthetic)",
+      "category": "haul truck",
+      "machine_description": "Hauls ore and waste rock between the pit face and the crushing facilities or waste dump sites.",
+      "main_components": [
+        "Diesel engine",
+        "Transmission",
+        "Brakes",
+        "Off-road tires",
+        "Dump body",
+        "Hoist hydraulic system",
+        "Hydro-pneumatic suspension"
+      ],
+      "text": "The off-road haul truck CFE-400T is used to transport ore and waste rock between the pit face and the crushing facilities or waste dump sites. Its main components are the diesel engine, the transmission, the brakes, the off-road tires, the dump body, the hoist hydraulic system and the hydro-pneumatic suspension.\n\nThe diesel engine may present loss of diesel engine power, a symptom that indicates a clogged fuel filter or air filter, resolved by replacing the fuel and air filters. The diesel engine may also present diesel engine overheating, which indicates low coolant level or a blocked radiator, resolved by topping up the coolant and cleaning the radiator. The diesel engine may also present black smoke from the exhaust, which indicates a maladjusted fuel injection system, resolved by calibrating the injection system.\n\nThe transmission may present difficulty shifting gears, a symptom that indicates low transmission fluid level, resolved by topping up the fluid and checking for transmission leaks. The transmission may also present transmission slippage, which indicates worn clutch discs, resolved by replacing the clutch disc pack.\n\nThe brakes may present a spongy brake pedal, a symptom that indicates air in the hydraulic brake system, resolved by bleeding the brake system. The brakes may also present brake overheating, which indicates excessive use of the service brake on long grades, resolved by training the operator to use the engine brake and the retarder.\n\nThe off-road tires may present irregular tire wear, a symptom that indicates incorrect tire pressure, resolved by inflating the tires to the manufacturer's specification. The off-road tires may also present a sidewall cut on the tire, which indicates operation on haul roads with sharp rocks, resolved by maintaining the haul roads and replacing the damaged tire.\n\nThe dump body may present a crack in the dump body, a symptom that indicates impact from rock blocks during loading, resolved by structurally reinforcing the dump body and adjusting the loading excavator's dump height. The dump body may also present a dump body that fails to return to position, which indicates a stuck hydraulic control valve, resolved by cleaning or replacing the control valve.\n\nThe hoist hydraulic system may present a leak in the hoist cylinder, a symptom that indicates worn hoist cylinder seals, resolved by replacing the cylinder seal kit. The hoist hydraulic system may also present slow dump body hoisting, which indicates low hydraulic fluid level or a worn hydraulic pump, resolved by topping up the hydraulic fluid or replacing the hydraulic pump.\n\nThe hydro-pneumatic suspension may present a leak in the suspension cylinders, a symptom that indicates worn hydro-pneumatic seals in the suspension cylinders, resolved by replacing the seals and recharging the suspension cylinders with nitrogen."
+    },
+    {
+      "id": "doc-crusher",
+      "source": "Jaw Crusher BM-1200 — Maintenance Manual (synthetic)",
+      "category": "jaw crusher",
+      "machine_description": "Primary crushing stage — the first size reduction of run-of-mine ore.",
+      "main_components": [
+        "Jaw plates (fixed and moving)",
+        "Crusher eccentric shaft",
+        "Flywheel",
+        "Pitman",
+        "Main bearings",
+        "Tension springs",
+        "Toggle plate",
+        "Drive belts",
+        "Crusher drive motor",
+        "Lubrication system"
+      ],
+      "text": "The jaw crusher BM-1200 is used in the primary crushing stage for the initial size reduction of run-of-mine ore. Its main components are the fixed jaw plate, the moving jaw plate, the crusher eccentric shaft, the flywheel, the pitman, the main bearings, the pitman bushing, the tension springs, the toggle plate, the drive belts, the crusher drive motor and the lubrication system.\n\nThe fixed jaw plate and the moving jaw plate may present accelerated wear of the jaw plate liners, a symptom that indicates feed material with abrasiveness above the specification for the installed liner, resolved by switching to a more wear-resistant alloy liner and adjusting the feed particle size.\n\nThe crusher eccentric shaft may present excessive vibration in the crusher eccentric shaft, a symptom that indicates wear of the main bearings, resolved by replacing the main bearings and realigning the eccentric shaft.\n\nThe flywheel may present imbalance of the flywheel, a symptom that indicates a crack or loss of mass in the flywheel, resolved by dynamic balancing or replacement of the flywheel.\n\nThe pitman may present excessive play in the pitman, a symptom that indicates wear of the pitman bushing, resolved by replacing the pitman bushing and adjusting the play.\n\nThe tension springs may present a broken tension spring, a symptom that indicates fatigue from crusher overload caused by non-crushable material in the crushing chamber, resolved by replacing the tension spring and installing a metal detector on the feed.\n\nThe toggle plate may present wear of the toggle plate, a symptom that indicates insufficient lubrication at the toggle joint, resolved by scheduled relubrication and replacement of the toggle plate when necessary.\n\nThe drive belts may present slippage of the drive belts, a symptom that indicates insufficient belt tensioning, resolved by adjusting the tension or replacing the set of drive belts.\n\nThe crusher drive motor may present overcurrent in the crusher drive motor, a symptom that indicates the crusher operating flooded due to excessive feed, resolved by adjusting the feed rate and installing level control in the crushing chamber.\n\nThe lubrication system may present low pressure in the lubrication system, a symptom that indicates a clogged oil filter or a worn lubrication pump, resolved by replacing the oil filter or the lubrication pump."
+    }
+  ]
+}

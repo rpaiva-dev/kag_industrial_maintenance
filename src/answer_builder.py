@@ -1,61 +1,62 @@
-"""Geração da resposta final a partir dos caminhos encontrados no grafo.
+"""Final answer generation from the paths found in the graph.
 
-O prompt final é deliberadamente RESTRITIVO: o LLM só pode usar as relações
-fornecidas (as triplas dos caminhos), nunca conhecimento próprio. É o inverso
-de um RAG comum, onde o LLM recebe texto solto e pode "completar" com o que
-sabe. Aqui, se o grafo não tem a informação, a resposta é "não sei" — a
-groundedness vem da estrutura, não da boa vontade do modelo.
+The final prompt is deliberately RESTRICTIVE: the LLM can only use the
+relations provided (the triples in the paths), never its own knowledge.
+This is the opposite of a regular RAG, where the LLM receives loose text
+and can "fill in" with what it knows. Here, if the graph doesn't have the
+information, the answer is "I don't know" — groundedness comes from the
+structure, not from the model's good will.
 """
 
-from src.llm_client import chamar_llm
+from src.llm_client import call_llm
 
-MENSAGEM_SEM_INFORMACAO = (
-    "Não encontrei essa informação na base de conhecimento. "
-    "O grafo não possui nenhuma entidade relacionada à sua pergunta, "
-    "então prefiro admitir que não sei a inventar uma resposta."
+NO_INFORMATION_MESSAGE = (
+    "I couldn't find that information in the knowledge base. "
+    "The graph has no entity related to your question, so I'd rather "
+    "admit I don't know than make something up."
 )
 
-PROMPT_SISTEMA = """Você é um assistente de manutenção industrial que responde EXCLUSIVAMENTE com base em um grafo de conhecimento.
+SYSTEM_PROMPT = """You are an industrial maintenance assistant that answers EXCLUSIVELY based on a knowledge graph.
 
-Você receberá a pergunta do usuário e os caminhos percorridos no grafo (sequências de triplas origem -relação-> destino, com a fonte documental de cada relação).
+You will receive the user's question and the paths walked in the graph (sequences of origin -relation-> destination triples, with the source document of each relation).
 
-Regras OBRIGATÓRIAS:
-1. Use SOMENTE as relações fornecidas. Não acrescente causas, ações ou fatos que não estejam nas triplas, mesmo que você os conheça.
-2. Explicite na resposta o CAMINHO percorrido no grafo que sustenta a conclusão, no formato: entidade -[relação]-> entidade -[relação]-> entidade.
-3. Se os caminhos fornecidos não forem suficientes para responder, diga claramente que a base de conhecimento não cobre esse ponto.
-4. Cite a fonte documental (campo "fonte") das relações usadas.
-5. Responda em português, de forma clara e direta: causa(s) provável(is) primeiro, depois a(s) ação(ões) corretiva(s)."""
+MANDATORY rules:
+1. Use ONLY the relations provided. Do not add causes, actions or facts that aren't in the triples, even if you happen to know them.
+2. Make the graph PATH that supports the conclusion explicit in the answer, in the format: entity -[relation]-> entity -[relation]-> entity.
+3. If the provided paths aren't enough to answer, say clearly that the knowledge base doesn't cover that point.
+4. Cite the source document ("source" field) of the relations used.
+5. Answer in English, clearly and directly: probable cause(s) first, then the corrective action(s)."""
 
 
-def formatar_caminhos(caminhos: list[list[dict]]) -> str:
-    """Serializa os caminhos em texto legível para o prompt.
+def format_paths(paths: list[list[dict]]) -> str:
+    """Serialize the paths into readable text for the prompt.
 
-    Formato "a -[rel]-> b -[rel]-> c" em vez de JSON cru: mais compacto e o
-    modelo replica esse formato na resposta ao explicitar o caminho.
+    "a -[rel]-> b -[rel]-> c" format instead of raw JSON: more compact, and
+    the model mirrors this format in the answer when it makes the path explicit.
     """
-    linhas = []
-    for i, caminho in enumerate(caminhos, 1):
-        passos = " ".join(
-            f"{t['origem']} -[{t['relacao']}]-> {t['destino']}" if j == 0
-            else f"-[{t['relacao']}]-> {t['destino']}"
-            for j, t in enumerate(caminho)
+    lines = []
+    for i, path in enumerate(paths, 1):
+        steps = " ".join(
+            f"{t['origin']} -[{t['relation']}]-> {t['destination']}" if j == 0
+            else f"-[{t['relation']}]-> {t['destination']}"
+            for j, t in enumerate(path)
         )
-        fontes = sorted({t["fonte"] for t in caminho if t.get("fonte")})
-        linhas.append(f"Caminho {i}: {passos}\n  Fontes: {'; '.join(fontes)}")
-    return "\n".join(linhas)
+        sources = sorted({t["source"] for t in path if t.get("source")})
+        lines.append(f"Path {i}: {steps}\n  Sources: {'; '.join(sources)}")
+    return "\n".join(lines)
 
 
-def gerar_resposta(pergunta: str, resultado_consulta: dict) -> str:
-    """Monta o prompt final e gera a resposta ancorada no grafo."""
-    if resultado_consulta["entidade_partida"] is None:
-        # Curto-circuito SEM chamar o LLM: se não há entidade de partida,
-        # não existe evidência nenhuma — qualquer resposta seria invenção.
-        return MENSAGEM_SEM_INFORMACAO
+def generate_answer(question: str, query_result: dict) -> str:
+    """Build the final prompt and generate the graph-grounded answer."""
+    if query_result["start_entity"] is None:
+        # Short-circuit WITHOUT calling the LLM: if there's no starting
+        # entity, there's no evidence at all — any answer would be made up.
+        return NO_INFORMATION_MESSAGE
 
-    caminhos_texto = formatar_caminhos(resultado_consulta["caminhos"])
+    paths_text = format_paths(query_result["paths"])
     user = (
-        f"Pergunta do usuário: {pergunta}\n\n"
-        f"Entidade de partida no grafo: {resultado_consulta['entidade_partida']}\n\n"
-        f"Caminhos encontrados no grafo:\n{caminhos_texto}"
+        f"User question: {question}\n\n"
+        f"Starting entity in the graph: {query_result['start_entity']}\n\n"
+        f"Paths found in the graph:\n{paths_text}"
     )
-    return chamar_llm(system=PROMPT_SISTEMA, user=user)
+    return call_llm(system=SYSTEM_PROMPT, user=user)

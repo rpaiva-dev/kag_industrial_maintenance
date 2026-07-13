@@ -1,25 +1,26 @@
-"""Front-end Streamlit do KAG Agent AH (Asset-Health).
+"""Streamlit front-end for KAG Agent Mining (all mining data is synthetic).
 
-Layout no estilo das LLMs (ChatGPT/Claude):
-- Barra lateral com o "logo" KAG Agent AH, botão de nova conversa e a lista
-  de conversas da sessão (cada conversa tem seu próprio histórico).
-- Menu Config com a opção "Sobre": explica o passo a passo de como a KAG
-  funciona, lista os ativos monitorados (com descrição e componentes) e
-  exibe o grafo de conhecimento COMPLETO.
-- No chat, cada resposta mostra apenas o SUBGRAFO dos pontos que a consulta
-  conectou na base — a trilha de raciocínio, sem o ruído do grafo inteiro.
-- Quando a pergunta não é específica o suficiente (ex: cita um componente
-  mas não o sintoma), o agente PEDE mais detalhes em vez de adivinhar, e a
-  próxima mensagem do usuário é interpretada em conjunto com a pergunta
-  original (contexto de esclarecimento).
+LLM-style layout (ChatGPT/Claude):
+- Sidebar with the "KAG Agent Mining" logo, a new-chat button and the list
+  of session conversations (each conversation keeps its own history).
+- Config menu with an "About" option: explains the pipeline step by step,
+  lists the monitored assets (with description and components) and shows
+  the FULL knowledge graph.
+- In the chat, each answer only shows the SUBGRAPH of the points the query
+  connected in the knowledge base — the reasoning trail, without the noise
+  of the full graph.
+- When the question isn't specific enough (e.g. it names a component but
+  not the symptom), the agent ASKS for more detail instead of guessing, and
+  the user's next message is interpreted together with the original
+  question (clarification context).
 
-Fluxo de cada pergunta:
-1. graph_query.consultar        -> LLM identifica a entidade de partida;
-   checagem determinística de especificidade; travessia (até 3 saltos).
-2. Se precisar de esclarecimento -> exibe a pergunta e as opções, sem chamar
-   o LLM de resposta (não há "evidência" suficiente ainda para responder).
-3. Caso contrário, answer_builder.gerar_resposta -> LLM responde SOMENTE
-   com base nos caminhos encontrados.
+Flow for every question:
+1. graph_query.query          -> the LLM identifies the starting entity;
+   deterministic specificity check; traversal (up to 3 hops).
+2. If clarification is needed -> show the question and the options, without
+   calling the answer LLM (there isn't enough "evidence" yet to answer).
+3. Otherwise, answer_builder.generate_answer -> the LLM answers based
+   SOLELY on the paths found.
 """
 
 import json
@@ -30,358 +31,366 @@ from pathlib import Path
 import streamlit as st
 import streamlit.components.v1 as components
 
-from src.answer_builder import gerar_resposta
-from src.graph_builder import ARQUIVO_GRAFO, carregar_grafo, executar_construcao
-from src.graph_query import consultar
-from src.graph_viz import gerar_html_grafo, gerar_html_rastreio, subgrafo_dos_caminhos
+from src.answer_builder import generate_answer
+from src.graph_builder import GRAPH_FILE, load_graph, run_graph_construction
+from src.graph_query import query
+from src.graph_viz import generate_graph_html, generate_trace_html, subgraph_from_paths
 
-# Tempo (s) de cada passo da animação de rastreio, espelhando o valor padrão
-# usado dentro de gerar_html_rastreio — precisamos dele aqui para estimar
-# quanto tempo esperar antes de trocar a animação pela resposta final.
-DURACAO_PASSO_ANIMACAO_S = 0.45
+st.set_page_config(page_title="KAG Agent Mining", page_icon="🛠️", layout="wide")
 
-st.set_page_config(page_title="KAG Agent AH", page_icon="🛠️", layout="wide")
+RAW_FILE = Path(__file__).resolve().parent / "data" / "raw" / "maintenance_manuals.json"
 
-ARQUIVO_RAW = Path(__file__).resolve().parent / "data" / "raw" / "manuais_manutencao.json"
+# Duration (s) of each trace-animation step, mirroring the default value
+# used inside generate_trace_html — we need it here to estimate how long to
+# wait before swapping the animation for the final answer.
+ANIMATION_STEP_DURATION_S = 0.45
 
 
 @st.cache_resource
-def obter_grafo():
-    """Carrega o grafo do disco uma única vez por sessão do servidor.
+def get_graph():
+    """Load the graph from disk once per server session.
 
-    cache_resource (e não cache_data) porque o DiGraph é um objeto mutável
-    compartilhado, não um dado serializável a ser copiado a cada rerun.
+    cache_resource (not cache_data) because the DiGraph is a mutable shared
+    object, not serializable data to be copied on every rerun.
     """
-    if not ARQUIVO_GRAFO.exists():
-        from src.graph_builder import ARQUIVO_TRIPLAS
+    if not GRAPH_FILE.exists():
+        from src.graph_builder import TRIPLES_FILE
 
-        if ARQUIVO_TRIPLAS.exists():
-            return executar_construcao()
+        if TRIPLES_FILE.exists():
+            return run_graph_construction()
         st.error(
-            "Grafo não encontrado. Rode o pipeline offline primeiro:\n\n"
-            "`python -m src.extraction` e depois `python -m src.graph_builder`"
+            "Graph not found. Run the offline pipeline first:\n\n"
+            "`python -m src.extraction` and then `python -m src.graph_builder`"
         )
         st.stop()
-    return carregar_grafo()
+    return load_graph()
 
 
 @st.cache_data
-def obter_ativos_monitorados() -> list[dict]:
-    """Lê os metadados de exibição (descrição + componentes) direto do raw.
+def get_monitored_assets() -> list[dict]:
+    """Read the display metadata (description + components) straight from the raw data.
 
-    Não usamos os nós do grafo para montar essa lista porque o nome exato que
-    o LLM extrai pode variar levemente do texto de origem — os metadados aqui
-    são a fonte confiável e estável para a descrição das máquinas.
+    We don't use the graph's nodes to build this list because the exact
+    name the LLM extracts can vary slightly from the source text — this
+    metadata is the stable, reliable source for the machine descriptions.
     """
-    dados = json.loads(ARQUIVO_RAW.read_text(encoding="utf-8"))
+    data = json.loads(RAW_FILE.read_text(encoding="utf-8"))
     return [
         {
-            "fonte": doc["fonte"],
-            "categoria": doc.get("categoria", ""),
-            "descricao": doc.get("descricao_maquina", ""),
-            "componentes": doc.get("componentes_principais", []),
+            "source": doc["source"],
+            "category": doc.get("category", ""),
+            "description": doc.get("machine_description", ""),
+            "components": doc.get("main_components", []),
         }
-        for doc in dados["documentos"]
+        for doc in data["documents"]
     ]
 
 
-grafo = obter_grafo()
+graph = get_graph()
 
 # ---------------------------------------------------------------------------
-# Estado da sessão: múltiplas conversas, como nas interfaces de LLM.
-# Estrutura: {id: {"titulo": str, "mensagens": [{pergunta, resposta, caminhos, esclarecimento}]}}
+# Session state: multiple conversations, like LLM interfaces.
+# Shape: {id: {"title": str, "messages": [{question, answer, paths, clarification}]}}
 # ---------------------------------------------------------------------------
-if "conversas" not in st.session_state:
-    st.session_state.conversas = {}
-if "conversa_ativa" not in st.session_state:
-    st.session_state.conversa_ativa = None
-if "pagina" not in st.session_state:
-    st.session_state.pagina = "chat"  # "chat" | "sobre"
+if "conversations" not in st.session_state:
+    st.session_state.conversations = {}
+if "active_conversation" not in st.session_state:
+    st.session_state.active_conversation = None
+if "page" not in st.session_state:
+    st.session_state.page = "chat"  # "chat" | "about"
 
 
-def nova_conversa():
-    """Cria uma conversa vazia e a torna ativa (equivalente ao 'New chat')."""
+def new_conversation():
+    """Create an empty conversation and make it active (like 'New chat')."""
     cid = str(uuid.uuid4())[:8]
-    st.session_state.conversas[cid] = {"titulo": "Nova conversa", "mensagens": []}
-    st.session_state.conversa_ativa = cid
-    st.session_state.pagina = "chat"
+    st.session_state.conversations[cid] = {"title": "New chat", "messages": []}
+    st.session_state.active_conversation = cid
+    st.session_state.page = "chat"
 
 
-# Garante que sempre existe pelo menos uma conversa aberta.
-if not st.session_state.conversas:
-    nova_conversa()
+# Make sure there's always at least one open conversation.
+if not st.session_state.conversations:
+    new_conversation()
 
 # ---------------------------------------------------------------------------
-# BARRA LATERAL — logo, nova conversa, lista de conversas e Config.
+# SIDEBAR — logo, new chat, conversation list and Config.
 # ---------------------------------------------------------------------------
 with st.sidebar:
-    # "Logo" no canto superior esquerdo, como nas LLMs.
+    # "Logo" in the top-left corner, like LLM interfaces.
     st.markdown(
         """
         <div style="display:flex;align-items:center;gap:10px;padding:4px 0 12px 0;">
           <div style="font-size:30px;">🛠️</div>
           <div>
-            <div style="font-size:19px;font-weight:700;line-height:1.1;">KAG Agent AH</div>
-            <div style="font-size:12px;opacity:.65;">Asset-Health · Knowledge Augmented Generation</div>
+            <div style="font-size:19px;font-weight:700;line-height:1.1;">KAG Agent Mining</div>
+            <div style="font-size:12px;opacity:.65;">Knowledge Augmented Generation · synthetic data</div>
           </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    if st.button("➕ Nova conversa", use_container_width=True):
-        nova_conversa()
+    if st.button("➕ New chat", use_container_width=True):
+        new_conversation()
         st.rerun()
 
-    st.markdown("**Conversas**")
-    # Lista das conversas (mais recentes primeiro), clicáveis como nas LLMs.
-    # Cada uma tem um botão de três pontos (⋮) com as opções de renomear e
-    # apagar — o popover funciona como o menu de contexto.
-    for cid, conv in reversed(list(st.session_state.conversas.items())):
-        ativa = cid == st.session_state.conversa_ativa and st.session_state.pagina == "chat"
-        rotulo = ("🟢 " if ativa else "") + conv["titulo"][:32]
+    st.markdown("**Conversations**")
+    # List of conversations (most recent first), clickable like LLM UIs.
+    # Each one has a three-dot (⋮) button with rename and delete options —
+    # the popover acts as the context menu.
+    for cid, conv in reversed(list(st.session_state.conversations.items())):
+        is_active = cid == st.session_state.active_conversation and st.session_state.page == "chat"
+        label = ("🟢 " if is_active else "") + conv["title"][:32]
 
-        col_nome, col_menu = st.columns([5, 1])
-        with col_nome:
-            if st.button(rotulo, key=f"abrir_{cid}", use_container_width=True):
-                st.session_state.conversa_ativa = cid
-                st.session_state.pagina = "chat"
+        col_name, col_menu = st.columns([5, 1])
+        with col_name:
+            if st.button(label, key=f"open_{cid}", use_container_width=True):
+                st.session_state.active_conversation = cid
+                st.session_state.page = "chat"
                 st.rerun()
         with col_menu:
             with st.popover("⋮", use_container_width=True, key=f"menu_{cid}"):
-                novo_titulo = st.text_input(
-                    "Renomear conversa", value=conv["titulo"], key=f"input_renomear_{cid}"
+                new_title = st.text_input(
+                    "Rename chat", value=conv["title"], key=f"rename_input_{cid}"
                 )
-                if st.button("✏️ Renomear", key=f"btn_renomear_{cid}", use_container_width=True):
-                    titulo = novo_titulo.strip()
-                    if titulo:
-                        conv["titulo"] = titulo
+                if st.button("✏️ Rename", key=f"rename_btn_{cid}", use_container_width=True):
+                    title = new_title.strip()
+                    if title:
+                        conv["title"] = title
                     st.rerun()
-                if st.button("🗑️ Apagar", key=f"btn_apagar_{cid}", use_container_width=True):
-                    del st.session_state.conversas[cid]
-                    # Se era a conversa ativa, escolhe outra existente (ou
-                    # deixa None — o guard logo acima cria uma nova vazia).
-                    if st.session_state.conversa_ativa == cid:
-                        restantes = list(st.session_state.conversas.keys())
-                        st.session_state.conversa_ativa = restantes[-1] if restantes else None
+                if st.button("🗑️ Delete", key=f"delete_btn_{cid}", use_container_width=True):
+                    del st.session_state.conversations[cid]
+                    # If it was the active conversation, pick another
+                    # existing one (or leave None — the guard above creates
+                    # a new empty one).
+                    if st.session_state.active_conversation == cid:
+                        remaining = list(st.session_state.conversations.keys())
+                        st.session_state.active_conversation = remaining[-1] if remaining else None
                     st.rerun()
 
     st.divider()
 
-    # Menu Config: hoje só tem "Sobre", mas o popover deixa espaço para
-    # futuras opções (modelo, nº de saltos, etc.) sem mudar o layout.
+    # Config menu: today it only has "About", but the popover leaves room
+    # for future options (model, hop count, etc.) without changing the layout.
     with st.popover("⚙️ Config", use_container_width=True):
-        if st.button("ℹ️ Sobre — como a aplicação funciona", use_container_width=True):
-            st.session_state.pagina = "sobre"
+        if st.button("ℹ️ About — how the app works", use_container_width=True):
+            st.session_state.page = "about"
             st.rerun()
 
 # ---------------------------------------------------------------------------
-# PÁGINA "SOBRE" — o passo a passo da KAG, os ativos monitorados e o grafo completo.
+# "ABOUT" PAGE — the KAG pipeline step by step, the monitored assets and the full graph.
 # ---------------------------------------------------------------------------
-if st.session_state.pagina == "sobre":
-    col_titulo, col_voltar = st.columns([5, 1])
-    with col_titulo:
-        st.title("ℹ️ Sobre — como esta KAG funciona")
-    with col_voltar:
-        if st.button("← Voltar ao chat"):
-            st.session_state.pagina = "chat"
+if st.session_state.page == "about":
+    col_title, col_back = st.columns([5, 1])
+    with col_title:
+        st.title("ℹ️ About — how this KAG works")
+    with col_back:
+        if st.button("← Back to chat"):
+            st.session_state.page = "chat"
             st.rerun()
 
     st.markdown(
         """
-Uma **KAG (Knowledge Augmented Generation)** ancora as respostas do LLM em um
-**grafo de conhecimento**, em vez de trechos de texto soltos (como no RAG).
-Isso permite responder perguntas que exigem **encadear relações** — e provar
-o caminho usado, ou pedir mais detalhes quando a pergunta não é específica
-o suficiente.
+A **KAG (Knowledge Augmented Generation)** grounds the LLM's answers in a
+**knowledge graph**, instead of loose text passages (as in RAG). This lets
+it answer questions that require **chaining relations** together — and
+prove the path used, or ask for more detail when the question isn't
+specific enough.
 
-### Fase offline — construção da base (roda uma vez)
+> ⚠️ **All data in this app is synthetic.** The four equipment manuals,
+> their components, symptoms, causes and corrective actions were written
+> to simulate realistic industrial-maintenance documentation — none of it
+> was extracted from a real manufacturer's manual or any real mining
+> operation.
 
-| Passo | O que acontece | Módulo |
+### Offline phase — building the knowledge base (runs once)
+
+| Step | What happens | Module |
 |---|---|---|
-| **1. Documentos** | Manuais de manutenção de 4 tipos de ativos de mineração ficam em `data/raw/`, com metadado de fonte | `data/raw/` |
-| **2. Extração de triplas** | O LLM lê cada manual e extrai relações estruturadas `(origem, relação, destino)` com tipos. Só 4 relações são permitidas: `tem_componente`, `apresenta_sintoma`, `indica_causa`, `resolve_com`. Cada tripla é validada (a relação precisa conectar os tipos certos) | `src/extraction.py` |
-| **3. Montagem do grafo** | As triplas viram um grafo direcionado: cada entidade é um **nó** (com tipo), cada relação é uma **aresta** (com a fonte documental). Entidades iguais citadas em manuais diferentes viram o MESMO nó | `src/graph_builder.py` |
+| **1. Documents** | Synthetic maintenance manuals for 4 mining asset types live in `data/raw/`, each with a source label | `data/raw/` |
+| **2. Triple extraction** | The LLM reads each manual and extracts structured relations `(origin, relation, destination)` with types. Only 4 relations are allowed: `has_component`, `has_symptom`, `indicates_cause`, `resolved_by`. Each triple is validated (the relation must connect the right types) | `src/extraction.py` |
+| **3. Graph construction** | The triples become a directed graph: each entity is a **node** (with a type), each relation is an **edge** (with its source document). The same entity mentioned across manuals becomes ONE shared node | `src/graph_builder.py` |
 
-### Fase online — o que acontece a cada pergunta sua
+### Online phase — what happens on every question
 
-| Passo | O que acontece | Módulo |
+| Step | What happens | Module |
 |---|---|---|
-| **4. Identificação da entidade** | O LLM mapeia sua pergunta para **um nó real do grafo** (ex: "vibração alta"), preferindo o mais específico possível. Se nenhum nó corresponde, o sistema **admite que não sabe** — nunca inventa | `src/graph_query.py` |
-| **5. Checagem de especificidade** | Se a entidade identificada é um **componente** ou **equipamento** com mais de um próximo passo possível na cadeia (várias sintomas, ou vários componentes), o agente **pede mais detalhes** em vez de adivinhar — exatamente como um técnico faria | `src/graph_query.py` |
-| **6. Travessia multi-hop** | Com uma entidade específica, um algoritmo **determinístico** (não o LLM!) percorre o grafo até 3 saltos seguindo a cadeia causal: sintoma → causa → ação | `src/graph_query.py` |
-| **7. Resposta ancorada** | O LLM recebe SOMENTE os caminhos encontrados e é obrigado a responder com base neles, explicitando o caminho e citando as fontes | `src/answer_builder.py` |
-| **8. Visualização** | O chat exibe o subgrafo dos pontos que foram conectados — a trilha de raciocínio, ou as opções candidatas quando o agente pede esclarecimento | `src/graph_viz.py` |
+| **4. Entity identification** | The LLM maps your question to a **real node in the graph** (e.g. "overcurrent"), preferring the most specific match possible. If no node matches, the system **admits it doesn't know** — it never makes one up | `src/graph_query.py` |
+| **5. Specificity check** | If the identified entity is a **component** or **equipment** with more than one possible next step (several symptoms, or several components), the agent **asks for more detail** instead of guessing — exactly like a technician would | `src/graph_query.py` |
+| **6. Multi-hop traversal** | With a specific entity, a **deterministic** algorithm (not the LLM!) walks the graph up to 3 hops following the causal chain: symptom → cause → action | `src/graph_query.py` |
+| **7. Grounded answer** | The LLM receives ONLY the paths found and must answer based on them, making the path explicit and citing the sources | `src/answer_builder.py` |
+| **8. Visualization** | The chat shows the subgraph of the points that were connected — the reasoning trail, or the candidate options when the agent asks for clarification | `src/graph_viz.py` |
 
-**A diferença-chave para o RAG:** no RAG o LLM recebe texto parecido e pode
-"completar" com o que sabe. Na KAG, a *evidência* é estrutural: se a aresta
-não existe no grafo, a relação não entra na resposta — e se falta uma
-informação para escolher entre arestas, o agente pergunta.
+**The key difference from RAG:** in RAG, the LLM receives similar-sounding
+text and can "fill in the gaps" with what it knows. In KAG, the *evidence*
+is structural: if the edge doesn't exist in the graph, the relation doesn't
+make it into the answer — and if information is missing to choose between
+edges, the agent asks.
 
-### Cadeia causal do domínio
+### The domain's causal chain
 
-`Equipamento` →`tem_componente`→ `Componente` →`apresenta_sintoma`→ `Sintoma` →`indica_causa`→ `Causa` →`resolve_com`→ `Ação corretiva`
+`Equipment` →`has_component`→ `Component` →`has_symptom`→ `Symptom` →`indicates_cause`→ `Cause` →`resolved_by`→ `Corrective Action`
 
-### Exemplo do fluxo de esclarecimento
+### Example of the clarification flow
 
-> **Você:** "O motor do britador está com problema."
+> **You:** "The crusher's drive motor has a problem."
 >
-> **Agente:** "O motor de acionamento do britador pode apresentar diferentes
-> sintomas: sobrecorrente no motor de acionamento do britador. Qual desses
-> sintomas você está observando?" *(ou, se o componente citado tiver mais de
-> um sintoma cadastrado, todas as opções aparecem para você escolher)*
+> **Agent:** "The crusher drive motor can present different symptoms:
+> overcurrent in the crusher drive motor. Which of these symptoms are you
+> observing?" *(if the mentioned component had more than one registered
+> symptom, every option would appear for you to choose from)*
 >
-> **Você:** "sobrecorrente"
+> **You:** "overcurrent"
 >
-> **Agente:** responde com a causa e a ação corretiva, citando a fonte.
+> **Agent:** answers with the cause and the corrective action, citing the source.
         """
     )
 
     st.divider()
-    st.subheader("🏭 Ativos monitorados")
-    st.caption("Os 4 tipos de ativos de mineração cobertos pela base de conhecimento atual.")
-    for ativo in obter_ativos_monitorados():
+    st.subheader("🏭 Monitored assets")
+    st.caption("The 4 mining asset types covered by the current knowledge base — all data is synthetic.")
+    for asset in get_monitored_assets():
         with st.container(border=True):
-            st.markdown(f"**{ativo['fonte']}**  \n*{ativo['categoria']}*")
-            st.write(ativo["descricao"])
+            st.markdown(f"**{asset['source']}**  \n*{asset['category']}*")
+            st.write(asset["description"])
             st.markdown(
-                "Componentes principais: "
-                + ", ".join(f"`{c}`" for c in ativo["componentes"])
+                "Main components: "
+                + ", ".join(f"`{c}`" for c in asset["components"])
             )
 
     st.divider()
-    st.subheader("Grafo de conhecimento completo")
+    st.subheader("Full knowledge graph")
     st.caption(
-        f"{grafo.number_of_nodes()} entidades · {grafo.number_of_edges()} relações — "
-        "🔵 equipamento · 🟢 componente · 🟠 sintoma · 🔴 causa · 🟣 ação"
+        f"{graph.number_of_nodes()} entities · {graph.number_of_edges()} relations — "
+        "🔵 equipment · 🟢 component · 🟠 symptom · 🔴 cause · 🟣 action"
     )
-    components.html(gerar_html_grafo(grafo), height=570, scrolling=False)
+    components.html(generate_graph_html(graph), height=570, scrolling=False)
     st.stop()
 
 # ---------------------------------------------------------------------------
-# PÁGINA DE CHAT
+# CHAT PAGE
 # ---------------------------------------------------------------------------
-conversa = st.session_state.conversas[st.session_state.conversa_ativa]
+conversation = st.session_state.conversations[st.session_state.active_conversation]
 
-if not conversa["mensagens"]:
-    # Tela de boas-vindas de conversa vazia, como nas LLMs.
+if not conversation["messages"]:
+    # Empty-conversation welcome screen, like LLM interfaces.
     st.markdown(
         """
         <div style="text-align:center;padding:60px 0 20px 0;">
           <div style="font-size:52px;">🛠️</div>
-          <h2 style="margin:4px 0;">KAG Agent AH</h2>
-          <p style="opacity:.7;">Descreva o problema no ativo de mineração (peneira, transportador
-          de correia, caminhão fora de estrada ou britador) e eu percorro o grafo de conhecimento
-          para encontrar a causa provável e a ação corretiva.</p>
-          <p style="opacity:.55;font-size:13px;">Ex.: <i>"O eixo excêntrico do britador está com
-          vibração excessiva — qual a causa e a ação corretiva?"</i></p>
-          <p style="opacity:.55;font-size:13px;">Se a pergunta não tiver detalhe suficiente
-          (ex.: <i>"o motor do britador está com problema"</i>), eu pergunto qual sintoma você
-          está observando antes de responder.</p>
+          <h2 style="margin:4px 0;">KAG Agent Mining</h2>
+          <p style="opacity:.7;">Describe the problem on a mining asset (vibrating screen, belt
+          conveyor, haul truck or jaw crusher) and I'll walk the knowledge graph to find the
+          probable cause and the corrective action. All data is synthetic.</p>
+          <p style="opacity:.55;font-size:13px;">E.g.: <i>"The crusher's eccentric shaft has
+          excessive vibration — what's the cause and the fix?"</i></p>
+          <p style="opacity:.55;font-size:13px;">If the question doesn't have enough detail
+          (e.g. <i>"the crusher's motor has a problem"</i>), I'll ask which symptom you're
+          observing before answering.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-# Renderiza o histórico da conversa ativa, incluindo o subgrafo de cada resposta.
-for i, msg in enumerate(conversa["mensagens"]):
+# Render the active conversation's history, including each answer's subgraph.
+for i, msg in enumerate(conversation["messages"]):
     with st.chat_message("user"):
-        st.write(msg["pergunta"])
+        st.write(msg["question"])
     with st.chat_message("assistant"):
-        st.write(msg["resposta"])
-        if msg["caminhos"]:
-            titulo_expander = (
-                "🔎 Opções encontradas na base — escolha uma para eu continuar"
-                if msg.get("esclarecimento")
-                else "🔎 Pontos conectados na base de conhecimento"
+        st.write(msg["answer"])
+        if msg["paths"]:
+            expander_title = (
+                "🔎 Options found in the knowledge base — pick one for me to continue"
+                if msg.get("clarification")
+                else "🔎 Points connected in the knowledge base"
             )
-            with st.expander(titulo_expander, expanded=False):
-                sub = subgrafo_dos_caminhos(grafo, msg["caminhos"])
+            with st.expander(expander_title, expanded=False):
+                sub = subgraph_from_paths(graph, msg["paths"])
                 components.html(
-                    gerar_html_grafo(sub, msg["caminhos"]),
+                    generate_graph_html(sub, msg["paths"]),
                     height=420,
                     scrolling=False,
                 )
 
-pergunta = st.chat_input("Descreva o problema do ativo...")
+question = st.chat_input("Describe the problem with the asset...")
 
-if pergunta:
+if question:
     with st.chat_message("user"):
-        st.write(pergunta)
+        st.write(question)
 
-    # Se a última resposta do agente foi um pedido de esclarecimento, a
-    # pergunta original entra como contexto para o LLM combinar as duas
-    # informações (ex: "motor do britador" + "sobrecorrente").
-    ultima_msg = conversa["mensagens"][-1] if conversa["mensagens"] else None
-    contexto_anterior = ultima_msg["pergunta"] if ultima_msg and ultima_msg.get("esclarecimento") else None
+    # If the agent's last reply was a clarification request, the original
+    # question becomes context so the LLM combines both pieces of
+    # information (e.g. "crusher's motor" + "overcurrent").
+    last_msg = conversation["messages"][-1] if conversation["messages"] else None
+    previous_context = last_msg["question"] if last_msg and last_msg.get("clarification") else None
 
     with st.chat_message("assistant"):
-        with st.spinner("Identificando entidade de partida..."):
-            resultado = consultar(pergunta, grafo, contexto_anterior=contexto_anterior)
+        with st.spinner("Identifying the starting entity..."):
+            result = query(question, graph, previous_context=previous_context)
 
-        # --- Animação de rastreio: mostra o agente "andando" pelos nós do
-        # grafo que a consulta conectou, enquanto a resposta é preparada.
-        # Como components.html() só EMBUTE o iframe e retorna na hora (a
-        # animação em JS roda no navegador, independente do Python), ela toca
-        # de verdade em paralelo com a chamada ao LLM logo abaixo.
-        animacao_placeholder = st.empty()
-        if resultado["caminhos"]:
-            mensagem_final_animacao = (
-                "Opções encontradas — escolha uma para eu continuar."
-                if resultado["precisa_esclarecimento"]
-                else "Caminho encontrado — gerando resposta..."
+        # --- Trace animation: shows the agent "walking" through the graph
+        # nodes the query connected, while the answer is being prepared.
+        # Since components.html() only EMBEDS the iframe and returns right
+        # away (the JS animation runs in the browser, independent of
+        # Python), it really does play in parallel with the LLM call below.
+        animation_placeholder = st.empty()
+        if result["paths"]:
+            final_animation_message = (
+                "Options found — pick one for me to continue."
+                if result["needs_clarification"]
+                else "Path found — generating the answer..."
             )
-            html_rastreio, n_passos = gerar_html_rastreio(
-                grafo,
-                resultado["caminhos"],
-                resultado["entidade_partida"],
-                mensagem_final=mensagem_final_animacao,
-                duracao_passo_ms=int(DURACAO_PASSO_ANIMACAO_S * 1000),
+            trace_html, n_steps = generate_trace_html(
+                graph,
+                result["paths"],
+                result["start_entity"],
+                final_message=final_animation_message,
+                step_duration_ms=int(ANIMATION_STEP_DURATION_S * 1000),
             )
-            with animacao_placeholder.container():
-                components.html(html_rastreio, height=450, scrolling=False)
+            with animation_placeholder.container():
+                components.html(trace_html, height=450, scrolling=False)
 
-        if resultado["precisa_esclarecimento"]:
-            # Não chamamos o LLM de resposta: ainda não há evidência suficiente
-            # (caminho completo) para responder sem adivinhar. Como não há uma
-            # chamada de rede aqui para "preencher" o tempo da animação,
-            # aguardamos manualmente para o usuário ver o rastreio completo.
-            duracao_estimada = min(n_passos * DURACAO_PASSO_ANIMACAO_S + 0.4, 4.0)
-            time.sleep(duracao_estimada)
-            resposta = resultado["pergunta_esclarecimento"]
+        if result["needs_clarification"]:
+            # We don't call the answer LLM: there isn't enough evidence (a
+            # complete path) to answer without guessing. Since there's no
+            # network call here to "fill" the animation's time, we wait
+            # manually so the user sees the full trace.
+            estimated_duration = min(n_steps * ANIMATION_STEP_DURATION_S + 0.4, 4.0)
+            time.sleep(estimated_duration)
+            answer = result["clarifying_question"]
         else:
-            # A chamada ao LLM (rede) demora o suficiente para a animação
-            # tocar por completo em paralelo, no navegador.
-            resposta = gerar_resposta(pergunta, resultado)
+            # The LLM call (network) takes long enough for the animation to
+            # play in full, in parallel, in the browser.
+            answer = generate_answer(question, result)
 
-        animacao_placeholder.empty()
-        st.write(resposta)
+        animation_placeholder.empty()
+        st.write(answer)
 
-        # Mostra os pontos conectados (resposta) ou as opções candidatas
-        # (esclarecimento) — nunca o grafo inteiro, que fica no Sobre.
-        if resultado["caminhos"]:
-            titulo_expander = (
-                "🔎 Opções encontradas na base — escolha uma para eu continuar"
-                if resultado["precisa_esclarecimento"]
-                else "🔎 Pontos conectados na base de conhecimento"
+        # Show the connected points (answer) or the candidate options
+        # (clarification) — never the full graph, that stays in About.
+        if result["paths"]:
+            expander_title = (
+                "🔎 Options found in the knowledge base — pick one for me to continue"
+                if result["needs_clarification"]
+                else "🔎 Points connected in the knowledge base"
             )
-            with st.expander(titulo_expander, expanded=False):
-                sub = subgrafo_dos_caminhos(grafo, resultado["caminhos"])
+            with st.expander(expander_title, expanded=False):
+                sub = subgraph_from_paths(graph, result["paths"])
                 components.html(
-                    gerar_html_grafo(sub, resultado["caminhos"]),
+                    generate_graph_html(sub, result["paths"]),
                     height=420,
                     scrolling=False,
                 )
 
-    conversa["mensagens"].append(
+    conversation["messages"].append(
         {
-            "pergunta": pergunta,
-            "resposta": resposta,
-            "caminhos": resultado["caminhos"],
-            "esclarecimento": resultado["precisa_esclarecimento"],
+            "question": question,
+            "answer": answer,
+            "paths": result["paths"],
+            "clarification": result["needs_clarification"],
         }
     )
-    # A primeira pergunta vira o título da conversa na lateral (como nas LLMs).
-    if conversa["titulo"] == "Nova conversa":
-        conversa["titulo"] = pergunta[:45]
+    # The first question becomes the conversation's title in the sidebar (like LLM UIs).
+    if conversation["title"] == "New chat":
+        conversation["title"] = question[:45]
     st.rerun()

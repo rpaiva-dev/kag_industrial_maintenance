@@ -2,53 +2,53 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Projeto: KAG — Manutenção Industrial
+## Project: KAG Agent Mining
 
-Sistema de KAG (Knowledge Augmented Generation) construído do ZERO, sem frameworks prontos de grafo de conhecimento (nada de LangChain GraphRAG, LlamaIndex KG, etc). O objetivo é aprender extração de entidades/relações, construção de grafo e raciocínio multi-hop, implementando cada peça manualmente.
+A Knowledge Augmented Generation (KAG) system built from SCRATCH, with no ready-made knowledge-graph framework (no LangChain GraphRAG, no LlamaIndex KG, etc). The goal is to learn entity/relation extraction, knowledge graph construction and multi-hop reasoning by implementing every piece by hand.
 
-Domínio: manutenção de ativos de **mineração** — atualmente 4 tipos de ativo: peneira vibratória, transportador de correia, caminhão fora de estrada e britador. A base cobre equipamentos, componentes (motores, molas, mancais, etc.), sintomas de falha, causas prováveis e ações corretivas. Diferente de RAG puro (busca por similaridade de texto), o sistema responde perguntas que exigem atravessar uma CADEIA de relações causa-efeito: Equipamento → Componente → Sintoma → Causa → Ação corretiva.
+Domain: maintenance of **mining** assets — currently 4 asset types: vibrating screen, belt conveyor, off-road haul truck and jaw crusher. **All data in this project is synthetic** — the manuals, components, symptoms, causes and corrective actions were written to simulate realistic maintenance documentation; none of it comes from a real manufacturer manual or a real mining operation. Unlike plain RAG (text-similarity search), the system answers questions that require walking a CHAIN of cause-effect relations: Equipment → Component → Symptom → Cause → Corrective Action.
 
-Quando a pergunta do usuário não é específica o suficiente para escolher um caminho (ex: cita um componente mas não o sintoma, ou o equipamento mas não o componente), o agente PEDE mais detalhes em vez de adivinhar — essa checagem é determinística, baseada na estrutura do grafo (`src/graph_query.py::verificar_especificidade`), não uma decisão do LLM.
+When the user's question isn't specific enough to pick a single path (e.g. it names a component but not the symptom, or the equipment but not the component), the agent ASKS for more detail instead of guessing — that check is deterministic, based on the graph's structure (`src/graph_query.py::check_specificity`), not a judgment call made by the LLM.
 
-## Comandos
+## Commands
 
 ```powershell
-# Setup (uma vez)
+# Setup (once)
 python -m venv .venv
 .venv/Scripts/python -m pip install --upgrade pip -q
 .venv/Scripts/python -m pip install -r requirements.txt -q
 
-# Pipeline offline: extrair triplas dos documentos e construir o grafo
-.venv/Scripts/python -m src.extraction     # data/raw -> data/processed/triplas.json
-.venv/Scripts/python -m src.graph_builder  # triplas.json -> data/processed/grafo.graphml
+# Offline pipeline: extract triples from the documents and build the graph
+.venv/Scripts/python -m src.extraction     # data/raw -> data/processed/triples.json
+.venv/Scripts/python -m src.graph_builder  # triples.json -> data/processed/graph.graphml
 
-# Rodar o app
+# Run the app
 .venv/Scripts/python -m streamlit run app.py --server.headless true
 ```
 
-Sempre use o interpretador do `.venv` (`.venv/Scripts/python` no Windows), nunca o Python do sistema.
+Always use the `.venv` interpreter (`.venv/Scripts/python` on Windows), never the system Python.
 
-A chave da API vai em `.env` local (`ANTHROPIC_API_KEY=...`, ver `.env.example`) — nunca hardcoded. Em produção Streamlit, usar `st.secrets`.
+The API key goes in a local `.env` (`OPENAI_API_KEY=...`, see `.env.example`) — never hardcoded. In Streamlit production, use `st.secrets`.
 
-## Arquitetura
+## Architecture
 
-Pipeline em duas fases:
+Two-phase pipeline:
 
-**Fase offline (indexação):**
-1. `data/raw/` — documentos sintéticos de manuais de manutenção (JSON com metadado de origem)
-2. `src/extraction.py` — LLM (Claude via lib `anthropic`) extrai triplas `(origem, relação, destino)` com tipos de entidade; relações permitidas: `tem_componente`, `apresenta_sintoma`, `indica_causa`, `resolve_com`. Saída validada em `data/processed/triplas.json`
-3. `src/graph_builder.py` — monta `nx.DiGraph` (nós com atributo `tipo`, arestas com `tipo_relacao` e `fonte`) e persiste em `.graphml`
+**Offline phase (indexing):**
+1. `data/raw/maintenance_manuals.json` — synthetic mining-maintenance manuals (JSON with source metadata)
+2. `src/extraction.py` — an LLM (via the `openai` lib) extracts `(origin, relation, destination)` triples with entity types; allowed relations: `has_component`, `has_symptom`, `indicates_cause`, `resolved_by`. Output validated into `data/processed/triples.json`
+3. `src/graph_builder.py` — builds an `nx.DiGraph` (nodes with a `type` attribute, edges with `relation_type` and `source`) and persists it to `.graphml`
 
-**Fase online (consulta, orquestrada pelo `app.py`):**
-4. `src/graph_query.py` — LLM identifica a entidade de partida na pergunta; BFS limitada (até 3 saltos) coleta caminhos relevantes como listas de triplas ordenadas
-5. `src/answer_builder.py` — prompt final com os caminhos do grafo + instrução de responder SOMENTE com base nas relações do grafo, explicitando o caminho. Se não há entidade de partida, o sistema admite não ter a informação — nunca inventa relação
-6. `src/graph_viz.py` — visualização pyvis do grafo destacando o caminho usado na última resposta
-7. `app.py` — front-end Streamlit: campo de pergunta, resposta + caminho em texto + grafo, histórico em `st.session_state`
+**Online phase (query, orchestrated by `app.py`):**
+4. `src/graph_query.py` — the LLM identifies the starting entity in the question; a deterministic specificity check asks for clarification when the entity has more than one possible next step; a limited traversal (up to 3 hops) collects the relevant paths as ordered lists of triples
+5. `src/answer_builder.py` — final prompt built from the graph paths, instructing the model to answer ONLY based on the graph's relations, making the path explicit. If there's no starting entity, the system admits it doesn't have the information — it never invents a relation
+6. `src/graph_viz.py` — pyvis visualization of the graph highlighting the path used in the last answer, plus a step-by-step trace animation played while the answer is being generated
+7. `app.py` — Streamlit front-end: chat-style UI with per-conversation history in `st.session_state`, an About page explaining the pipeline, and the live graph-trace animation
 
-`src/llm_client.py` centraliza toda chamada à API Anthropic (modelo `claude-opus-4-8`).
+`src/llm_client.py` centralizes every call to the OpenAI API (model `gpt-4o`).
 
-## Convenções
+## Conventions
 
-- Comentários de código em português, explicando o "porquê" das decisões técnicas
-- Sem frameworks de KG — apenas `anthropic`, `networkx`, `pyvis`, `streamlit`
-- O arquivo `index.html` só deve ser criado/alterado via skill `format_index_to_landing_page` (comando `/format_index_to_landing_page`), e somente quando pedido explicitamente
+- All code (comments, docstrings, identifiers, prompts) is written in English
+- No KG frameworks — only `openai`, `networkx`, `pyvis`, `streamlit`
+- The `index.html` file must only be created/modified via the `format_index_to_landing_page` skill (`/format_index_to_landing_page` command), and only when explicitly requested

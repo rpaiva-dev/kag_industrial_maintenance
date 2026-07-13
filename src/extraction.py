@@ -1,120 +1,120 @@
-"""Extração de entidades e relações (triplas) a partir dos documentos brutos.
+"""Entity and relation extraction (triples) from the raw source documents.
 
-Diferença fundamental para um RAG comum: em vez de fatiar o texto em chunks e
-indexar por similaridade, aqui o LLM LÊ cada documento e o converte em
-conhecimento ESTRUTURADO — triplas (origem, relação, destino) com tipos de
-entidade. É essa estrutura que depois permite raciocínio multi-hop: seguir a
-cadeia equipamento -> componente -> sintoma -> causa -> ação, algo que a busca
-por similaridade não faz, porque a cadeia raramente está inteira em um único
-trecho de texto.
+Fundamental difference from a regular RAG: instead of slicing text into
+chunks and indexing by similarity, the LLM READS each document and turns it
+into STRUCTURED knowledge — triples (origin, relation, destination) with
+entity types. That structure is what later enables multi-hop reasoning:
+following the chain equipment -> component -> symptom -> cause -> action,
+something similarity search never does, because the chain rarely lives
+entirely inside a single passage.
 """
 
 import json
 from pathlib import Path
 
-from src.llm_client import chamar_llm
+from src.llm_client import call_llm
 
-RAIZ = Path(__file__).resolve().parent.parent
-ARQUIVO_RAW = RAIZ / "data" / "raw" / "manuais_manutencao.json"
-ARQUIVO_TRIPLAS = RAIZ / "data" / "processed" / "triplas.json"
+ROOT = Path(__file__).resolve().parent.parent
+RAW_FILE = ROOT / "data" / "raw" / "maintenance_manuals.json"
+TRIPLES_FILE = ROOT / "data" / "processed" / "triples.json"
 
-# Vocabulário fechado de relações e tipos. Um vocabulário aberto deixaria o
-# LLM inventar variações ("possui_componente", "tem-componente"...) e o grafo
-# ficaria fragmentado — nós que deveriam se conectar não se conectariam.
-RELACOES_VALIDAS = {"tem_componente", "apresenta_sintoma", "indica_causa", "resolve_com"}
-TIPOS_VALIDOS = {"equipamento", "componente", "sintoma", "causa", "acao"}
+# Closed vocabulary of relations and types. An open vocabulary would let the
+# LLM invent variations ("has-component", "has_part"...) and the graph would
+# end up fragmented — nodes that should connect wouldn't connect.
+VALID_RELATIONS = {"has_component", "has_symptom", "indicates_cause", "resolved_by"}
+VALID_TYPES = {"equipment", "component", "symptom", "cause", "action"}
 
-# Coerência semântica: cada relação só faz sentido entre certos tipos.
-# Validar isso barra alucinações estruturais (ex: sintoma -tem_componente-> causa).
-DOMINIO_RELACAO = {
-    "tem_componente": ("equipamento", "componente"),
-    "apresenta_sintoma": ("componente", "sintoma"),
-    "indica_causa": ("sintoma", "causa"),
-    "resolve_com": ("causa", "acao"),
+# Semantic coherence: each relation only makes sense between certain types.
+# Validating this blocks structural hallucinations (e.g. symptom -has_component-> cause).
+RELATION_DOMAIN = {
+    "has_component": ("equipment", "component"),
+    "has_symptom": ("component", "symptom"),
+    "indicates_cause": ("symptom", "cause"),
+    "resolved_by": ("cause", "action"),
 }
 
-# Schema para structured outputs: a API garante JSON válido nesse formato,
-# eliminando a classe de erro "o LLM devolveu JSON quebrado".
-SCHEMA_TRIPLAS = {
+# Schema for structured outputs: the API guarantees valid JSON in this
+# shape, eliminating the "the LLM returned broken JSON" class of error.
+TRIPLES_SCHEMA = {
     "type": "object",
     "properties": {
-        "triplas": {
+        "triples": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "origem": {"type": "string"},
-                    "tipo_origem": {"type": "string", "enum": sorted(TIPOS_VALIDOS)},
-                    "relacao": {"type": "string", "enum": sorted(RELACOES_VALIDAS)},
-                    "destino": {"type": "string"},
-                    "tipo_destino": {"type": "string", "enum": sorted(TIPOS_VALIDOS)},
+                    "origin": {"type": "string"},
+                    "origin_type": {"type": "string", "enum": sorted(VALID_TYPES)},
+                    "relation": {"type": "string", "enum": sorted(VALID_RELATIONS)},
+                    "destination": {"type": "string"},
+                    "destination_type": {"type": "string", "enum": sorted(VALID_TYPES)},
                 },
-                "required": ["origem", "tipo_origem", "relacao", "destino", "tipo_destino"],
+                "required": ["origin", "origin_type", "relation", "destination", "destination_type"],
                 "additionalProperties": False,
             },
         }
     },
-    "required": ["triplas"],
+    "required": ["triples"],
     "additionalProperties": False,
 }
 
-PROMPT_SISTEMA = """Você é um extrator de conhecimento de manuais de manutenção industrial.
+SYSTEM_PROMPT = """You are a knowledge extractor for industrial maintenance manuals.
 
-Sua tarefa: ler o documento e extrair TODAS as triplas (origem, relação, destino) presentes no texto, usando SOMENTE estas relações:
+Your task: read the document and extract ALL triples (origin, relation, destination) present in the text, using ONLY these relations:
 
-- tem_componente: equipamento -> componente
-- apresenta_sintoma: componente -> sintoma
-- indica_causa: sintoma -> causa
-- resolve_com: causa -> acao
+- has_component: equipment -> component
+- has_symptom: component -> symptom
+- indicates_cause: symptom -> cause
+- resolved_by: cause -> action
 
-Regras:
-1. Extraia apenas o que está EXPLÍCITO no texto. Não invente relações.
-2. Use nomes em minúsculas para as entidades. Para sintomas, causas e ações, PRESERVE qualquer referência ao componente/equipamento presente no texto (ex: "ruído metálico no excêntrico da peneira", NUNCA encurte para apenas "ruído metálico"). Isso é crítico: um nome genérico e curto demais faz com que sintomas de EQUIPAMENTOS DIFERENTES virem, por engano, o MESMO nó do grafo — o que faria o sistema responder com dados do equipamento errado. Para componentes e equipamentos, use exatamente o nome (já qualificado) como aparece no texto.
-3. Um sintoma pode indicar mais de uma causa e uma causa pode ter mais de uma ação — extraia todas.
-4. Respeite a direção da relação (origem -> destino) conforme o esquema acima."""
+Rules:
+1. Extract only what is EXPLICIT in the text. Never invent a relation.
+2. Use lowercase names for entities. For symptoms, causes and actions, PRESERVE any reference to the component/equipment present in the text (e.g. "metallic noise in the screen eccentric", NEVER shorten it to just "metallic noise"). This is critical: a name that's too generic and short makes symptoms from DIFFERENT PIECES OF EQUIPMENT collide into the SAME graph node by mistake — which would make the system answer with data from the wrong machine. For components and equipment, use exactly the (already qualified) name as it appears in the text.
+3. A symptom may indicate more than one cause, and a cause may have more than one action — extract all of them.
+4. Respect the direction of the relation (origin -> destination) as defined above."""
 
 
-def extrair_triplas_documento(texto: str, fonte: str) -> list[dict]:
-    """Chama o LLM para um documento e devolve as triplas validadas."""
-    resposta = chamar_llm(
-        system=PROMPT_SISTEMA,
-        user=f"Documento (fonte: {fonte}):\n\n{texto}",
-        json_schema=SCHEMA_TRIPLAS,
+def extract_triples_from_document(text: str, source: str) -> list[dict]:
+    """Call the LLM for one document and return the validated triples."""
+    response = call_llm(
+        system=SYSTEM_PROMPT,
+        user=f"Document (source: {source}):\n\n{text}",
+        json_schema=TRIPLES_SCHEMA,
     )
-    dados = json.loads(resposta)
+    data = json.loads(response)
 
-    triplas_validas = []
-    for t in dados["triplas"]:
-        # Mesmo com o schema garantindo a forma, validamos a SEMÂNTICA:
-        # a relação precisa conectar os tipos certos.
-        esperado = DOMINIO_RELACAO.get(t["relacao"])
-        if esperado != (t["tipo_origem"], t["tipo_destino"]):
-            print(f"  [descartada] tripla incoerente: {t}")
+    valid_triples = []
+    for t in data["triples"]:
+        # Even with the schema guaranteeing the shape, we validate the
+        # SEMANTICS: the relation needs to connect the right types.
+        expected = RELATION_DOMAIN.get(t["relation"])
+        if expected != (t["origin_type"], t["destination_type"]):
+            print(f"  [discarded] incoherent triple: {t}")
             continue
-        t["origem"] = t["origem"].strip().lower()
-        t["destino"] = t["destino"].strip().lower()
-        t["fonte"] = fonte  # rastreabilidade: de qual documento a relação veio
-        triplas_validas.append(t)
-    return triplas_validas
+        t["origin"] = t["origin"].strip().lower()
+        t["destination"] = t["destination"].strip().lower()
+        t["source"] = source  # traceability: which document the relation came from
+        valid_triples.append(t)
+    return valid_triples
 
 
-def executar_extracao() -> list[dict]:
-    """Pipeline completo: lê data/raw, extrai de cada documento, salva o JSON."""
-    dados = json.loads(ARQUIVO_RAW.read_text(encoding="utf-8"))
-    todas: list[dict] = []
-    for doc in dados["documentos"]:
-        print(f"Extraindo triplas de: {doc['fonte']}")
-        triplas = extrair_triplas_documento(doc["texto"], doc["fonte"])
-        print(f"  {len(triplas)} triplas extraídas")
-        todas.extend(triplas)
+def run_extraction() -> list[dict]:
+    """Full pipeline: read data/raw, extract from each document, save the JSON."""
+    data = json.loads(RAW_FILE.read_text(encoding="utf-8"))
+    all_triples: list[dict] = []
+    for doc in data["documents"]:
+        print(f"Extracting triples from: {doc['source']}")
+        triples = extract_triples_from_document(doc["text"], doc["source"])
+        print(f"  {len(triples)} triples extracted")
+        all_triples.extend(triples)
 
-    ARQUIVO_TRIPLAS.parent.mkdir(parents=True, exist_ok=True)
-    ARQUIVO_TRIPLAS.write_text(
-        json.dumps({"triplas": todas}, ensure_ascii=False, indent=2), encoding="utf-8"
+    TRIPLES_FILE.parent.mkdir(parents=True, exist_ok=True)
+    TRIPLES_FILE.write_text(
+        json.dumps({"triples": all_triples}, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print(f"\nTotal: {len(todas)} triplas salvas em {ARQUIVO_TRIPLAS}")
-    return todas
+    print(f"\nTotal: {len(all_triples)} triples saved to {TRIPLES_FILE}")
+    return all_triples
 
 
 if __name__ == "__main__":
-    executar_extracao()
+    run_extraction()

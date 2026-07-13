@@ -1,17 +1,17 @@
-"""Visualização do grafo com destaque do caminho usado na última resposta.
+"""Graph visualization, highlighting the path used in the last answer.
 
-Usamos pyvis (rede interativa em HTML) em vez de matplotlib estático porque,
-para portfólio, poder arrastar/zoom e VER o raciocínio destacado comunica
-muito mais do que uma imagem congelada. O HTML gerado é embutido no Streamlit
-via st.components.v1.html.
+We use pyvis (an interactive HTML network) instead of a static matplotlib
+image because, for a portfolio, being able to drag/zoom and SEE the
+highlighted reasoning communicates far more than a frozen picture. The
+generated HTML is embedded in Streamlit via st.components.v1.html.
 
-Este módulo também gera a ANIMAÇÃO DE RASTREIO: enquanto o agente está
-respondendo, mostramos o subgrafo se "construindo" nó a nó, na ordem em que a
-travessia (BFS a partir da entidade de partida) os alcança — simulando
-visualmente o algoritmo de graph_query.py explorando a base. Isso usa uma
-página HTML/JS minimalista própria (não o template do pyvis), porque
-precisamos adicionar nós/arestas ao vis-network progressivamente via
-setTimeout, e o pyvis só gera datasets estáticos completos.
+This module also generates the TRACE ANIMATION: while the agent is
+answering, we show the subgraph "building itself" node by node, in the
+order the traversal (BFS from the starting entity) reaches them —
+visually simulating the algorithm in graph_query.py exploring the
+knowledge base. This uses a minimal custom HTML/JS page (not the pyvis
+template), because we need to progressively add nodes/edges to vis-network
+via setTimeout, and pyvis only generates complete, static datasets.
 """
 
 import json
@@ -20,160 +20,160 @@ from collections import deque
 import networkx as nx
 from pyvis.network import Network
 
-# Cores por tipo de entidade — a legenda visual da cadeia causal.
-CORES_TIPO = {
-    "equipamento": "#4e79a7",
-    "componente": "#59a14f",
-    "sintoma": "#f28e2b",
-    "causa": "#e15759",
-    "acao": "#b07aa1",
+# Colors per entity type — the visual legend of the causal chain.
+TYPE_COLORS = {
+    "equipment": "#4e79a7",
+    "component": "#59a14f",
+    "symptom": "#f28e2b",
+    "cause": "#e15759",
+    "action": "#b07aa1",
 }
-COR_PADRAO = "#9c9c9c"
-COR_DESTAQUE = "#ffd700"  # dourado: nós/arestas do caminho da resposta
+DEFAULT_COLOR = "#9c9c9c"
+HIGHLIGHT_COLOR = "#ffd700"  # gold: nodes/edges on the path used in the answer
 
 
-def subgrafo_dos_caminhos(grafo: nx.DiGraph, caminhos: list[list[dict]]) -> nx.DiGraph:
-    """Constrói um grafo contendo APENAS os nós/arestas percorridos na resposta.
+def subgraph_from_paths(graph: nx.DiGraph, paths: list[list[dict]]) -> nx.DiGraph:
+    """Build a graph containing ONLY the nodes/edges walked for the answer.
 
-    Por que um subgrafo e não o grafo inteiro com destaque? Para o usuário
-    final, o que importa é ver os pontos que a consulta conectou na base —
-    mostrar as ~100 entidades todas vira ruído visual. O subgrafo é a
-    "trilha de raciocínio" isolada.
+    Why a subgraph instead of the full graph with highlights? For the end
+    user, what matters is seeing the points the query connected in the
+    knowledge base — showing all ~100 entities would just be visual noise.
+    The subgraph is the isolated "reasoning trail".
     """
     sub = nx.DiGraph()
-    for caminho in caminhos:
-        for t in caminho:
-            for no in (t["origem"], t["destino"]):
-                # Copia o atributo tipo do grafo original para manter as cores.
-                sub.add_node(no, tipo=grafo.nodes[no].get("tipo", "?") if no in grafo else "?")
-            sub.add_edge(t["origem"], t["destino"], tipo_relacao=t["relacao"], fonte=t.get("fonte", ""))
+    for path in paths:
+        for t in path:
+            for node in (t["origin"], t["destination"]):
+                # Copy the "type" attribute from the original graph to keep the colors.
+                sub.add_node(node, type=graph.nodes[node].get("type", "?") if node in graph else "?")
+            sub.add_edge(t["origin"], t["destination"], relation_type=t["relation"], source=t.get("source", ""))
     return sub
 
 
-def gerar_html_grafo(grafo: nx.DiGraph, caminhos: list[list[dict]] | None = None) -> str:
-    """Gera o HTML da rede, destacando os caminhos (se fornecidos)."""
-    # Conjuntos de nós/arestas a destacar, derivados das triplas dos caminhos.
-    nos_destaque: set[str] = set()
-    arestas_destaque: set[tuple[str, str]] = set()
-    for caminho in caminhos or []:
-        for t in caminho:
-            nos_destaque.update([t["origem"], t["destino"]])
-            arestas_destaque.add((t["origem"], t["destino"]))
+def generate_graph_html(graph: nx.DiGraph, paths: list[list[dict]] | None = None) -> str:
+    """Generate the network's HTML, highlighting the paths (if provided)."""
+    # Sets of nodes/edges to highlight, derived from the paths' triples.
+    highlighted_nodes: set[str] = set()
+    highlighted_edges: set[tuple[str, str]] = set()
+    for path in paths or []:
+        for t in path:
+            highlighted_nodes.update([t["origin"], t["destination"]])
+            highlighted_edges.add((t["origin"], t["destination"]))
 
-    rede = Network(height="550px", width="100%", directed=True, bgcolor="#ffffff")
-    rede.barnes_hut()  # física padrão razoável para grafos pequenos
+    net = Network(height="550px", width="100%", directed=True, bgcolor="#ffffff")
+    net.barnes_hut()  # reasonable default physics for small graphs
 
-    for no, dados in grafo.nodes(data=True):
-        tipo = dados.get("tipo", "?")
-        destacado = no in nos_destaque
-        rede.add_node(
-            no,
-            label=no,
-            title=f"{no} ({tipo})",
-            color=CORES_TIPO.get(tipo, COR_PADRAO),
-            # Borda dourada + tamanho maior sinalizam o caminho do raciocínio
-            # sem perder a cor do tipo (que carrega a semântica da cadeia).
-            borderWidth=4 if destacado else 1,
-            size=28 if destacado else 16,
-            **({"borderWidthSelected": 4, "shapeProperties": {"borderDashes": False}} if destacado else {}),
+    for node, data in graph.nodes(data=True):
+        node_type = data.get("type", "?")
+        highlighted = node in highlighted_nodes
+        net.add_node(
+            node,
+            label=node,
+            title=f"{node} ({node_type})",
+            color=TYPE_COLORS.get(node_type, DEFAULT_COLOR),
+            # Gold border + larger size signal the reasoning path without
+            # losing the type color (which carries the chain's semantics).
+            borderWidth=4 if highlighted else 1,
+            size=28 if highlighted else 16,
+            **({"borderWidthSelected": 4, "shapeProperties": {"borderDashes": False}} if highlighted else {}),
         )
-        if destacado:
-            rede.get_node(no)["color"] = {
-                "background": CORES_TIPO.get(tipo, COR_PADRAO),
-                "border": COR_DESTAQUE,
+        if highlighted:
+            net.get_node(node)["color"] = {
+                "background": TYPE_COLORS.get(node_type, DEFAULT_COLOR),
+                "border": HIGHLIGHT_COLOR,
             }
 
-    for u, v, dados in grafo.edges(data=True):
-        destacada = (u, v) in arestas_destaque
-        rede.add_edge(
+    for u, v, data in graph.edges(data=True):
+        is_highlighted = (u, v) in highlighted_edges
+        net.add_edge(
             u,
             v,
-            label=dados.get("tipo_relacao", ""),
-            color=COR_DESTAQUE if destacada else "#c0c0c0",
-            width=4 if destacada else 1,
+            label=data.get("relation_type", ""),
+            color=HIGHLIGHT_COLOR if is_highlighted else "#c0c0c0",
+            width=4 if is_highlighted else 1,
             font={"size": 10, "align": "middle"},
         )
 
-    # generate_html devolve a página completa como string — evitamos escrever
-    # arquivo temporário em disco só para reler em seguida.
-    return rede.generate_html(notebook=False)
+    # generate_html returns the full page as a string — this avoids writing
+    # a temporary file to disk just to read it back.
+    return net.generate_html(notebook=False)
 
 
-def gerar_passos_rastreio(
-    subgrafo: nx.DiGraph, raiz: str, max_nos: int = 8
+def generate_trace_steps(
+    subgraph: nx.DiGraph, root: str, max_nodes: int = 8
 ) -> list[dict]:
-    """Gera a sequência ordenada de passos (nó, aresta, nó, aresta...) que a
-    animação vai revelar, explorando o subgrafo em BFS a partir da raiz.
+    """Generate the ordered sequence of steps (node, edge, node, edge...) the
+    animation will reveal, exploring the subgraph in BFS order from the root.
 
-    BFS (mais próximo primeiro) em vez da ordem bruta das triplas porque é
-    assim que uma exploração "de dentro para fora" a partir da entidade de
-    partida se pareceria de verdade — e reaproveita arestas de entrada e
-    saída (contexto reverso + cadeia causal) na ordem em que seriam
-    descobertas a partir da raiz, não na ordem em que aparecem nas triplas.
+    BFS (closest first) instead of the raw triple order because that's what
+    an "inside-out" exploration from the starting entity would really look
+    like — and it reuses incoming and outgoing edges (reverse context +
+    causal chain) in the order they'd be discovered from the root, not in
+    the order they happen to appear in the triples.
     """
-    if raiz not in subgrafo:
+    if root not in subgraph:
         return []
 
-    visitados = {raiz}
-    fila = deque([raiz])
-    passos = [
+    visited = {root}
+    queue = deque([root])
+    steps = [
         {
-            "tipo": "no",
-            "id": raiz,
-            "label": raiz,
-            "cor": CORES_TIPO.get(subgrafo.nodes[raiz].get("tipo"), COR_PADRAO),
+            "type": "node",
+            "id": root,
+            "label": root,
+            "color": TYPE_COLORS.get(subgraph.nodes[root].get("type"), DEFAULT_COLOR),
         }
     ]
 
-    while fila and len(visitados) < max_nos:
-        atual = fila.popleft()
-        vizinhos = list(subgrafo.successors(atual)) + list(subgrafo.predecessors(atual))
-        for v in vizinhos:
-            if v in visitados or len(visitados) >= max_nos:
+    while queue and len(visited) < max_nodes:
+        current = queue.popleft()
+        neighbors = list(subgraph.successors(current)) + list(subgraph.predecessors(current))
+        for v in neighbors:
+            if v in visited or len(visited) >= max_nodes:
                 continue
-            visitados.add(v)
-            fila.append(v)
-            # A aresta pode existir em qualquer direção entre atual e v.
-            de, para = (atual, v) if subgrafo.has_edge(atual, v) else (v, atual)
-            passos.append(
+            visited.add(v)
+            queue.append(v)
+            # The edge may exist in either direction between current and v.
+            src, dst = (current, v) if subgraph.has_edge(current, v) else (v, current)
+            steps.append(
                 {
-                    "tipo": "aresta",
-                    "id": f"{de}=>{para}",
-                    "de": de,
-                    "para": para,
-                    "label": subgrafo.edges[de, para]["tipo_relacao"],
+                    "type": "edge",
+                    "id": f"{src}=>{dst}",
+                    "from": src,
+                    "to": dst,
+                    "label": subgraph.edges[src, dst]["relation_type"],
                 }
             )
-            passos.append(
+            steps.append(
                 {
-                    "tipo": "no",
+                    "type": "node",
                     "id": v,
                     "label": v,
-                    "cor": CORES_TIPO.get(subgrafo.nodes[v].get("tipo"), COR_PADRAO),
+                    "color": TYPE_COLORS.get(subgraph.nodes[v].get("type"), DEFAULT_COLOR),
                 }
             )
 
-    return passos
+    return steps
 
 
-def gerar_html_rastreio(
-    grafo: nx.DiGraph,
-    caminhos: list[list[dict]],
-    raiz: str,
-    mensagem_final: str = "Caminho encontrado.",
-    duracao_passo_ms: int = 450,
-    max_nos: int = 8,
+def generate_trace_html(
+    graph: nx.DiGraph,
+    paths: list[list[dict]],
+    root: str,
+    final_message: str = "Path found.",
+    step_duration_ms: int = 450,
+    max_nodes: int = 8,
 ) -> tuple[str, int]:
-    """Gera a animação de rastreio do grafo e devolve (html, nº de passos).
+    """Generate the trace animation and return (html, number of steps).
 
-    O nº de passos é devolvido para quem chama poder estimar quanto tempo a
-    animação leva (e, se necessário, aguardar esse tempo antes de trocá-la
-    pela resposta final — ver app.py).
+    The step count is returned so the caller can estimate how long the
+    animation takes (and, if needed, wait that long before swapping it for
+    the final answer — see app.py).
     """
-    sub = subgrafo_dos_caminhos(grafo, caminhos)
-    passos = gerar_passos_rastreio(sub, raiz, max_nos=max_nos)
-    passos_json = json.dumps(passos, ensure_ascii=False)
-    duracao_total_ms = len(passos) * duracao_passo_ms
+    sub = subgraph_from_paths(graph, paths)
+    steps = generate_trace_steps(sub, root, max_nodes=max_nodes)
+    steps_json = json.dumps(steps, ensure_ascii=False)
+    total_duration_ms = len(steps) * step_duration_ms
 
     html = f"""<!doctype html>
 <html>
@@ -182,24 +182,24 @@ def gerar_html_rastreio(
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js"></script>
 <style>
   html, body {{ margin: 0; padding: 0; font-family: -apple-system, Segoe UI, sans-serif; background: #ffffff; }}
-  #rede {{ width: 100%; height: 400px; }}
+  #network {{ width: 100%; height: 400px; }}
   #status {{
     text-align: center; font-size: 13px; color: #888; padding: 8px 0 2px 0;
     transition: color .3s ease;
   }}
-  #status.pronto {{ color: #2a9d5c; font-weight: 600; }}
+  #status.done {{ color: #2a9d5c; font-weight: 600; }}
 </style>
 </head>
 <body>
-<div id="rede"></div>
-<div id="status">🔎 Percorrendo o grafo de conhecimento...</div>
+<div id="network"></div>
+<div id="status">🔎 Walking the knowledge graph...</div>
 <script>
-  const passos = {passos_json};
-  const DELAY = {duracao_passo_ms};
+  const steps = {steps_json};
+  const DELAY = {step_duration_ms};
 
   const nodes = new vis.DataSet([]);
   const edges = new vis.DataSet([]);
-  const container = document.getElementById('rede');
+  const container = document.getElementById('network');
   const network = new vis.Network(container, {{ nodes: nodes, edges: edges }}, {{
     physics: {{ stabilization: {{ iterations: 80 }}, barnesHut: {{ springLength: 120 }} }},
     layout: {{ improvedLayout: true }},
@@ -208,17 +208,17 @@ def gerar_html_rastreio(
     nodes: {{ shape: 'dot', font: {{ size: 13 }} }},
   }});
 
-  passos.forEach((passo, i) => {{
+  steps.forEach((step, i) => {{
     setTimeout(() => {{
-      if (passo.tipo === 'no') {{
-        // Flash dourado ao "descobrir" o nó, depois assenta na cor do tipo —
-        // visualmente comunica "acabei de chegar aqui" -> "nó conhecido".
-        nodes.add({{ id: passo.id, label: passo.label, color: '#ffd700', borderWidth: 4, size: 24 }});
+      if (step.type === 'node') {{
+        // Gold flash when the node is "discovered", then settles into its
+        // type color — visually communicates "just arrived here" -> "known node".
+        nodes.add({{ id: step.id, label: step.label, color: '#ffd700', borderWidth: 4, size: 24 }});
         setTimeout(() => {{
-          try {{ nodes.update({{ id: passo.id, color: passo.cor, borderWidth: 2, size: 16 }}); }} catch (e) {{}}
+          try {{ nodes.update({{ id: step.id, color: step.color, borderWidth: 2, size: 16 }}); }} catch (e) {{}}
         }}, Math.max(DELAY - 120, 100));
       }} else {{
-        edges.add({{ id: passo.id, from: passo.de, to: passo.para, label: passo.label, color: {{ color: '#ffd700' }}, width: 3 }});
+        edges.add({{ id: step.id, from: step.from, to: step.to, label: step.label, color: {{ color: '#ffd700' }}, width: 3 }});
       }}
     }}, i * DELAY);
   }});
@@ -226,12 +226,12 @@ def gerar_html_rastreio(
   setTimeout(() => {{
     const st = document.getElementById('status');
     if (st) {{
-      st.textContent = {json.dumps("✅ " + mensagem_final)};
-      st.classList.add('pronto');
+      st.textContent = {json.dumps("✅ " + final_message)};
+      st.classList.add('done');
     }}
-  }}, Math.max(passos.length, 1) * DELAY + 150);
+  }}, Math.max(steps.length, 1) * DELAY + 150);
 </script>
 </body>
 </html>"""
 
-    return html, len(passos)
+    return html, len(steps)

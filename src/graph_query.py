@@ -1,259 +1,261 @@
-"""Consulta ao grafo: identificação da entidade de partida + raciocínio multi-hop.
+"""Graph query: starting-entity identification + multi-hop reasoning.
 
-Aqui está o coração da diferença para um RAG comum:
-- RAG: embedda a pergunta, busca chunks parecidos, devolve texto solto.
-- KAG: (1) o LLM só faz o "linking" — mapear a pergunta para UM nó do grafo;
-  (2) o PERCURSO é feito por algoritmo determinístico (BFS/DFS), não pelo LLM.
-  Cada salto segue uma aresta que existe de fato, então a cadeia
-  sintoma -> causa -> ação é garantidamente suportada pelos dados.
+This is the heart of the difference from a regular RAG:
+- RAG: embed the question, search for similar chunks, return loose text.
+- KAG: (1) the LLM only does the "linking" — mapping the question to ONE
+  node in the graph; (2) the TRAVERSAL is done by a deterministic algorithm
+  (DFS), not by the LLM. Every hop follows an edge that really exists, so
+  the chain symptom -> cause -> action is guaranteed to be backed by data.
 
-Além disso, o sistema pede mais informação ao usuário quando a pergunta não é
-específica o suficiente para escolher um caminho — por exemplo, perguntar
-sobre um COMPONENTE sem dizer o SINTOMA observado. Essa checagem também é
-determinística: olhamos quantos "próximos passos" distintos existem no grafo
-a partir da entidade identificada. Se há mais de um, a pergunta é ambígua e
-pedimos ao usuário para escolher, em vez de adivinhar.
+On top of that, the system asks the user for more information when the
+question isn't specific enough — for example, asking about a COMPONENT
+without stating the SYMPTOM. That check is also deterministic: we look at
+how many distinct "next steps" exist in the graph from the identified
+entity. If there's more than one, the question is ambiguous and we ask the
+user to choose, instead of guessing.
 """
 
 import json
 
 import networkx as nx
 
-from src.llm_client import chamar_llm
+from src.llm_client import call_llm
 
-# Limite de saltos: 3 cobre a cadeia sintoma -> causa -> ação (e sobra um salto
-# quando a partida é um componente). Sem limite, o BFS traria o grafo inteiro
-# e afogaria o prompt final em contexto irrelevante.
-MAX_SALTOS = 3
+# Hop limit: 3 covers the chain symptom -> cause -> action (with one hop to
+# spare when starting from a component). With no limit, the traversal would
+# bring back the whole graph and drown the final prompt in irrelevant context.
+MAX_HOPS = 3
 
-SCHEMA_ENTIDADE = {
+ENTITY_SCHEMA = {
     "type": "object",
     "properties": {
-        # anyOf com null: o LLM precisa poder dizer "nenhuma entidade casa" —
-        # é isso que permite ao sistema admitir que não sabe, em vez de forçar
-        # um match ruim e alucinar uma resposta.
-        "entidade": {"anyOf": [{"type": "string"}, {"type": "null"}]}
+        # anyOf with null: the LLM needs to be able to say "no entity
+        # matches" — that's what lets the system admit it doesn't know,
+        # instead of forcing a bad match and hallucinating an answer.
+        "entity": {"anyOf": [{"type": "string"}, {"type": "null"}]}
     },
-    "required": ["entidade"],
+    "required": ["entity"],
     "additionalProperties": False,
 }
 
 
-def identificar_entidade_partida(pergunta: str, grafo: nx.DiGraph) -> str | None:
-    """Usa o LLM para mapear a pergunta a um nó existente do grafo.
+def identify_starting_entity(question: str, graph: nx.DiGraph) -> str | None:
+    """Use the LLM to map the question to an existing node in the graph.
 
-    Passamos a lista completa de nós (com tipo) no prompt — viável porque o
-    grafo é pequeno. O LLM escolhe dentre opções REAIS, nunca cria nomes novos;
-    ainda assim validamos que a resposta é um nó de verdade.
+    We pass the full list of nodes (with type) in the prompt — feasible
+    because the graph is small. The LLM picks among REAL options, never
+    creates new names; we still validate the answer is an actual node.
     """
-    linhas = [
-        f"- {no} (tipo: {dados.get('tipo', '?')})" for no, dados in grafo.nodes(data=True)
+    lines = [
+        f"- {node} (type: {data.get('type', '?')})" for node, data in graph.nodes(data=True)
     ]
-    resposta = chamar_llm(
+    response = call_llm(
         system=(
-            "Você mapeia perguntas sobre manutenção de ativos de mineração "
-            "(peneiras, transportadores de correia, caminhões fora de estrada, "
-            "britadores) para entidades de um grafo de conhecimento. Dada a "
-            "pergunta e a lista de entidades, retorne o nome EXATO da entidade "
-            "MAIS ESPECÍFICA mencionada na pergunta como ponto de partida do "
-            "raciocínio: prefira um sintoma citado; se não houver sintoma mas "
-            "houver um componente citado, retorne o componente; se só o "
-            "equipamento for citado, retorne o equipamento.\n\n"
-            "REGRA CRÍTICA — nunca troque de equipamento: se a pergunta "
-            "menciona explicitamente um tipo de equipamento (peneira, "
-            "transportador, caminhão ou britador), a entidade escolhida DEVE "
-            "pertencer a ESSE equipamento. Nunca escolha uma entidade de um "
-            "equipamento diferente do mencionado só porque o nome parece "
-            "combinar (ex: se a pergunta é sobre o britador, jamais retorne "
-            "uma entidade que só existe na peneira, mesmo que a palavra do "
-            "sintoma seja parecida). Se nenhuma entidade do equipamento "
-            "correto corresponder ao sintoma descrito, prefira retornar o "
-            "componente ou o equipamento certos (mesmo sem sintoma "
-            "correspondente) a retornar uma entidade de outro equipamento; "
-            "se nem isso houver, retorne null.\n\n"
-            "Se a pergunta mencionar mais de um turno de conversa (contexto "
-            "anterior + nova resposta do usuário), combine as informações "
-            "para achar a entidade mais específica possível. Se NENHUMA "
-            "entidade da lista corresponder ao assunto da pergunta, retorne "
-            "null. Nunca invente um nome fora da lista."
+            "You map questions about maintenance of mining assets "
+            "(vibrating screens, belt conveyors, off-road haul trucks, "
+            "jaw crushers) to entities in a knowledge graph. Given the "
+            "question and the list of entities, return the EXACT name of "
+            "the MOST SPECIFIC entity mentioned in the question as the "
+            "starting point of the reasoning: prefer a symptom if one is "
+            "mentioned; if there's no symptom but a component is "
+            "mentioned, return the component; if only the equipment is "
+            "mentioned, return the equipment.\n\n"
+            "CRITICAL RULE — never switch equipment: if the question "
+            "explicitly mentions a type of equipment (screen, conveyor, "
+            "truck or crusher), the chosen entity MUST belong to THAT "
+            "equipment. Never pick an entity from a different piece of "
+            "equipment just because the name sounds like a match (e.g. if "
+            "the question is about the crusher, never return an entity "
+            "that only exists on the screen, even if the symptom word is "
+            "similar). If no entity from the correct equipment matches the "
+            "described symptom, prefer returning the correct component or "
+            "equipment (even without a matching symptom) over returning an "
+            "entity from another piece of equipment; if there's nothing "
+            "like that either, return null.\n\n"
+            "If the question spans more than one conversation turn "
+            "(previous context + the user's new answer), combine that "
+            "information to find the most specific entity possible. If "
+            "NO entity in the list matches the subject of the question, "
+            "return null. Never invent a name outside the list."
         ),
-        user=f"Pergunta: {pergunta}\n\nEntidades do grafo:\n" + "\n".join(linhas),
-        json_schema=SCHEMA_ENTIDADE,
+        user=f"Question: {question}\n\nGraph entities:\n" + "\n".join(lines),
+        json_schema=ENTITY_SCHEMA,
     )
-    entidade = json.loads(resposta)["entidade"]
-    # Cinto e suspensório: só aceitamos se for realmente um nó do grafo.
-    if entidade is not None and entidade in grafo:
-        return entidade
+    entity = json.loads(response)["entity"]
+    # Belt and suspenders: only accept it if it's actually a node in the graph.
+    if entity is not None and entity in graph:
+        return entity
     return None
 
 
-def _sucessores_por_relacao(grafo: nx.DiGraph, no: str, relacao: str) -> list[str]:
-    """Vizinhos de saída de `no` conectados especificamente por `relacao`."""
+def _successors_by_relation(graph: nx.DiGraph, node: str, relation: str) -> list[str]:
+    """Outgoing neighbors of `node` connected specifically by `relation`."""
     return sorted(
-        v for v in grafo.successors(no) if grafo.edges[no, v]["tipo_relacao"] == relacao
+        v for v in graph.successors(node) if graph.edges[node, v]["relation_type"] == relation
     )
 
 
-def verificar_especificidade(entidade: str, grafo: nx.DiGraph) -> dict:
-    """Checa, de forma determinística, se a entidade é específica o bastante.
+def check_specificity(entity: str, graph: nx.DiGraph) -> dict:
+    """Deterministically check whether the entity is specific enough.
 
-    A ideia central: se o próximo passo da cadeia causal a partir da entidade
-    tem MAIS DE UMA opção (ex: um componente com vários sintomas possíveis, ou
-    um equipamento com vários componentes possíveis), a pergunta não deu
-    informação suficiente para escolher qual caminho seguir — então paramos
-    aqui e devolvemos as opções para o usuário escolher, em vez de deixar o
-    LLM advinhar (e possivelmente citar uma causa que não é a do problema
-    real do usuário).
+    Core idea: if the next step in the causal chain from the entity has
+    MORE THAN ONE option (e.g. a component with several possible symptoms,
+    or a piece of equipment with several possible components), the question
+    didn't give enough information to choose which path to follow — so we
+    stop here and return the options for the user to choose, instead of
+    letting the LLM guess (and possibly cite a cause that isn't the user's
+    actual problem).
 
-    Sintomas com múltiplas causas, ou causas com múltiplas ações, NÃO contam
-    como ambiguidade: nesse nível é normal e útil listar todas as
-    possibilidades na resposta final (o answer_builder já faz isso bem).
+    Symptoms with multiple causes, or causes with multiple actions, do NOT
+    count as ambiguity: at that level it's normal and useful to list every
+    possibility in the final answer (answer_builder already does this well).
     """
-    tipo = grafo.nodes[entidade].get("tipo")
+    node_type = graph.nodes[entity].get("type")
 
-    if tipo == "equipamento":
-        candidatos = _sucessores_por_relacao(grafo, entidade, "tem_componente")
-        if len(candidatos) > 1:
+    if node_type == "equipment":
+        candidates = _successors_by_relation(graph, entity, "has_component")
+        if len(candidates) > 1:
             return {
-                "precisa_esclarecimento": True,
-                "entidade_ambigua": entidade,
-                "relacao_ambigua": "tem_componente",
-                "candidatos": candidatos,
-                "pergunta_esclarecimento": (
-                    f"O(a) **{entidade}** tem vários componentes que podem estar "
-                    f"envolvidos: {', '.join(candidatos)}. Qual componente está "
-                    f"apresentando o problema?"
+                "needs_clarification": True,
+                "ambiguous_entity": entity,
+                "ambiguous_relation": "has_component",
+                "candidates": candidates,
+                "clarifying_question": (
+                    f"The **{entity}** has several components that could be "
+                    f"involved: {', '.join(candidates)}. Which component is "
+                    f"showing the problem?"
                 ),
             }
-        if len(candidatos) == 1:
-            # Só um componente possível: resolve automaticamente e desce mais
-            # um nível para checar se o COMPONENTE, por sua vez, é específico.
-            return verificar_especificidade(candidatos[0], grafo)
-        return {"precisa_esclarecimento": False, "entidade_resolvida": entidade}
+        if len(candidates) == 1:
+            # Only one possible component: resolve automatically and go one
+            # level deeper to check whether the COMPONENT, in turn, is specific.
+            return check_specificity(candidates[0], graph)
+        return {"needs_clarification": False, "resolved_entity": entity}
 
-    if tipo == "componente":
-        candidatos = _sucessores_por_relacao(grafo, entidade, "apresenta_sintoma")
-        if len(candidatos) > 1:
+    if node_type == "component":
+        candidates = _successors_by_relation(graph, entity, "has_symptom")
+        if len(candidates) > 1:
             return {
-                "precisa_esclarecimento": True,
-                "entidade_ambigua": entidade,
-                "relacao_ambigua": "apresenta_sintoma",
-                "candidatos": candidatos,
-                "pergunta_esclarecimento": (
-                    f"O(a) **{entidade}** pode apresentar diferentes sintomas: "
-                    f"{', '.join(candidatos)}. Qual desses sintomas você está "
-                    f"observando?"
+                "needs_clarification": True,
+                "ambiguous_entity": entity,
+                "ambiguous_relation": "has_symptom",
+                "candidates": candidates,
+                "clarifying_question": (
+                    f"The **{entity}** can present different symptoms: "
+                    f"{', '.join(candidates)}. Which of these symptoms are "
+                    f"you observing?"
                 ),
             }
-        return {"precisa_esclarecimento": False, "entidade_resolvida": entidade}
+        return {"needs_clarification": False, "resolved_entity": entity}
 
-    # sintoma, causa ou ação: já é o nível mais específico possível — nada a
-    # esclarecer, segue para a travessia normal.
-    return {"precisa_esclarecimento": False, "entidade_resolvida": entidade}
+    # symptom, cause or action: already the most specific level possible —
+    # nothing to clarify, proceed to normal traversal.
+    return {"needs_clarification": False, "resolved_entity": entity}
 
 
-def coletar_caminhos(grafo: nx.DiGraph, partida: str, max_saltos: int = MAX_SALTOS) -> list[list[dict]]:
-    """Percorre o grafo a partir da entidade e devolve caminhos como listas de triplas.
+def collect_paths(graph: nx.DiGraph, start: str, max_hops: int = MAX_HOPS) -> list[list[dict]]:
+    """Walk the graph from the entity and return paths as lists of triples.
 
-    Estratégia: DFS limitada em profundidade seguindo as arestas de SAÍDA
-    (a direção causal: sintoma -> causa -> ação). Cada caminho retornado é uma
-    sequência ordenada de triplas — exatamente a "evidência" que o LLM usará
-    para responder. Também incluímos 1 salto de ENTRADA (quem aponta para a
-    partida), para dar contexto: ex. qual componente apresenta o sintoma.
+    Strategy: depth-limited DFS following OUTGOING edges (the causal
+    direction: symptom -> cause -> action). Each returned path is an
+    ordered sequence of triples — exactly the "evidence" the LLM will use
+    to answer. We also include 1 hop of INCOMING context (who points to the
+    start), to give context: e.g. which component shows the symptom.
     """
-    caminhos: list[list[dict]] = []
+    paths: list[list[dict]] = []
 
-    def dfs(no: str, caminho_atual: list[dict], visitados: set[str]):
-        sucessores = [v for v in grafo.successors(no) if v not in visitados]
-        # Nó folha ou limite de saltos atingido: fecha o caminho acumulado.
-        if not sucessores or len(caminho_atual) >= max_saltos:
-            if caminho_atual:
-                caminhos.append(list(caminho_atual))
+    def dfs(node: str, current_path: list[dict], visited: set[str]):
+        successors = [v for v in graph.successors(node) if v not in visited]
+        # Leaf node or hop limit reached: close the accumulated path.
+        if not successors or len(current_path) >= max_hops:
+            if current_path:
+                paths.append(list(current_path))
             return
-        for v in sucessores:
-            aresta = grafo.edges[no, v]
-            tripla = {
-                "origem": no,
-                "relacao": aresta["tipo_relacao"],
-                "destino": v,
-                "fonte": aresta.get("fonte", ""),
+        for v in successors:
+            edge = graph.edges[node, v]
+            triple = {
+                "origin": node,
+                "relation": edge["relation_type"],
+                "destination": v,
+                "source": edge.get("source", ""),
             }
-            caminho_atual.append(tripla)
-            dfs(v, caminho_atual, visitados | {v})
-            caminho_atual.pop()
+            current_path.append(triple)
+            dfs(v, current_path, visited | {v})
+            current_path.pop()
 
-    dfs(partida, [], {partida})
+    dfs(start, [], {start})
 
-    # Contexto reverso (1 salto): ex. "motor da peneira apresenta_sintoma vibração alta"
-    # quando a partida é o sintoma. Ajuda a resposta a citar o componente afetado.
-    for u in grafo.predecessors(partida):
-        aresta = grafo.edges[u, partida]
-        caminhos.append([
+    # Reverse context (1 hop): e.g. "crusher drive motor has_symptom
+    # overcurrent" when the start is the symptom. Helps the answer mention
+    # the affected component.
+    for u in graph.predecessors(start):
+        edge = graph.edges[u, start]
+        paths.append([
             {
-                "origem": u,
-                "relacao": aresta["tipo_relacao"],
-                "destino": partida,
-                "fonte": aresta.get("fonte", ""),
+                "origin": u,
+                "relation": edge["relation_type"],
+                "destination": start,
+                "source": edge.get("source", ""),
             }
         ])
 
-    return caminhos
+    return paths
 
 
-def _caminhos_das_opcoes(grafo: nx.DiGraph, checagem: dict) -> list[list[dict]]:
-    """Monta 'caminhos' de 1 salto representando as opções candidatas.
+def _paths_from_options(graph: nx.DiGraph, check: dict) -> list[list[dict]]:
+    """Build 1-hop 'paths' representing the candidate options.
 
-    Usado só para exibir visualmente, no subgrafo do chat, os pontos que o
-    usuário precisa escolher entre — sem que isso conte como uma resposta.
+    Used only to visually display, in the chat subgraph, the points the
+    user needs to choose between — this doesn't count as an answer.
     """
-    no = checagem["entidade_ambigua"]
-    relacao = checagem["relacao_ambigua"]
+    node = check["ambiguous_entity"]
+    relation = check["ambiguous_relation"]
     return [
         [
             {
-                "origem": no,
-                "relacao": relacao,
-                "destino": c,
-                "fonte": grafo.edges[no, c].get("fonte", ""),
+                "origin": node,
+                "relation": relation,
+                "destination": c,
+                "source": graph.edges[node, c].get("source", ""),
             }
         ]
-        for c in checagem["candidatos"]
+        for c in check["candidates"]
     ]
 
 
-def consultar(pergunta: str, grafo: nx.DiGraph, contexto_anterior: str | None = None) -> dict:
-    """Orquestra a consulta: linking + checagem de especificidade + travessia.
+def query(question: str, graph: nx.DiGraph, previous_context: str | None = None) -> dict:
+    """Orchestrate the query: linking + specificity check + traversal.
 
-    contexto_anterior: quando a resposta anterior do assistente foi um pedido
-    de esclarecimento, passamos a pergunta original do usuário junto com a
-    nova resposta dele, para que o LLM identifique a entidade combinando as
-    duas informações (ex: "motor do britador" + "vibração alta").
+    previous_context: when the assistant's previous reply was a
+    clarification request, we pass the user's original question along with
+    their new answer, so the LLM identifies the entity by combining both
+    pieces of information (e.g. "crusher drive motor" + "overcurrent").
     """
-    pergunta_efetiva = f"{contexto_anterior}\n{pergunta}" if contexto_anterior else pergunta
-    partida = identificar_entidade_partida(pergunta_efetiva, grafo)
+    effective_question = f"{previous_context}\n{question}" if previous_context else question
+    start = identify_starting_entity(effective_question, graph)
 
-    if partida is None:
+    if start is None:
         return {
-            "entidade_partida": None,
-            "caminhos": [],
-            "precisa_esclarecimento": False,
-            "pergunta_esclarecimento": None,
+            "start_entity": None,
+            "paths": [],
+            "needs_clarification": False,
+            "clarifying_question": None,
         }
 
-    checagem = verificar_especificidade(partida, grafo)
+    check = check_specificity(start, graph)
 
-    if checagem["precisa_esclarecimento"]:
+    if check["needs_clarification"]:
         return {
-            "entidade_partida": checagem["entidade_ambigua"],
-            "caminhos": _caminhos_das_opcoes(grafo, checagem),
-            "precisa_esclarecimento": True,
-            "pergunta_esclarecimento": checagem["pergunta_esclarecimento"],
+            "start_entity": check["ambiguous_entity"],
+            "paths": _paths_from_options(graph, check),
+            "needs_clarification": True,
+            "clarifying_question": check["clarifying_question"],
         }
 
-    entidade_resolvida = checagem["entidade_resolvida"]
+    resolved_entity = check["resolved_entity"]
     return {
-        "entidade_partida": entidade_resolvida,
-        "caminhos": coletar_caminhos(grafo, entidade_resolvida),
-        "precisa_esclarecimento": False,
-        "pergunta_esclarecimento": None,
+        "start_entity": resolved_entity,
+        "paths": collect_paths(graph, resolved_entity),
+        "needs_clarification": False,
+        "clarifying_question": None,
     }
